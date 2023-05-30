@@ -11,89 +11,51 @@
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
+
     <body class="sb-nav-fixed">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.html">KWAS</a>
-            <!-- Sidebar Toggle-->
-            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-            <!-- 로그인 후 -->
-            <ul class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">회원정보수정</a></li>
-                        <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!">로그아웃</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
+        <header class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <!-- First Section -->
+            <div class="navbar-brand">
+                <a class="navbar-brand ps-3" href="/index.html">KWAS</a>
+            </div>
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
+                <i class="fas fa-bars"></i>
+            </button>
+        
+            <!-- Second Section (to be loaded with a script) -->
+            <div id="dynamicHeader" class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0"></div>
+        </header>
+        <script>
+            // JavaScript code to load content dynamically into the second section
+            var dynamicHeader = document.getElementById("dynamicHeader");
+            fetch('/component/header.html')
+            .then(res => res.text())
+            .then(data => dynamicHeader.innerHTML = data);
+        </script>
+                
+
+                
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                    <div class="sb-sidenav-menu">
-                        <div class="nav">
+                    <script>
+                        const nav = document.querySelector('nav');
 
-                            <!-- 수강관리 -->
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#course" aria-expanded="false" aria-controls="course">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                수강관리
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="course" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">강의계획서 조회</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">수강신청</a>
-                                </nav>
-                            </div>
+                        fetch('/component/nav.html')
+                        .then(res => res.text())
+                        .then(data => {
+                            // 버튼을 로드하기 전에 내비게이션 사이드바를 로드
+                            nav.innerHTML = data;
 
-                            <!-- 학습 -->
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#study" aria-expanded="false" aria-controls="study">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                학습
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="study" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="#.html">성적조회</a>
-                                    <a class="nav-link" href="#.html">출결관리</a>
-                                    <a class="nav-link" href="#.html">학사일정</a>
-                                </nav>
-                            </div>
+                            // 내비게이션 사이드바를 로드한 후에 버튼에 대한 이벤트 리스너를 연결
+                            const sidebarToggle = document.getElementById('sidebarToggle');
+                            const layoutSidenav = document.getElementById('layoutSidenav');
 
-                            <!-- 게시판 -->
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#boards" aria-expanded="false" aria-controls="boards">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                게시판
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="boards" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/boards/boardList.html">공지사항</a>
-                                    <a class="nav-link" href="/boards/boardList.html">자유게시판</a>
-                                    <a class="nav-link" href="/boards/boardList.html">수업게시판</a>
-                                    <a class="nav-link" href="/boards/boardList.html">강의게시판</a>
-                                </nav>
-                            </div>
-
-                            <!-- 학사서비스 -->
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#service" aria-expanded="false" aria-controls="service">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                학사서비스
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="service" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="#.html">등록금조회</a>
-                                    <a class="nav-link" href="#.html">강의평가</a>
-                                    <a class="nav-link" href="#.html">교수정보조회</a>
-                                </nav>
-                            </div>
-                    <div class="sb-sidenav-footer">
-                        <div class="small">Logged in as:</div>
-                        Start Bootstrap
-                    </div>
+                            sidebarToggle.addEventListener('click', () => {
+                                layoutSidenav.classList.toggle('sb-sidenav-toggled');
+                            });
+                        });
+                    </script>
                 </nav>
             </div>
 
@@ -101,27 +63,28 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px -4">
-                        <h1 class="mt-4">KWAS (로고 넣으셈)</h1>
-
+                        <div class = "align-items-center justify-content-center text-center">
+                            <a class="navbar-brand" href="/index.html"><img src="/img/kwas_logo.png" alt="kwas_logo" width="10%" height="20%"></a>
+                        </div>
                         <div class="row">
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-table me-1"></i>
-                                시간표
-                            </div>
-                           
-                </main>
-                <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid px-4">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2023</div>
-                            <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <i class="fas fa-table me-1"></i>
+                                    시간표
+                                </div>
+                                <!-- 내용 추가 -->
                             </div>
                         </div>
                     </div>
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <script>
+                        const footer = document.querySelector('footer');
+
+                        fetch('/component/footer.html')
+                        .then(res => res.text())
+                        .then(data => footer.innerHTML = data);
+                    </script>
                 </footer>
             </div>
         </div>

@@ -11241,3 +11241,11 @@ body {
   font-size: 0.75rem;
   border-radius: 0.375rem !important;
 }
+
+.sb-sidenav-toggled #layoutSidenav_nav {
+  width: 55px;
+}
+.sb-sidenav-toggled #layoutSidenav_content {
+  margin-left: 55px;
+}
+
