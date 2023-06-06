@@ -8,7 +8,7 @@
         <meta name="author" content="" />
         <title>학사정보관리시스템</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-        <link href="/css/styles.css" rel="stylesheet" />
+        <link href="/KWAS/css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
@@ -27,7 +27,7 @@
         <script>
             // JavaScript code to load content dynamically into the second section
             var dynamicHeader = document.getElementById("dynamicHeader");
-            fetch('/component/header.html')
+            fetch('/KWAS/component/header.html')
             .then(res => res.text())
             .then(data => dynamicHeader.innerHTML = data);
         </script>
@@ -40,7 +40,7 @@
                     <script>
                         const nav = document.querySelector('nav');
 
-                        fetch('/component/nav.html')
+                        fetch('/KWAS/component/nav.html')
                         .then(res => res.text())
                         .then(data => {
                             // 버튼을 로드하기 전에 내비게이션 사이드바를 로드
@@ -99,7 +99,7 @@
                                                     1
                                                 </td>
                                                 <td>
-                                                    <a href="/boards/contentForm.html">가짜제목</a>
+                                                    <a href="/KWAS/boards/contentForm.html">가짜제목</a>
                                                 </td>
                                                 <td>
                                                     교수님
@@ -149,7 +149,7 @@
                     <script>
                         const footer = document.querySelector('footer');
 
-                        fetch('/component/footer.html')
+                        fetch('/KWAS/component/footer.html')
                         .then(res => res.text())
                         .then(data => footer.innerHTML = data);
                     </script>
