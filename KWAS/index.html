@@ -1,99 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>학사정보관리시스템</title>
-        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-        <link href="/KWAS/css/styles.css" rel="stylesheet" />
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    </head>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>학사정보관리시스템</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
+      rel="stylesheet"
+    />
+    <link href="/KWAS/css/styles.css" rel="stylesheet" />
+    <script
+      src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
 
-    <body class="sb-nav-fixed">
-        <header class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <!-- First Section -->
-            <div class="navbar-brand">
-                <a class="navbar-brand ps-3" href="/KWAS/index.html">KWAS</a>
+  <body class="sb-nav-fixed">
+    <header class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+      <!-- First Section -->
+      <div class="navbar-brand">
+        <a class="navbar-brand ps-3" href="/KWAS/index.html">KWAS</a>
+      </div>
+      <button
+        class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
+        id="sidebarToggle"
+        href="#!"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Second Section (to be loaded with a script) -->
+      <div
+        id="dynamicHeader"
+        class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0"
+      ></div>
+    </header>
+    <script>
+      // JavaScript code to load content dynamically into the second section
+      var dynamicHeader = document.getElementById("dynamicHeader");
+      fetch("/KWAS/component/header.html")
+        .then((res) => res.text())
+        .then((data) => (dynamicHeader.innerHTML = data));
+    </script>
+
+    <div id="layoutSidenav">
+      <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+          <script>
+            const nav = document.querySelector("nav");
+
+            fetch("/KWAS/component/nav.html")
+              .then((res) => res.text())
+              .then((data) => {
+                // 버튼을 로드하기 전에 내비게이션 사이드바를 로드
+                nav.innerHTML = data;
+
+                // 내비게이션 사이드바를 로드한 후에 버튼에 대한 이벤트 리스너를 연결
+                const sidebarToggle = document.getElementById("sidebarToggle");
+                const layoutSidenav = document.getElementById("layoutSidenav");
+
+                sidebarToggle.addEventListener("click", () => {
+                  layoutSidenav.classList.toggle("sb-sidenav-toggled");
+                });
+              });
+          </script>
+        </nav>
+      </div>
+
+      <!-- index contents ::: 여기에 템플릿 넣으세요 -->
+      <div id="layoutSidenav_content">
+        <main>
+          <div class="container-fluid px -4">
+            <div class="align-items-center justify-content-center text-center">
+              <a class="navbar-brand" href="/KWAS/index.html"
+                ><img
+                  src="/KWAS/img/kwas_logo.png"
+                  alt="kwas_logo"
+                  width="15%"
+                  height="20%"
+              /></a>
             </div>
-            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
-                <i class="fas fa-bars"></i>
-            </button>
-        
-            <!-- Second Section (to be loaded with a script) -->
-            <div id="dynamicHeader" class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0"></div>
-        </header>
-        <script>
-            // JavaScript code to load content dynamically into the second section
-            var dynamicHeader = document.getElementById("dynamicHeader");
-            fetch('/KWAS/component/header.html')
-            .then(res => res.text())
-            .then(data => dynamicHeader.innerHTML = data);
-        </script>
-                
+            <div class="row">
+              <div class="card mb-4">
+                <div class="card-header">
+                  <i class="fas fa-table me-1"></i>
+                  시간표
+                </div>
+                <div class="container" style="width: 100%; margin: 0 auto">
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                            <th style="width: 10%"></th>
+                            <th style="width: 15%">월</th>
+                            <th style="width: 15%">화</th>
+                            <th style="width: 15%">수</th>
+                            <th style="width: 15%">목</th>
+                            <th style="width: 15%">금</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1교시</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2교시</th>
+                                <td></td>
+                                <td></td>
+                                <td>머신러닝</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3교시</th>
+                                <td>머신러닝</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">4교시</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">5교시</th>
+                                <td>소프트웨어공학</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">6교시</th>
+                                <td></td>
+                                <td></td>
+                                <td>소프트웨어공학</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">7교시</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">8교시</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-                
-        <div id="layoutSidenav">
-            <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                    <script>
-                        const nav = document.querySelector('nav');
-
-                        fetch('/KWAS/component/nav.html')
-                        .then(res => res.text())
-                        .then(data => {
-                            // 버튼을 로드하기 전에 내비게이션 사이드바를 로드
-                            nav.innerHTML = data;
-
-                            // 내비게이션 사이드바를 로드한 후에 버튼에 대한 이벤트 리스너를 연결
-                            const sidebarToggle = document.getElementById('sidebarToggle');
-                            const layoutSidenav = document.getElementById('layoutSidenav');
-
-                            sidebarToggle.addEventListener('click', () => {
-                                layoutSidenav.classList.toggle('sb-sidenav-toggled');
-                            });
-                        });
-                    </script>
-                </nav>
+              </div>
             </div>
+          </div>
+        </main>
+        <footer class="py-4 bg-light mt-auto">
+          <script>
+            const footer = document.querySelector("footer");
 
-            <!-- index contents ::: 여기에 템플릿 넣으세요 -->
-            <div id="layoutSidenav_content">
-                <main>
-                    <div class="container-fluid px -4">
-                        <div class = "align-items-center justify-content-center text-center">
-                            <a class="navbar-brand" href="/KWAS/index.html"><img src="/KWAS/img/kwas_logo.png" alt="kwas_logo" width="10%" height="20%"></a>
-                        </div>
-                        <div class="row">
-                            <div class="card mb-4">
-                                <div class="card-header">
-                                    <i class="fas fa-table me-1"></i>
-                                    시간표
-                                </div>
-                                <!-- 내용 추가 -->
-                            </div>
-                        </div>
-                    </div>
-                </main>
-                <footer class="py-4 bg-light mt-auto">
-                    <script>
-                        const footer = document.querySelector('footer');
-
-                        fetch('/KWAS/component/footer.html')
-                        .then(res => res.text())
-                        .then(data => footer.innerHTML = data);
-                    </script>
-                </footer>
-            </div>
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="js/scripts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="assets/demo/chart-area-demo.js"></script>
-        <script src="assets/demo/chart-bar-demo.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-        <script src="js/datatables-simple-demo.js"></script>
-    </body>
+            fetch("/KWAS/component/footer.html")
+              .then((res) => res.text())
+              .then((data) => (footer.innerHTML = data));
+          </script>
+        </footer>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/KWAS/js/scripts.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="assets/demo/chart-area-demo.js"></script>
+    <script src="assets/demo/chart-bar-demo.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/KWAS/js/datatables-simple-demo.js"></script>
+  </body>
 </html>
