@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>학사정보관리시스템</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
+      rel="stylesheet"
+    />
+    <link href="/KWAS/css/styles.css" rel="stylesheet" />
+    <script
+      src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body class="sb-nav-fixed">
+    <header class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+      <!-- First Section -->
+      <div class="navbar-brand">
+        <a class="navbar-brand ps-3" href="/index.html">KWAS</a>
+      </div>
+      <button
+        class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
+        id="sidebarToggle"
+        href="#!"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Second Section (to be loaded with a script) -->
+      <div
+        id="dynamicHeader"
+        class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0"
+      ></div>
+    </header>
+    <script>
+      // JavaScript code to load content dynamically into the second section
+      var dynamicHeader = document.getElementById("dynamicHeader");
+      fetch("/KWAS/component/header.html")
+        .then((res) => res.text())
+        .then((data) => (dynamicHeader.innerHTML = data));
+    </script>
+
+    <div id="layoutSidenav">
+      <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+          <script>
+            const nav = document.querySelector("nav");
+
+            fetch("/KWAS/component/nav.html")
+              .then((res) => res.text())
+              .then((data) => {
+                // 버튼을 로드하기 전에 내비게이션 사이드바를 로드
+                nav.innerHTML = data;
+
+                // 내비게이션 사이드바를 로드한 후에 버튼에 대한 이벤트 리스너를 연결
+                const sidebarToggle = document.getElementById("sidebarToggle");
+                const layoutSidenav = document.getElementById("layoutSidenav");
+
+                sidebarToggle.addEventListener("click", () => {
+                  layoutSidenav.classList.toggle("sb-sidenav-toggled");
+                });
+              });
+          </script>
+        </nav>
+      </div>
+
+      <!-- index contents ::: 여기에 템플릿 넣으세요 -->
+      <div id="layoutSidenav_content">
+        <main>
+          <div class="container-fluid px-4" style="width: 100%; margin: 0 auto">
+            <div class="align-items-center justify-content-center text-center">
+              <a class="navbar-brand" href="/KWAS/index.html"
+                ><img
+                  src="/KWAS/img/kwas_logo.png"
+                  alt="kwas_logo"
+                  width="15%"
+                  height="20%"
+              /></a>
+            </div>
+            <div class="card mb-4">
+              <div class="card-header">강의계획서 조회</div>
+              <div class="card-body">
+                <div class="chart-area">
+                  <canvas id="myLineChart" width="100%" height="30"></canvas>
+                </div>
+              </div>
+
+              <script>
+                // 데이터 예시
+                const semesterLabels = [
+                  "1-1학기",
+                  "1-2학기",
+                  "2-1학기",
+                  "2-2학기",
+                  "3-1학기",
+                  "3-2학기",
+                  "4-1학기",
+                  "4-2학기",
+                ];
+                const subjectGrades = [
+                  [4.0, 4.3, 4.0, 3.8, 4.0, 4.1, 4.0, 3.8], // 전체 성적
+                  [, , 4.5, 4.0, 3.8, 4.0, 4.1, 4.0, 4.0], // 전공 성적
+                  [3.0, 3.8, 3.8, 3.5, 4.0, 3.6, 4.0, 4.0], // 교양 성적
+                ];
+
+                // 그래프 생성
+                const ctx = document
+                  .getElementById("myLineChart")
+                  .getContext("2d");
+                const myChart = new Chart(ctx, {
+                  type: "line",
+                  data: {
+                    labels: semesterLabels,
+                    datasets: [
+                      {
+                        label: "전체",
+                        data: subjectGrades[0],
+                        fill: false,
+                        borderColor: "rgba(255, 0, 0, 1)",
+                        borderWidth: 1,
+                      },
+                      {
+                        label: "전공",
+                        data: subjectGrades[1],
+                        fill: false,
+                        borderColor: "rgba(0, 255, 0, 1)",
+                        borderWidth: 1,
+                      },
+                      {
+                        label: "교양",
+                        data: subjectGrades[2],
+                        fill: false,
+                        borderColor: "rgba(0, 0, 255, 1)",
+                        borderWidth: 1,
+                      },
+                    ],
+                  },
+                  options: {
+                    scales: {
+                      y: {
+                        beginAtZero: true,
+                        max: 4.5,
+                        stepSize: 0.5,
+                      },
+                    },
+                  },
+                });
+              </script>
+              <div class="card-body">
+                <!-- 학정번호 과목명 이수구분 학점 교수명 연락처 -->
+                <div class="container" style="width: 100%; margin: 0 auto">
+                  <table class="table table-hover">
+                    <thead>
+                      <div class="text-center">
+                        <h5>2023년 1학기</h5>
+                      </div>
+                      <tr>
+                        <th style="width: 15%">학정번호</th>
+                        <th style="width: 15%">과목명</th>
+                        <th style="width: 15%">개설학과</th>
+                        <th style="width: 10%">이수구분</th>
+                        <th style="width: 5%">학점</th>
+                        <th style="width: 10%">교수명</th>
+                        <th style="width: 10%">성적</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>H020-4-0846-01</td>
+                        <td>소프트웨어공학</td>
+                        <td>컴퓨터정보공학부</td>
+                        <td>전선</td>
+                        <td>3</td>
+                        <td>이기훈</td>
+                        <td>A</td>
+                      </tr>
+                      <tr>
+                        <td>H020-4-8483-01</td>
+                        <td>머신러닝</td>
+                        <td>컴퓨터정보공학부</td>
+                        <td>전선</td>
+                        <td>3</td>
+                        <td>박철수</td>
+                        <td>A+</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+        <footer class="py-4 bg-light mt-auto">
+          <script>
+            const footer = document.querySelector("footer");
+
+            fetch("/KWAS/component/footer.html")
+              .then((res) => res.text())
+              .then((data) => (footer.innerHTML = data));
+          </script>
+        </footer>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/KWAS/js/scripts.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="assets/demo/chart-area-demo.js"></script>
+    <script src="assets/demo/chart-bar-demo.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/KWAS/js/datatables-simple-demo.js"></script>
+  </body>
+</html>
