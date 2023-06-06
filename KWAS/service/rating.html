@@ -9,14 +9,14 @@
     <meta name="author" content="" />
     <title>학사정보관리시스템</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-    <link href="/KWAS/css/styles.css" rel="stylesheet" />
+    <link href="../css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="/KWAS/index.html">KWAS</a>
+        <a class="navbar-brand ps-3" href="../main/index.html">KWAS</a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
                 class="fas fa-bars"></i></button>
@@ -82,10 +82,10 @@
                         <div class="collapse" id="boards" aria-labelledby="headingOne"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="/KWAS/boards/boardList.html">공지사항</a>
-                                <a class="nav-link" href="/KWAS/boards/boardList.html">자유게시판</a>
-                                <a class="nav-link" href="/KWAS/boards/boardList.html">수업게시판</a>
-                                <a class="nav-link" href="/KWAS/boards/boardList.html">강의게시판</a>
+                                <a class="nav-link" href="../boards/boardList.html">공지사항</a>
+                                <a class="nav-link" href="../boards/boardList.html">자유게시판</a>
+                                <a class="nav-link" href="../boards/boardList.html">수업게시판</a>
+                                <a class="nav-link" href="../boards/boardList.html">강의게시판</a>
                             </nav>
                         </div>
 
@@ -99,8 +99,8 @@
                         <div class="collapse" id="service" aria-labelledby="headingOne"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="/KWAS/service/fee.html">등록금조회</a>
-                                <a class="nav-link" href="/KWAS/service/rating.html">강의평가</a>
+                                <a class="nav-link" href="../service/fee.html">등록금조회</a>
+                                <a class="nav-link" href="../service/rating.html">강의평가</a>
                                 <a class="nav-link" href="#.html">교수정보조회</a>
                             </nav>
                         </div>
@@ -115,8 +115,15 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px -4">
-                    <h1 class="mt-4"><img src="/KWAS/img/kwas_logo.png"></h1>
-
+                    <div class="align-items-center justify-content-center text-center">
+                        <a class="navbar-brand" href="../main/index.html"
+                          ><img
+                            src="../img/kwas_logo.png"
+                            alt="kwas_logo"
+                            width="15%"
+                            height="20%"
+                        /></a>
+                      </div>
                     <div class="card mb-4">
                         <div class="card-header">
                             게시글 내용
@@ -155,7 +162,7 @@
                                         </tbody>
                                     </table>
                                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                        <a href="/KWAS/service/writie_rating.html" class="btn btn-dark">작성</a>
+                                        <a href="../service/writie_rating.html" class="btn btn-dark">작성</a>
                                     </div>
                                 </div>
                             </div>
@@ -165,28 +172,25 @@
                 </div>
             </main>
             <footer class="py-4 bg-light mt-auto">
-                <div class="container-fluid px-4">
-                    <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Your Website 2023</div>
-                        <div>
-                            <a href="#">Privacy Policy</a>
-                            &middot;
-                            <a href="#">Terms &amp; Conditions</a>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+                <script>
+                  const footer = document.querySelector("footer");
+      
+                  fetch("../component/footer.html")
+                    .then((res) => res.text())
+                    .then((data) => (footer.innerHTML = data));
+                </script>
+              </footer>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         crossorigin="anonymous"></script>
-    <script src="/KWAS/js/scripts.js"></script>
+    <script src="../js/scripts.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
     <script src="assets/demo/chart-area-demo.js"></script>
     <script src="assets/demo/chart-bar-demo.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
         crossorigin="anonymous"></script>
-    <script src="/KWAS/js/datatables-simple-demo.js"></script>
+    <script src="../js/datatables-simple-demo.js"></script>
 </body>
 
 </html>

@@ -8,7 +8,7 @@
         <meta name="author" content="" />
         <title>학사정보관리시스템</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-        <link href="/KWAS/css/styles.css" rel="stylesheet" />
+        <link href="../css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
 
@@ -16,7 +16,7 @@
         <header class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- First Section -->
             <div class="navbar-brand">
-                <a class="navbar-brand ps-3" href="/KWAS/index.html">KWAS</a>
+                <a class="navbar-brand ps-3" href="../main/index.html">KWAS</a>
             </div>
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
                 <i class="fas fa-bars"></i>
@@ -28,7 +28,7 @@
         <script>
             // JavaScript code to load content dynamically into the second section
             var dynamicHeader = document.getElementById("dynamicHeader");
-            fetch('/KWAS/component/header.html')
+            fetch('../component/header.html')
             .then(res => res.text())
             .then(data => dynamicHeader.innerHTML = data);
         </script>
@@ -41,7 +41,7 @@
                     <script>
                         const nav = document.querySelector('nav');
 
-                        fetch('/KWAS/component/nav.html')
+                        fetch('../component/nav.html')
                         .then(res => res.text())
                         .then(data => {
                             // 버튼을 로드하기 전에 내비게이션 사이드바를 로드
@@ -64,7 +64,7 @@
                 <main>
                     <div class="container-fluid px -4">
                         <div class = "align-items-center justify-content-center text-center">
-                            <a class="navbar-brand" href="/KWAS/index.html"><img src="/KWAS/img/kwas_logo.png" alt="kwas_logo" width="15%" height="20%"></a>
+                            <a class="navbar-brand" href="../main/index.html"><img src="../img/kwas_logo.png" alt="kwas_logo" width="15%" height="20%"></a>
                         </div>
 
                         <div class="card mb-4">
@@ -100,7 +100,7 @@
                                                     1
                                                 </td>
                                                 <td>
-                                                    <a href="/KWAS/boards/contentForm.html">가짜제목</a>
+                                                    <a href="../boards/contentForm.html">가짜제목</a>
                                                 </td>
                                                 <td>
                                                     교수님
@@ -135,7 +135,7 @@
                     
                                 <!-- 글쓰기 버튼 :: form data 전송 해야 되는 부분-->
                                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                        <a href="/KWAS/boards/writeForm.html" class="btn btn-dark">작성</a>
+                                        <a href="../boards/writeForm.html" class="btn btn-dark">작성</a>
                                     </div>
                             </div>
                     
@@ -150,7 +150,7 @@
                     <script>
                         const footer = document.querySelector('footer');
 
-                        fetch('/KWAS/component/footer.html')
+                        fetch('../component/footer.html')
                         .then(res => res.text())
                         .then(data => footer.innerHTML = data);
                     </script>
@@ -161,7 +161,7 @@
           src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
           crossorigin="anonymous"
         ></script>
-        <script src="/KWAS/js/scripts.js"></script>
+        <script src="../js/scripts.js"></script>
         <script
           src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
           crossorigin="anonymous"
@@ -172,6 +172,6 @@
           src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
           crossorigin="anonymous"
         ></script>
-        <script src="/KWAS/js/datatables-simple-demo.js"></script>
+        <script src="../js/datatables-simple-demo.js"></script>
       </body>
     </html>
