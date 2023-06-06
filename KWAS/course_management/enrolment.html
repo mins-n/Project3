@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>학사정보관리시스템</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
+      rel="stylesheet"
+    />
+    <link href="/KWAS/css/styles.css" rel="stylesheet" />
+    <script
+      src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body class="sb-nav-fixed">
+    <header class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+      <!-- First Section -->
+      <div class="navbar-brand">
+        <a class="navbar-brand ps-3" href="/index.html">KWAS</a>
+      </div>
+      <button
+        class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
+        id="sidebarToggle"
+        href="#!"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Second Section (to be loaded with a script) -->
+      <div
+        id="dynamicHeader"
+        class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0"
+      ></div>
+    </header>
+    <script>
+      // JavaScript code to load content dynamically into the second section
+      var dynamicHeader = document.getElementById("dynamicHeader");
+      fetch("/KWAS/component/header.html")
+        .then((res) => res.text())
+        .then((data) => (dynamicHeader.innerHTML = data));
+    </script>
+
+    <div id="layoutSidenav">
+      <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+          <script>
+            const nav = document.querySelector("nav");
+
+            fetch("/KWAS/component/nav.html")
+              .then((res) => res.text())
+              .then((data) => {
+                // 버튼을 로드하기 전에 내비게이션 사이드바를 로드
+                nav.innerHTML = data;
+
+                // 내비게이션 사이드바를 로드한 후에 버튼에 대한 이벤트 리스너를 연결
+                const sidebarToggle = document.getElementById("sidebarToggle");
+                const layoutSidenav = document.getElementById("layoutSidenav");
+
+                sidebarToggle.addEventListener("click", () => {
+                  layoutSidenav.classList.toggle("sb-sidenav-toggled");
+                });
+              });
+          </script>
+        </nav>
+      </div>
+
+      <!-- index contents ::: 여기에 템플릿 넣으세요 -->
+      <div id="layoutSidenav_content">
+        <main>
+          <div class="container-fluid px -4">
+            <div class="align-items-center justify-content-center text-center">
+              <a class="navbar-brand" href="/KWAS/index.html"
+                ><img
+                  src="/KWAS/img/kwas_logo.png"
+                  alt="kwas_logo"
+                  width="10%"
+                  height="20%"
+              /></a>
+            </div>
+
+            <div class="card mb-4">
+              <div class="card-header">수강신청</div>
+              <div class="card-body">
+                <!-- 세부검색 -->
+                <div
+                  class="container"
+                  style="width: 100%; margin: 0 auto"
+                ></div>
+                <!-- No. 학정번호 과목명 학점 교수명 여석 강의시간 비고 -->
+                <div class="container" style="width: 100%; margin: 0 auto">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th style="width: 5%">No.</th>
+                        <th style="width: 15%">학정번호</th>
+                        <th style="width: 15%">과목명</th>
+                        <th style="width: 5%">학점</th>
+                        <th style="width: 10%">교수명</th>
+                        <th style="width: 5%">여석</th>
+                        <th style="width: 10%">강의시간</th>
+                        <th style="width: 15%">비고</th>
+                        <th style="width: 10%">수강신청</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>1</td>
+                        <td>H020-4-0846-01</td>
+                        <td>소프트웨어공학</td>
+                        <td>3</td>
+                        <td>이기훈</td>
+                        <td>10</td>
+                        <td>월 5, 수 6</td>
+                        <td></td>
+                        <td>
+                          <button type="button" class="btn btn-primary">
+                            수강신청
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>2</td>
+                        <td>H020-4-8483-01</td>
+                        <td>머신러닝</td>
+                        <td>3</td>
+                        <td>박철수</td>
+                        <td>20</td>
+                        <td>월 3, 수 4</td>
+                        <td></td>
+                        <td>
+                          <button type="button" class="btn btn-primary">
+                            수강신청
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <table class="table table-hover">
+                  <tbody>
+                    <tr>
+                      <!-- 전체 전공 교양 -->
+                      <td style="width: 10%">
+                        <select
+                          class="form-select"
+                          aria-label="Default select example"
+                          onchange="showDepartments(this.value)"
+                        >
+                          <option selected>전체</option>
+                          <option value="1">교양</option>
+                          <option value="2">전자정보공과대학</option>
+                          <option value="3">소프트웨어융합대학</option>
+                          <option value="4">공과대학</option>
+                          <option value="5">자연과학대학</option>
+                          <option value="6">인문사회과학대학</option>
+                          <option value="7">정책법학대학</option>
+                          <option value="8">경영대학</option>
+                        </select>
+                      </td>
+
+                      <td id="departmentSelect" style="width: 20%">
+                        <!-- 선택한 전공에 따라 대학 선택이 업데이트될 공간 -->
+                      </td>
+
+                      <!-- 과목명 -->
+                      <td style="width: 20%">
+                        <div class="input-group">
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="과목명"
+                            aria-label="과목명"
+                            aria-describedby="basic-addon2"
+                          />
+                          <span class="input-group-text" id="basic-addon2"
+                            >검색</span
+                          >
+                        </div>
+                      </td>
+                    </tr>
+
+                    <script>
+                      function showDepartments(selectedValue) {
+                        let departmentSelect =
+                          document.getElementById("departmentSelect");
+
+                        // 선택한 대학에 따라 다른 학과 선택을 보여줌
+                        switch (selectedValue) {
+                          case "2":
+                            departmentSelect.innerHTML = `
+                                                        <select class="form-select" aria-label="Default select example">
+                                                          <option value="0">공통</option>
+                                                          <option value="1">전자공학과</option>
+                                                          <option value="2">전자통신공학과</option>
+                                                          <option value="3">전자융합공학과</option>
+                                                          <option value="4">전기공학과</option>
+                                                          <option value="5">전자재료공학과</option>
+                                                          <option value="6">로봇학부</option>
+                                                        </select>
+                                                        `;
+                            break;
+                          case "3":
+                            departmentSelect.innerHTML = `
+                                                        <select class="form-select" aria-label="Default select example">
+                                                            <option value="0">공통</option>
+                                                          <option value="1">컴퓨터정보공학부</option>
+                                                          <option value="2">소프트웨어학부</option>
+                                                          <option value="3">정보융합학부</option>
+                                                        </select>
+                                                      `;
+                            break;
+                          case "4":
+                            departmentSelect.innerHTML = `
+                                                          <select class="form-select" aria-label="Default select example">
+                                                            <option value="0">공통</option>
+                                                            <option value="1">건축공학과</option>
+                                                            <option value="2">화학공학과</option>
+                                                            <option value="3">환경공학과</option>
+                                                            <option value="4">건축학과</option>
+                                                          </select>
+                                                        `;
+                            break;
+                          case "5":
+                            departmentSelect.innerHTML = `
+                                                          <select class="form-select" aria-label="Default select example">
+                                                            <option value="0">공통</option>
+                                                            <option value="1">수학과</option>
+                                                            <option value="2">전자바이오물리학과</option>
+                                                            <option value="3">화학과</option>
+                                                            <option value="4">스포츠융합과학과</option>
+                                                          </select>
+                                                        `;
+                            break;
+                          case "6":
+                            departmentSelect.innerHTML = `
+                                                          <select class="form-select" aria-label="Default select example">
+                                                            <option value="0">공통</option>
+                                                            <option value="1">국어국문학과</option>
+                                                            <option value="2">영어산업학과</option>
+                                                            <option value="3">미디어커뮤케이션학부</option>
+                                                            <option value="4">산업심리학과</option>
+                                                            <option value="5">동북아문화사업학부</option>
+                                                          </select>
+                                                        `;
+                            break;
+                          case "7":
+                            departmentSelect.innerHTML = `
+                                                          <select class="form-select" aria-label="Default select example">
+                                                            <option value="0">공통</option>
+                                                            <option value="1">행정학과</option>
+                                                            <option value="2">법학부</option>
+                                                            <option value="3">국제학부</option>
+                                                            <option value="4">자산관리학과</option>
+                                                          </select>
+                                                        `;
+                            break;
+                          case "8":
+                            departmentSelect.innerHTML = `
+                                                          <select class="form-select" aria-label="Default select example">
+                                                            <option value="0">공통</option>
+                                                            <option value="1">경영학부</option>
+                                                            <option value="2">국제통상학부</option>
+                                                          </select>
+                                                        `;
+                            break;
+                          default:
+                            departmentSelect.innerHTML = "";
+                            break;
+                        }
+                      }
+                    </script>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </main>
+        <footer class="py-4 bg-light mt-auto">
+          <script>
+            const footer = document.querySelector("footer");
+
+            fetch("/KWAS/component/footer.html")
+              .then((res) => res.text())
+              .then((data) => (footer.innerHTML = data));
+          </script>
+        </footer>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/js/scripts.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="assets/demo/chart-area-demo.js"></script>
+    <script src="assets/demo/chart-bar-demo.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="js/datatables-simple-demo.js"></script>
+  </body>
+</html>
