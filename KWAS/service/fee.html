@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>학사정보관리시스템</title>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+        <link href="/KWAS/css/styles.css" rel="stylesheet" />
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    </head>
+
+    <body class="sb-nav-fixed">
+        <header class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <!-- First Section -->
+            <div class="navbar-brand">
+                <a class="navbar-brand ps-3" href="/KWAS/index.html">KWAS</a>
+            </div>
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
+                <i class="fas fa-bars"></i>
+            </button>
+        
+            <!-- Second Section (to be loaded with a script) -->
+            <div id="dynamicHeader" class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0"></div>
+        </header>
+        <script>
+            // JavaScript code to load content dynamically into the second section
+            var dynamicHeader = document.getElementById("dynamicHeader");
+            fetch('/KWAS/component/header.html')
+            .then(res => res.text())
+            .then(data => dynamicHeader.innerHTML = data);
+        </script>
+                
+
+                
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <script>
+                        const nav = document.querySelector('nav');
+
+                        fetch('/KWAS/component/nav.html')
+                        .then(res => res.text())
+                        .then(data => {
+                            // 버튼을 로드하기 전에 내비게이션 사이드바를 로드
+                            nav.innerHTML = data;
+
+                            // 내비게이션 사이드바를 로드한 후에 버튼에 대한 이벤트 리스너를 연결
+                            const sidebarToggle = document.getElementById('sidebarToggle');
+                            const layoutSidenav = document.getElementById('layoutSidenav');
+
+                            sidebarToggle.addEventListener('click', () => {
+                                layoutSidenav.classList.toggle('sb-sidenav-toggled');
+                            });
+                        });
+                    </script>
+                </nav>
+            </div>
+
+            <!-- index contents ::: 여기에 템플릿 넣으세요 -->
+            <div id="layoutSidenav_content">
+                <main>
+                    <div>
+
+                        <main role="main">
+                            <div class="py-5 bg-light">
+                                <div class="container">
+                    
+                    <div id="appModule" class="card card-body mb-4 content"><div><p class="contenttitle">등록금 고지서</p></div> <div style="text-align: right;"><button type="button" class="btn2 btn-white">등록금고지서 출력</button></div> <br> <div><div style="font-weight: bold; font-size: 15pt; text-align: center;">2023 - 1학기 재학생 등록금 납부 안내 </div> <br> <table><tbody><tr><td style="width: 75%; height: 25px; border: 1px solid black; margin-left: 20%; margin-right: 20%;"><span style="margin-left: 15%;"><a href="#a">등록금 납부 </a> | <a href="#b">수석,전액 및 보훈장학생 등록</a> | <a href="#d">졸업요건 미달자에 대한 등록금 책정 기준</a> |<a href="#e" style="margin-right: 7.5%;"> 학부생 은행정보 등록 안내</a></span></td></tr></tbody></table> <div></div> <br> <span id="a" style="color: blue; font-weight: bold;">● 등록금 납부</span><br> <span>1. <font style="color: red; font-weight: bold;">등록 기간: 2023.02.15.(수) ~ 02.28.(화) [평일 09:00 ~ 17:00] [시간 외 및 공휴일 납부 불가]</font></span> <br><br> <span>
+                            2. 등록금 납부방법
+                    
+                            <br>
+                            &nbsp;가. 납부은행: 하나은행, 국민은행, 신한은행, 우리은행 전 지점<br>
+                            &nbsp;나. 납부방법<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;① 가상계좌 납부(계좌이체): 등록금고지서상에 부여된 개인의 가상계좌로 납부<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;② 고지서로 은행에 직접납부 : 하나은행, 국민은행, 신한은행, 우리은행 전 영업점에서 납부<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;③ 인터넷 뱅킹(공과금/대학등록금납부)을 통한 납부<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;④ 은행 자동화기기(ATM, C/D기)를 통한 납부<br> <br> <font style="font-weight: bold;">다. 등록금 고지서 출력</font><br> <span style="color: orange; font-weight: bold;">▶학교 홈페이지 → KLAS 로그인 → 학사서비스 → 등록관리 → 등록금고지서 출력</span><br> <br>
+                            
+                            3. 등록금 고지금액<br>
+                                 &nbsp;&nbsp;&nbsp;가.학부 등록금<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- 재학생<span style="float: right;">[단위:원]</span></span> <br> <table class="tablegw"><tbody><tr><th width="30%">구  분</th> <th>등록금</th> <th width="40%">비  고</th></tr> <tr><td>인문사회계열</td> <td style="background-color: rgb(238, 255, 238);">3,244,000</td> <td rowspan="8"></td></tr> <tr><td>사이버정보보안학과<br>정보콘텐츠학과</td> <td style="background-color: rgb(238, 255, 238);">3,244,000</td></tr> <tr><td>경영대학</td> <td style="background-color: rgb(238, 255, 238);">3,432,000</td></tr> <tr><td>정책법학대학</td> <td style="background-color: rgb(238, 255, 238);">3,244,000</td></tr> <tr><td>동북아문화산업학부<br>국제통상학부</td> <td style="background-color: rgb(238, 255, 238);">3,630,000</td></tr> <tr><td>미디어커뮤니케이션학부</td> <td style="background-color: rgb(238, 255, 238);">3,753,000</td></tr> <tr><td>이학체육계열</td> <td style="background-color: rgb(238, 255, 238);">3,753,000</td></tr> <tr><td>공학계열</td> <td style="background-color: rgb(238, 255, 238);">4,266,000</td></tr></tbody></table> <br>
+                            
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- 재입학생<span style="float: right;">[단위:원]</span> <br> <table class="tablegw"><tbody><tr><th width="30%">구  분</th> <th>등록금</th> <th width="40%">비  고</th></tr> <tr><td>인문사회계열</td> <td style="background-color: rgb(238, 255, 238);">3,434,800</td> <td rowspan="8"></td></tr> <tr><td>사이버정보보안학과<br>정보콘텐츠학과</td> <td style="background-color: rgb(238, 255, 238);">3,434,800</td></tr> <tr><td>경영대학</td> <td style="background-color: rgb(238, 255, 238);">3,622,800</td></tr> <tr><td>정책법학대학</td> <td style="background-color: rgb(238, 255, 238);">3,434,800</td></tr> <tr><td>동북아문화산업학부<br>국제통상학부</td> <td style="background-color: rgb(238, 255, 238);">3,820,800</td></tr> <tr><td>미디어커뮤니케이션학부</td> <td style="background-color: rgb(238, 255, 238);">3,943,800</td></tr> <tr><td>이학체육계열</td> <td style="background-color: rgb(238, 255, 238);">3,943,800</td></tr> <tr><td>공학계열</td> <td style="background-color: rgb(238, 255, 238);">4,456,800</td></tr></tbody></table> <br>
+                            
+                            &nbsp;&nbsp;&nbsp; 나. 대학원(특수대학원 포함)<span style="float: right;">[단위:원]</span> <br> <table class="tablegw"><tbody><tr><th colspan="4" width="30%">구분</th> <th width="20%">입학금(신입생)</th> <th>등 록 금</th> <th width="20%">비 고</th></tr> <tr><td rowspan="6">일 반 <br><br> 대학원</td> <td rowspan="3">석사과정</td> <td colspan="2">인문사회계열</td> <td rowspan="6" style="background-color: rgb(238, 255, 238);">983,000</td> <td style="background-color: rgb(238, 255, 238);">5,082,000</td> <td rowspan="6"></td></tr> <tr><td colspan="2">이학계열</td> <td style="background-color: rgb(238, 255, 238);">5,913,000</td></tr> <tr><td colspan="2">공학계열</td> <td style="background-color: rgb(238, 255, 238);">6,663,000</td></tr> <tr><td rowspan="3">박사<br>과정</td> <td colspan="2">인문사회계열</td> <td style="background-color: rgb(238, 255, 238);">5,358,000</td></tr> <tr><td colspan="2">이학계열</td> <td style="background-color: rgb(238, 255, 238);">6,213,000</td></tr> <tr><td colspan="2">공학계열</td> <td style="background-color: rgb(238, 255, 238);">6,882,000</td></tr> <tr><td rowspan="6">특 수 <br><br> 대학원</td> <td colspan="3">경영대학원</td> <td rowspan="5" style="background-color: rgb(238, 255, 238);">988,000</td> <td style="background-color: rgb(238, 255, 238);">4,740,000</td> <td rowspan="6"></td></tr> <tr><td colspan="3">스마트융합대학원</td> <td style="background-color: rgb(238, 255, 238);">5,361,000</td></tr> <tr><td colspan="3">교육대학원</td> <td style="background-color: rgb(238, 255, 238);">4,518,000</td></tr> <tr><td colspan="3">상담복지정책대학원</td> <td style="background-color: rgb(238, 255, 238);">4,917,000</td></tr> <tr><td colspan="3">환경대학원</td> <td style="background-color: rgb(238, 255, 238);">4,514,000</td></tr> <tr><td colspan="3">건설법무대학원</td> <td style="background-color: rgb(238, 255, 238);">580,000</td> <td style="background-color: rgb(238, 255, 238);">6,565,000</td></tr></tbody></table> <br> <div onclick="window.scrollTo(0,0);" style="cursor: pointer; float: right; text-decoration: underline;">TOP</div> <span id="b" style="color: blue; font-weight: bold;">● 수석, 전액 및 보훈장학생 등록</span> <br>
+                            &nbsp;&nbsp; : 수업료 0원으로 나와있는 고지서를 가지고 은행에 직접방문하여 ‘0원 납부처리’를 해야 등록이 완료됨<br> <br> <span style="color: blue; font-weight: bold;">● 분할 등록 (별도 안내 예정)</span> <br>
+                            &nbsp;&nbsp; <span style="font-weight: bold;"> 1. 분할등록 신청대상</span> <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp; : 등록기간 내에 등록금 납부가 어려운 학부 재학생 <br> <br>
+                             &nbsp;&nbsp; <span style="font-weight: bold;"> 2. 분할등록 일정</span> <br> <div style="margin-left: 20px;"><span>가. 분할등록 신청기간: 2023. 02/15(수) - 02/21(화) <br>
+                                 &nbsp;&nbsp;&nbsp;  <span style="color: red; font-weight: bold;"> ※위 기간 내에 신청을 하지 않을 시에는 분할등록을 불허함</span><br>
+                                        나. 1차 등록기간: 2023. 02/22(수) - 02/28(화) ... (납부금액: 100만원) <br>
+                                        다. 2차 등록기간: 2023. 03/20(월) - 03/24(금) ... (납부금액: 100만원) <br>
+                                        라. 3차 등록기간: 2023. 04/17(월) - 04/21(금) ... (납부금액: 100만원)<br>
+                                        마. 4차 등록기간: 2023. 05/22(월) - 05/26(금) ... (납부금액: 잔액)<br></span></div> <br>
+                             
+                             &nbsp;&nbsp; <span style="font-weight: bold;"> 3. 신청방법 및 구비서류</span> <br> <div style="margin-left: 20px;">
+                                                 가. 신청 및 제출: 해당대학 교학팀에서 <font style="font-weight: bold;">소정양식(분할등록신청서)</font>을 수령 및 작성하여 학과장의 추천을 받아 해당 교학팀에 제출 <br>
+                                       나. 납부금액: <div style="margin-left: 20px;"> 1차 100만원을 납부하고,<br>
+                                            2차 100만원을 납부하고,<br>
+                                            3차 100만원을 납부하고,&nbsp;&nbsp;<span style="font-weight: bold;">   잔액은 2023. 05. 26(금)까지 완납 </span><br></div><br>
+                                      다. 구비서류 <br>
+                                      ▶ 분할등록신청서(본인 및 보호자 날인 후 학과장 경유)<br>
+                                                ▶ 주민등록등본(보호자와 본인과의 관계를 증명할 수 있어야 함) <br></div> <br>
+                             
+                             &nbsp;&nbsp; <span style="font-weight: bold;"> 4. 분할등록 고지서 수령 및 납부</span> <br> <div style="margin-left: 20px;">
+                                : KLAS에서 분할납부 고지서를 출력하여 해당기간예 가상계좌로 납부
+                             </div> <br>
+                             
+                             &nbsp;&nbsp; <span style="font-weight: bold;"> 5. 문의사항</span> <br> <div style="margin-left: 20px;">
+                                   가. 해당 단과대학 교학팀: <div style="margin-left: 110px;"> 전자정보대학: 940-5101,<br>
+                                               소프트웨어융합대학: 940-5571~2,<br>
+                                               공과대학: 940-5601,<br>
+                                               자연과학대학: 940-5201,<br>
+                                               인문사회과학대학 : 940-5785,<br>
+                                               정책법학대학: 940-5561,<br>
+                                               경영대학: 940-5302,<br>
+                                               동북아대학 : 940-5301<br></div>
+                                   나. 재무팀: 02) 940-5046~7<br>
+                                   다. <span style="color: red; font-weight: bold;"> 분할납부 연계대출 신청 : 학생복지팀 940-5033 </span><br></div> <br>
+                             
+                             &nbsp;&nbsp; <span style="font-weight: bold;"> 6. 유의사항</span> <br> <div style="margin-left: 20px;">
+                                            가. <span style="color: red; font-weight: bold;">잔액 납부기한(2023. 05. 26(금))까지 완납하지 않으면 기납부한 등록금은 반환하지 않으며,</span> <br>
+                               &nbsp;&nbsp;<span style="color: red; font-weight: bold;"> 자동으로 직권휴학 처리됨을 유의하시기 바랍니다.</span><br>       
+                               (분납기간 중 휴학은 불가능하며, 자퇴시 기납부한 등록금은 반환하지 않습니다.)<br>
+                                            나. <span style="color: red; font-weight: bold;">등록금 분할납부자의 경우 등록금 완납 후 국가장학금이 지급됩니다.</span><br>
+                               &nbsp;&nbsp;(국가장학금은 05월 중 일괄지급)<br>
+                                            다. <span style="color: red; font-weight: bold;">한국장학재단 등록금 분할납부 연계대출 이용희망자는 1회차 자비납부, 2회차부터 연계대출 이용이 가능합니다. (학생복지팀 문의)</span><br>
+                                            라. <span style="color: red; font-weight: bold;">재입학생은 분할납부가 불가합니다.</span><br></div> <br> <div onclick="window.scrollTo(0,0);" style="cursor: pointer; float: right; text-decoration: underline;">TOP</div> <span id="d" style="color: blue; font-weight: bold;"> ● 졸업요건 미달자에 대한 등록금 책정 기준(학점당 등록) </span><br> <div style="margin-left: 20px;">
+                                1. 대상조건: 졸업요건 미달로 수업연한(8학기(건축학과의 경우 10학기), 편입생 4학기)을 초과한 학생 <br>
+                                2. 신청기간: 매학기 등록기간 중에 <br>
+                                3. 신청방법: 수강신청서(교육지원팀 담당자) 확인 후 ⇒ KLAS에서&nbsp;고지서 출력<br>
+                                4. 학점당 등록금 산출기준<br> <table class="tablegw"><tbody><tr><th>구 분</th> <th>적 용 비 율</th> <th>비 고</th></tr> <tr><td>0학점</td> <td>소속 학과(부)의 4학년 수업료의 12분의 1</td> <td></td></tr> <tr><td>1학점 - 3학점</td> <td>소속 학과(부)의 4학년 수업료의 6분의 1</td> <td></td></tr> <tr><td>4학점 - 6학점</td> <td>소속 학과(부)의 4학년 수업료의 3분의 1</td> <td></td></tr> <tr><td>7학점 - 9학점</td> <td>소속 학과(부)의 4학년 수업료의 2분의 1</td> <td></td></tr> <tr><td>10학점 이상</td> <td>전액</td> <td></td></tr></tbody></table></div> <br> <span id="e" style="color: blue; font-weight: bold;"> ● 학부생 은행정보 등록 안내 </span><br> <div style="margin-left: 20px;">
+                                1. 목적 및 내용 <br> <div style="margin-left: 20px;"> ▶ 향후 학생 개개인들에게 입금하는 모든 지급분(등록금 차액환불금, 장학금 차액환불금, 근로장학금 등)은 <br> <span style="color: orange;"> 홈페이지 →KLAS → 개인정보수정(신상 정보조회/변경)에서 은행/계좌번호 </span>에 학생들이 직접 등록한 은행<br>
+                                                        계좌로 입금하고자 합니다. 반드시 현재 사용 중인 은행계좌를 정확하게 입력하시기 바랍니다.<br></div>
+                                2. 은행정보 등록방법<br> <div style="margin-left: 20px;">
+                                                               ▶ <span style="color: orange;"> 학교 홈페이지 KLAS 로그인 </span><br>
+                                    =&gt; 개인정보수정(신상 정보조회/변경)에서 <span style="color: orange;"> 은행/계좌번호 입력 </span><br></div>
+                                3. 계좌번호 입력시 유의사항<br> <div style="margin-left: 20px;">
+                                                        ▶ 반드시 통장 계좌번호 그대로(숫자 사이에 “-”를 넣고) 등록하시기 바랍니다.<br>
+                                                        ▶ 예) 123-45-67890(○), 1234567890(×)
+                                </div> <div onclick="window.scrollTo(0,0);" style="cursor: pointer; float: right; text-decoration: underline;">TOP</div></div></div> <div style="text-align: center;"><span><button type="button" class="btn2 btn-white">등록금고지서 출력</button></span></div></div>
+                    
+                    <form id="printForm" name="printForm" method="post"><input id="reprtParam1" name="reprtParam1" type="hidden" value=""><input id="reprtParam2" name="reprtParam2" type="hidden" value=""><input id="reprtParam3" name="reprtParam3" type="hidden" value=""><input id="reprtParam4" name="reprtParam4" type="hidden" value=""><input id="reprtParam5" name="reprtParam5" type="hidden" value=""><input id="reprtParam6" name="reprtParam6" type="hidden" value=""><input id="reprtParam7" name="reprtParam7" type="hidden" value=""><input id="reprtParam8" name="reprtParam8" type="hidden" value=""></form><script>
+                    let appModule = new Vue({
+                        el: '#appModule',
+                        data: {
+                            list: [],
+                            today : Number(''),
+                            thisYear : '',
+                            thisHakgi :'',
+                            mtype : '',
+                            organCode : '',
+                            
+                        },
+                        mounted: function () {
+                        },
+                        methods: {
+                            getData : function () {
+                                axios.post('/std/cps/atnlc/AcGrApplyStdList.do')
+                                .then(function (response) {
+                                    this.list = response.data;
+                                }.bind(this));
+                            },
+                            MM_openBrWindow: function (theURL,winName,features) {
+                                window.open(theURL,winName,features);
+                            },
+                            goPrintCheck : function () {
+                                axios.post('/std/hak/erollmnt/AcGrApplyTermCheck.do')
+                                .then(function (response) {
+                                    if(response.data.stats){
+                                        this.goPrint();
+                                    }else{
+                                        alert(response.data.returnMsg);
+                                    }
+                                }.bind(this));
+                            },
+                            goPrint : function(code) {
+                                var rptType = '';
+                                switch (this.mtype) {
+                                case '11':	break;
+                                case '31':	this.organCode='1'; break;   
+                                case '33':	this.organCode='3'; break;   
+                                case '34':	this.organCode='4'; break;   
+                                case '35':	this.organCode='5'; break;   
+                                case '36':	this.organCode='6'; break;   
+                                case '37': 	this.organCode='7'; break;   
+                                case '38':	this.organCode='8'; break;
+                                default:
+                                    alert('등록금 고지서를 출력할 수 있는 사용자가 아닙니다.');
+                                    break;
+                                }
+                                var regDate1 = '';
+                                var regWeekDay1 = '';
+                                var regDate2 = '';
+                                var regWeekDay2 = '';
+                                axios.post('TutionNtOne.do',this.$data)
+                                .then(function (response) {
+                                    if(!response.data) {
+                                        alert('등록금고지서 등록일자 조회 실패');
+                                        return false;
+                                    } else {
+                                        regDate1    = response.data.fromDate;
+                                        regWeekDay1 = response.data.fromDay;
+                                        regDate2    = response.data.toDate;
+                                        regWeekDay2 = response.data.toDay;
+                                                           
+                                        axios.post('TutionNtInfo.do',this.$data)
+                                        .then(function (response) {
+                                            var rptAt = true;
+                                            
+                                            //등록금 고지서 데이터 조회 실패시 학부/대학원 분기 처리 추가 2022.02.16 JWKIM
+                                            if(!response.data) {	                		
+                                                if(this.mtype == '11') {	//학부
+                                                    var msg  =  this.thisYear+"년 "+this.thisHakgi+"학기 등록금 내역이 없습니다.\n\n";
+                                                    msg += '졸업요건 미달로 수업연한(8학기, 편입생 4학기)을\n 초과하여 학기를 이수하는 학생(9학기 이상),\n';
+                                                    msg += '졸업논문 및 영어인증 미통과자\n\n';
+                                                    msg += '교육지원팀(5022~3)로 문의하여 주시기 바랍니다.';   
+                                                    alert(msg);
+                                                    rptAt = false;
+                                                    return false;		                		
+                                                } else {					//대학원
+                                                    var msg  =  this.thisYear+"년 "+this.thisHakgi+"학기 등록금 내역이 없습니다.\n\n";	                		    
+                                                    msg += '대학원 교학팀으로 문의하여 주시기 바랍니다.';   
+                                                    alert(msg);
+                                                    rptAt = false;
+                                                    return false;
+                                                }	                		
+                                            } 
+                                            if(response.data.payDate){
+                                                alert('이미 등록금 납부내역이 등록되어 있으므로 고지서를 출력할 수 없습니다.');
+                                                rptAt = false;
+                                                return false;
+                                            }
+                                            if('aldfajl' != response.data.hashData){
+                                                alert('등록금 조회에러');
+                                                rptAt = false;
+                                                return false;
+                                            }
+                                            
+                                            switch (response.data.hakjukMainCode) {
+                                            case '1': alert('휴학생은 등록금 고지서를 출력할 수 없습니다(휴학일자 : '+ response.data.hakjukDate); rptAt = false; return false; break;
+                                            case '3': alert('제적생은 등록금 고지서를 출력할 수 없습니다(제적일자 : '+ response.data.hakjukDate); rptAt = false; return false; break;
+                                            }
+                                            
+                                            // 외국인 의료보험료 수납의뢰서
+                                            if(response.data.count > 0){
+                                                alert('학부 외국인 학생 의료보험 가입 의무화에 따라  \n의료보험료 납부 후 등록금 고지서가 출력 가능합니다.\n(문의 : 국제교류팀, 02-940-5014~6)');
+                                                
+                                                rptType='foreignMedi';		// 유학생 의료보험료 수납의뢰서 sycho 2020.07.25
+                                                
+                                                var strOption = 'toolbar=no, menubar=no, location=no,resizable=yes,left=0,top=0,width='  + screen.width + ',height=' + screen.height;
+                                                $("#reprtParam1").val(this.thisYear);
+                                                $("#reprtParam2").val(this.thisHakgi);
+                                                
+                                                var popup = window.open('', 'printPop', strOption);
+                                               
+                                               $("#printForm").prop('target', 'printPop').prop("action","/std/cmn/reprt/ForeignMediPrint.do").submit().prop('target', '');
+                                               popup.focus();
+                                               
+                                               rptAt = false;
+                                            }
+                                            
+                                            if(response.data.payCode == '2'){
+                                                alert("분할납부 대상자 출력 불가");
+                                                return false;
+                                            }
+                                            if(rptAt) {
+                                                 var strOption = 'toolbar=no, menubar=no, location=no,resizable=yes,left=0,top=0,width='  + screen.width + ',height=' + screen.height;
+                                                 $("#reprtParam1").val(this.thisYear);
+                                                 $("#reprtParam2").val(this.thisHakgi);
+                                                 $("#reprtParam3").val(response.data.hakbun);
+                                                 $("#reprtParam4").val(regDate1);
+                                                 $("#reprtParam5").val(regWeekDay1);
+                                                 $("#reprtParam6").val(regDate2);
+                                                 $("#reprtParam7").val(regWeekDay2);
+                                                 $("#reprtParam8").val(this.organCode);
+                                                 
+                                                 var popup = window.open('', 'printPop', strOption);
+                                                 switch (this.mtype) {
+                                                     case '11':	
+                                                         $("#printForm").prop('target', 'printPop').prop("action","/std/cmn/reprt/Tution01Print.do").submit().prop('target', ''); break;
+                                                     case '31':	   
+                                                     case '33':	   
+                                                     case '34':	   
+                                                     case '35':	   
+                                                     case '36':	   
+                                                     case '37': 	   
+                                                     case '38':
+                                                         $("#printForm").prop('target', 'printPop').prop("action","/std/cmn/reprt/Tution02Print.do").submit().prop('target', '');	break;                 				
+                                                  }
+                                                 
+                                                 popup.focus();
+                                            }
+                                        }.bind(this));
+                                    }
+                                }.bind(this));
+                            }
+                        }
+                    });
+                    </script>
+                    
+                    </div>
+                            </div>
+                        </main>
+                        
+                    </div>
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <script>
+                        const footer = document.querySelector('footer');
+
+                        fetch('/KWAS/component/footer.html')
+                        .then(res => res.text())
+                        .then(data => footer.innerHTML = data);
+                    </script>
+                </footer>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/chart-area-demo.js"></script>
+        <script src="assets/demo/chart-bar-demo.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+        <script src="js/datatables-simple-demo.js"></script>
+    </body>
+</html>
