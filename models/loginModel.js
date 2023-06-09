@@ -1,10 +1,10 @@
 const mysql = require('mysql');
 const conn = mysql.createConnection({
-    host: '54.180.104.62',
-    user: 'root',
-    password: '1234',
-    port: '58261',
-    database: 'ManageSys',
+  host: '54.180.104.62',
+  user: 'root',
+  password: '1234',
+  port: '58261',
+  database: 'ManageSys',
 });
 
  module.exports.join = (datas) => {
@@ -48,3 +48,37 @@ module.exports.authenticate = (schoolNumber, password, registerChoice) => {
     });
   });
 };
+
+module.exports.findId = (name, phone_num) => {
+  return new Promise ((resolve, reject) => {
+      let sql = 'SELECT user_id FROM user WHERE name = ? and phone_num = ?';
+      conn.query(sql, [name, phone_num], (err, rows, fields)=>{
+          if(err) {
+              reject(err);
+          } else {
+            if (rows.length) {
+              resolve(rows[0]);
+            } else {
+              reject('존재하지 않는 사용자');
+            }
+          }
+      })
+  })
+}
+
+module.exports.findPw = (user_id, name, phone_num) => {
+  return new Promise ((resolve, reject) => {
+      let sql = 'SELECT password FROM user WHERE user_id=? and name = ? and phone_num = ?';
+      conn.query(sql, [user_id, name, phone_num], (err, rows, fields)=>{
+          if(err) {
+              reject(err);
+          } else {
+            if (rows.length) {
+              resolve(rows[0]);
+            } else {
+              reject('존재하지 않는 사용자');
+            }
+          }
+      })
+  })
+}
