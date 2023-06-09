@@ -148,26 +148,23 @@
                   <tbody>
                     <tr>
                       <!-- 전체 전공 교양 -->
-                      <td style="width: 10%">
+                      <td style="width: 50%"></td>
+                      <td style="width: 20%">
                         <select
                           class="form-select"
                           aria-label="Default select example"
                           onchange="showDepartments(this.value)"
                         >
-                          <option selected>전체</option>
-                          <option value="1">교양</option>
-                          <option value="2">전자정보공과대학</option>
-                          <option value="3">소프트웨어융합대학</option>
-                          <option value="4">공과대학</option>
-                          <option value="5">자연과학대학</option>
-                          <option value="6">인문사회과학대학</option>
-                          <option value="7">정책법학대학</option>
-                          <option value="8">경영대학</option>
+                          <option value="1" selected>전체</option>
+                          <option value="2">교양</option>
+                          <option value="3">컴퓨터정보공학부</option>
+                          <option value="4">소프트웨어학부</option>
+                          <option value="5">정보융합학부</option>
+                          <option value="6">로봇학부</option>
+                          <option value="7">전자공학과</option>
+                          <option value="8">수학과</option>
+                          <option value="9">경영학부</option>
                         </select>
-                      </td>
-
-                      <td id="departmentSelect" style="width: 20%">
-                        <!-- 선택한 전공에 따라 대학 선택이 업데이트될 공간 -->
                       </td>
 
                       <!-- 과목명 -->
@@ -191,90 +188,6 @@
                       function showDepartments(selectedValue) {
                         let departmentSelect =
                           document.getElementById("departmentSelect");
-
-                        // 선택한 대학에 따라 다른 학과 선택을 보여줌
-                        switch (selectedValue) {
-                          case "2":
-                            departmentSelect.innerHTML = `
-                                                        <select class="form-select" aria-label="Default select example">
-                                                          <option value="0">공통</option>
-                                                          <option value="1">전자공학과</option>
-                                                          <option value="2">전자통신공학과</option>
-                                                          <option value="3">전자융합공학과</option>
-                                                          <option value="4">전기공학과</option>
-                                                          <option value="5">전자재료공학과</option>
-                                                          <option value="6">로봇학부</option>
-                                                        </select>
-                                                        `;
-                            break;
-                          case "3":
-                            departmentSelect.innerHTML = `
-                                                        <select class="form-select" aria-label="Default select example">
-                                                            <option value="0">공통</option>
-                                                          <option value="1">컴퓨터정보공학부</option>
-                                                          <option value="2">소프트웨어학부</option>
-                                                          <option value="3">정보융합학부</option>
-                                                        </select>
-                                                      `;
-                            break;
-                          case "4":
-                            departmentSelect.innerHTML = `
-                                                          <select class="form-select" aria-label="Default select example">
-                                                            <option value="0">공통</option>
-                                                            <option value="1">건축공학과</option>
-                                                            <option value="2">화학공학과</option>
-                                                            <option value="3">환경공학과</option>
-                                                            <option value="4">건축학과</option>
-                                                          </select>
-                                                        `;
-                            break;
-                          case "5":
-                            departmentSelect.innerHTML = `
-                                                          <select class="form-select" aria-label="Default select example">
-                                                            <option value="0">공통</option>
-                                                            <option value="1">수학과</option>
-                                                            <option value="2">전자바이오물리학과</option>
-                                                            <option value="3">화학과</option>
-                                                            <option value="4">스포츠융합과학과</option>
-                                                          </select>
-                                                        `;
-                            break;
-                          case "6":
-                            departmentSelect.innerHTML = `
-                                                          <select class="form-select" aria-label="Default select example">
-                                                            <option value="0">공통</option>
-                                                            <option value="1">국어국문학과</option>
-                                                            <option value="2">영어산업학과</option>
-                                                            <option value="3">미디어커뮤케이션학부</option>
-                                                            <option value="4">산업심리학과</option>
-                                                            <option value="5">동북아문화사업학부</option>
-                                                          </select>
-                                                        `;
-                            break;
-                          case "7":
-                            departmentSelect.innerHTML = `
-                                                          <select class="form-select" aria-label="Default select example">
-                                                            <option value="0">공통</option>
-                                                            <option value="1">행정학과</option>
-                                                            <option value="2">법학부</option>
-                                                            <option value="3">국제학부</option>
-                                                            <option value="4">자산관리학과</option>
-                                                          </select>
-                                                        `;
-                            break;
-                          case "8":
-                            departmentSelect.innerHTML = `
-                                                          <select class="form-select" aria-label="Default select example">
-                                                            <option value="0">공통</option>
-                                                            <option value="1">경영학부</option>
-                                                            <option value="2">국제통상학부</option>
-                                                          </select>
-                                                        `;
-                            break;
-                          default:
-                            departmentSelect.innerHTML = "";
-                            break;
-                        }
                       }
                     </script>
                   </tbody>
