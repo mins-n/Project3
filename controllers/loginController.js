@@ -12,6 +12,7 @@ exports.join = (req, res)=>{
 
 exports.login = (req, res) => {
     console.log(req.body);
+    
     const schoolNumber = req.body.school_number;
     const password = req.body.password;
     const registerChoice = req.body.register_choice;

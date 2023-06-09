@@ -3,7 +3,7 @@ const conn = mysql.createConnection({
     host: '54.180.104.62',
     user: 'root',
     password: '1234',
-    port: '51029',
+    port: '58261',
     database: 'ManageSys',
 });
 
@@ -32,6 +32,7 @@ const conn = mysql.createConnection({
 
 module.exports.authenticate = (schoolNumber, password, registerChoice) => {
   return new Promise((resolve, reject) => {
+    console.log(schoolNumber, password, registerChoice);
     conn.query('SELECT * FROM user WHERE user_id = ? AND password = ? AND register_choice = ?', [schoolNumber, password, registerChoice], function(err, rows) {
       if (err) {
         reject(err);
