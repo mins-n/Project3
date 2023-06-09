@@ -12,13 +12,12 @@ const conn = mysql.createConnection({
     host: '54.180.104.62',
     user: 'root',
     password: '1234',
-    port: '51029',
+    port: '58261',
     database: 'ManageSys',
 });
 
 var app = express();
 
-/*
 conn.connect(function (err) {
     if (err) {
         console.error('Error connecting to MySQL database: ' + err.stack);
@@ -27,7 +26,6 @@ conn.connect(function (err) {
 
     console.log('Connected to MySQL database as id ' + conn.threadId);
 });
-*/
 
 // view engine setup
 app.set('views', path.join(__dirname, 'KWAS'));
