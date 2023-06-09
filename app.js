@@ -3,16 +3,18 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var session = require('express-session');
+var bodyParser = require('body-parser');
+const mysql = require('mysql');
 
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/loginRouter')
-const mysql = require('mysql');
 
 const conn = mysql.createConnection({
-    host: '54.180.104.62',
+    host: '43.202.44.199',
     user: 'root',
     password: '1234',
-    port: '58261',
+    port: '52570',
     database: 'ManageSys',
 });
 
@@ -26,6 +28,17 @@ conn.connect(function (err) {
 
     console.log('Connected to MySQL database as id ' + conn.threadId);
 });
+
+app.use(
+    session({
+      secret: 'your-secret-key',
+      resave: false,
+      saveUninitialized: true,
+      cookie: { secure: false } // Set 'secure' to 'true' if using HTTPS
+    })
+  );
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'KWAS'));
@@ -43,14 +56,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/', indexRouter);
 app.use('/main', indexRouter);
 app.use('/login_form', loginRouter);
-
-
-
-
-
-
-
-
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

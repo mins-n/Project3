@@ -1,9 +1,9 @@
 const mysql = require('mysql');
 const conn = mysql.createConnection({
-  host: '54.180.104.62',
+  host: '43.202.44.199',
   user: 'root',
   password: '1234',
-  port: '58261',
+  port: '52570',
   database: 'ManageSys',
 });
 
@@ -81,4 +81,14 @@ module.exports.findPw = (user_id, name, phone_num) => {
           }
       })
   })
+}
+
+exports.logout = async (req, res) => {
+  console.log('req 의 값은 : ', req.session);
+  if(req.session.user) {
+      await req.session.destroy(error =>{
+          if(error)
+              console.log(error)
+      });
+  }
 }
