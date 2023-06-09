@@ -188,83 +188,28 @@
                         </tr>
                         </tbody>
                     </table>
+                    <!-- 서버로부터 시간표 정보 가져옴 -->
                     <script>                      
                       function timetable(selectedValue) {
-                        let timetable = document.getElementById("timetable");
-                        switch (selectedValue) {
-                          case "6":
-                            timetable.innerHTML = `<tr>
-                                <th scope="row">1교시</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2교시</th>
-                                <td></td>
-                                <td></td>
-                                <td>머신러닝</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3교시</th>
-                                <td>머신러닝</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">4교시</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">5교시</th>
-                                <td>소프트웨어공학</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">6교시</th>
-                                <td></td>
-                                <td></td>
-                                <td>소프트웨어공학</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">7교시</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">8교시</th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            `;
-                            break;
-                            default:
-                            timetable.innerHTML = `
-                            `;
-                            break;
+                        // 서버로부터 수업 정보 가져옴
+                        fetch('/timetableEndpoint', {
+                          method: 'POST', // Use the appropriate HTTP method (POST, GET, etc.)
+                          body: JSON.stringify({ selectedValue }), // Pass any necessary data to the server
+                          headers: {
+                            'Content-Type': 'application/json' // Set the appropriate Content-Type header
+                          }
+                        })
+                          .then(response => response.json())
+                          .then(data => {
+                            // Update the timetable element with the received data
+                            let timetable = document.getElementById("timetable");
+                            timetable.innerHTML = data; // Assuming the server responds with the HTML content
+                          })
+                          .catch(error => {
+                            // Handle any errors that occurred during the request
+                            console.error('Error:', error);
+                          });
                       }
-                    }
                     </script>
 
               </div>
