@@ -27,42 +27,42 @@
                   <div class="card-header">
                     <h3 class="text-center font-weight-light my-4">로그인</h3>
                   </div>
+                  <form>
+                  <div class="radio" style="margin-left: 20px">
+                    <label
+                      ><input
+                        type="radio"
+                        id="register_choice"
+                        name="register_choice"
+                        value="2"
+                      />
+                      학생</label
+                    >
+                    <label
+                      ><input
+                        type="radio"
+                        id="register_choice"
+                        name="register_choice"
+                        value="1"
+                      />
+                      교수님</label
+                    >
+                    <label
+                      ><input
+                        type="radio"
+                        id="register_choice"
+                        name="register_choice"
+                        value="0"
+                      />
+                      관리자</label
+                    >
+                  </div>
                   <div class="card-body">
-                    <form action="/login_form/login.html" method="POST"></form>
-                      <div class="radio" style="margin-left: 20px">
-                        <label
-                          ><input
-                            type="radio"
-                            id="register_choice"
-                            name="register_choice"
-                            value="student"
-                          />
-                          학생</label
-                        >
-                        <label
-                          ><input
-                            type="radio"
-                            id="register_choice"
-                            name="register_choice"
-                            value="professor"
-                          />
-                          교수님</label
-                        >
-                        <label
-                          ><input
-                            type="radio"
-                            id="register_choice"
-                            name="register_choice"
-                            value="admin"
-                          />
-                          관리자</label
-                        >
-                      </div>
-                    
                       <div class="form-floating mb-3">
                         <input
                           class="form-control"
                           id="school_number"
+                          name="school_number"
                           type="text"
                           placeholder="학번 10자리를 입력하시오"
                         />
@@ -72,6 +72,7 @@
                         <input
                           class="form-control"
                           id="password"
+                          name="password"
                           type="password"
                           placeholder="Password"
                         />
@@ -80,25 +81,38 @@
 
                       <div class="mt-4 mb-0">
                         <div class="d-grid">
-                          <button type="submit" class="btn btn-primary btn-block" onclick="handleLoginResponse(response)">로그인</button>
+                          <button type="button" class="btn btn-primary btn-block" onclick="login()">로그인</button>
+                          <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
                           <script>
-                            function handleLoginResponse(response){
-                              if(response.status===200){
-                                alert('로그인 성공');
-                                window.location.href="/KWAS/main/index.html";
-                              }
-                              else if (response.status===400){
-                                alret('로그인 실패');
-                                window.location.href="/KWAS/login_form/login.html";
-                              }
-                              else{
-                                alert('오류가 발생했습니다.');
-                              }
+                            function login() {
+                              var form = document.querySelector('form');
+                              var formData = new FormData(form);
+
+                              axios.post('/login_form/login.html', {
+                                school_number: formData.get('school_number'),
+                                password: formData.get('password'),
+                                register_choice: formData.get('register_choice')
+                              })
+                                .then(function(response) {
+                                  if (response.status === 200) {
+                                    alert("로그인 성공");
+                                    window.location.href = "../main/index.html";
+                                  } else if (response.status === 400) {
+                                    alert("로그인 실패");
+                                    window.location.href = "register.html";
+                                  } else {
+                                    alert("오류가 발생했습니다.");
+                                  }
+                                })
+                                .catch(function(error) {
+                                  console.log("오류:", error);
+                                });
                             }
                             </script>
                         </div>
                       </div>
-
+                    </form>
+                    </div>
                       <div
                         class="d-flex align-items-center justify-content-between mt-4 mb-0"
                       >
@@ -113,7 +127,6 @@
                           >비밀번호를 잃어버리셨습니까?</a
                         >
                       </div>
-                    </form>
                   </div>
                   <div class="card-footer text-center py-3">
                     <div class="small">

@@ -22,7 +22,6 @@ exports.getTimetable = (userId) => {
       } );
     });
   };*/
->>>>>>> 92cd444610ed11484ccb9f75739b1e52156108a2
 
 exports.getTimetable = () => {
     const data = {

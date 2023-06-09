@@ -9,7 +9,6 @@ const conn = mysql.createConnection({
 
  module.exports.join = (datas) => {
   return new Promise((resolve, reject) => {
-    console.log(datas);
     conn.query('SELECT user_id FROM user WHERE user_id=?', datas[0], function(err, rows) {
       if (err) {
         reject(err);
@@ -33,8 +32,9 @@ const conn = mysql.createConnection({
 module.exports.authenticate = (schoolNumber, password, registerChoice) => {
   return new Promise((resolve, reject) => {
     console.log(schoolNumber, password, registerChoice);
-    conn.query('SELECT * FROM user WHERE user_id = ? AND password = ? AND register_choice = ?', [schoolNumber, password, registerChoice], function(err, rows) {
+    conn.query('SELECT * FROM user WHERE user_id = ? AND password = ? AND user_class = ?', [schoolNumber, password, registerChoice], function(err, rows) {
       if (err) {
+        console.log('  ');
         reject(err);
       } else {
         if (rows.length) {
