@@ -4,10 +4,15 @@ const loginModel = require('../models/loginModel');
 exports.join = (req, res)=>{
     var datas = [req.body.school_number, req.body.password, req.body.name, req.body.telephone,
         req.body.inputEmail,req.body.register_choice];
-        loginModel.join(datas, function(stat, result){
-            res.status(stat).send(result)
-    });
-}
+    loginModel.join(datas)
+      .then((result) => {
+        res.status(200).send('Join successful');
+      })
+      .catch((error) => {
+        // Authentication failed
+        res.status(400).send('Invalid credentials');
+      });
+    }
 
 exports.login = (req, res) => {
     const schoolNumber = req.body.school_number;
@@ -21,25 +26,32 @@ exports.login = (req, res) => {
       })
       .catch((error) => {
         // Authentication failed
-        res.status(401).send('Invalid credentials');
+        res.status(400).send('Invalid credentials');
       });
   };
 
-/*
 exports.findId = (req, res)=>{
-    const name = req.body.;
-    const phone_num = req.body. ;
-        loginModel.findId(name, phone_num, function(stat, result){
-            res.status(stat).send(result)
-    });
-}
-
+    const name = req.body.inputName;
+    const phone_num = req.body.inputPhone;
+    loginModel.findId(name, phone_num)
+      .then((result) => {
+        res.status(200).send('Find successful');
+      })
+      .catch((error) => {
+        // Authentication failed
+        res.status(400).send('Invalid credentials');
+      });
+    }
 exports.findPw = (req, res)=>{
-  const user_id = req.body.;
-  const name = req.body.;
-  const phone_num = req.body.;
-      loginModel.findPw(user_id, name, phone_num, function(stat, result){
-          res.status(stat).send(result)
-  });
+  const user_id = req.body.inputName;
+    const name = req.body.inputName;
+    const phone_num = req.body.inputPhone;
+    loginModel.findPw(user_id, name, phone_num)
+      .then((result) => {
+        res.status(200).send('Find successful');
+      })
+      .catch((error) => {
+        // Authentication failed
+        res.status(400).send('Invalid credentials');
+      });
 }
-*/
