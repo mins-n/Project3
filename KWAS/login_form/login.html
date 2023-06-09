@@ -80,10 +80,20 @@
 
                       <div class="mt-4 mb-0">
                         <div class="d-grid">
-                          <button type="submit" class="btn btn-primary btn-block" onclick="redirectToLoginPage()">로그인</button>
+                          <button type="submit" class="btn btn-primary btn-block" onclick="handleLoginResponse(response)">로그인</button>
                           <script>
-                            function redirectToLoginPage() {
-                              window.location.href = "../main/index.html";
+                            function handleLoginResponse(response){
+                              if(response.status===200){
+                                alert('로그인 성공');
+                                window.location.href="/KWAS/main/index.html";
+                              }
+                              else if (response.status===400){
+                                alret('로그인 실패');
+                                window.location.href="/KWAS/login_form/login.html";
+                              }
+                              else{
+                                alert('오류가 발생했습니다.');
+                              }
                             }
                             </script>
                         </div>
