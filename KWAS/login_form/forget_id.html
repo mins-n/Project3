@@ -62,8 +62,16 @@
                         <a class="small" href="/KWAS/login_form/login.html"
                           >로그인으로 돌아가기</a
                         >
-                        <a class="btn btn-primary" href="#">학번 조회</a>
                       </div>
+                      <div class="mt-4 mb-0">
+                        <div class="d-grid">
+                          <button type="submit" class="btn btn-primary btn-block" onclick="redirectToLoginPage()">학번 찾기</button>
+                          <script>
+                            function redirectToLoginPage() {
+                              window.location.href = "login.html";
+                            }
+                            </script>
+                        </div>
                     </form>
                   </div>
                   <div class="card-footer text-center py-3">
