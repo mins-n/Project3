@@ -1,9 +1,9 @@
 const mysql = require('mysql');
 const conn = mysql.createConnection({
-    host: '3.34.200.80',
+    host: '54.180.104.62',
     user: 'root',
     password: '1234',
-    port: '57412',
+    port: '51029',
     database: 'ManageSys',
 });
 
@@ -29,3 +29,21 @@ const conn = mysql.createConnection({
     });
   });
 }; 
+
+module.exports.authenticate = (schoolNumber, password, registerChoice) => {
+  return new Promise((resolve, reject) => {
+    conn.query('SELECT * FROM user WHERE user_id = ? AND password = ? AND register_choice = ?', [schoolNumber, password, registerChoice], function(err, rows) {
+      if (err) {
+        reject(err);
+      } else {
+        if (rows.length) {
+          // User authenticated successfully
+          resolve(rows[0]); // Return the user object
+        } else {
+          // Authentication failed
+          reject('Invalid credentials');
+        }
+      }
+    });
+  });
+};

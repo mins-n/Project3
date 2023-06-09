@@ -9,10 +9,10 @@ var loginRouter = require('./routes/loginRouter')
 const mysql = require('mysql');
 
 const conn = mysql.createConnection({
-    host: '3.34.200.80',
+    host: '54.180.104.62',
     user: 'root',
     password: '1234',
-    port: '57412',
+    port: '51029',
     database: 'ManageSys',
 });
 
