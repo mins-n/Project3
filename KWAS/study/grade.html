@@ -48,7 +48,22 @@
         .then((res) => res.text())
         .then((data) => (dynamicHeader.innerHTML = data));
     </script>
+    <script>
+      function openEditPopup() {
+        document.getElementById("editPopup").style.display = "block";
+      }
 
+      function closeEditPopup() {
+        document.getElementById("editPopup").style.display = "none";
+      }
+
+      // Show/hide the link based on certain conditions
+      const isAdmin = true; // Change this value based on your logic
+
+      if (isAdmin) {
+        document.getElementById("editLink").style.display = "inline";
+      }
+    </script>
     <div id="layoutSidenav">
       <div id="layoutSidenav_nav">
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
