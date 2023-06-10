@@ -110,6 +110,41 @@
                             }
                             </script>
                         </div>
+                         <div class="mt-4 mb-0">
+                        <div class="d-grid">
+                          <button type="button" class="btn btn-primary btn-block" onclick="register()">회원가입 진행하기</button>
+                          <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+                          <script>
+                            function register() {
+                              var form = document.querySelector('form');
+                              var formData = new FormData(form);
+                
+                              axios.post('/login_form/register.html', {
+                                register_choice: formData.get('register_choice'),
+                                school_number: formData.get('school_number'),
+                                inputEmail: formData.get('inputEmail'),
+                                password: formData.get('password'),
+                                password_check: formData.get('password_check'),
+                                name: formData.get('name'),
+                                telephone: formData.get('telephone')
+                              })
+                                .then(function(response) {
+                                  if (response.status === 200) {
+                                    alert("회원가입 성공");
+                                    window.location.href = "login.html";
+                                  } else if (response.status === 400) {
+                                    alert("회원가입 실패");
+                                    window.location.href = "register.html";
+                                  } else {
+                                    alert("오류가 발생했습니다.");
+                                  }
+                                })
+                                .catch(function(error) {
+                                  console.log("오류:", error);
+                                });
+                            }
+                          </script>
+                        </div>
                       </div>
                     </form>
                     </div>
