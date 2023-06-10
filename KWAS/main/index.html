@@ -80,96 +80,25 @@
                   <div class="d-flex justify-content-end">
                     <div class="input-group mb-3" style="width: 10%;">
                       <select class="form-select" aria-label="Default select example" onchange="timetable(this.value)">
-                        <option value="0">1-1학기</option>
-                        <option value="1">1-2학기</option>
-                        <option value="2">2-1학기</option>
-                        <option value="3">2-2학기</option>
-                        <option value="4">3-1학기</option>
-                        <option value="5">3-2학기</option>
-                        <option value="6" selected>4-1학기</option>
-                        <option value="7">4-2학기</option>
+                        <!-- JavaScript로 동적으로 옵션을 생성합니다 -->
+                        <script>
+                          // 서버로부터 받아온 year과 semester 정보를 가정합니다
+                          var years = ["2018", "2018", "2021", "2021", "2022", "2022", "2023"];
+                          var semesters = ["1학기", "2학기", "1학기", "2학기", "1학기", "2학기", "1학기"];
+                    
+                          // 옵션을 동적으로 생성합니다
+                          for (var i = 0; i < years.length; i++) {
+                            var option = document.createElement("option");
+                            option.value = i + 1;
+                            option.text = years[i] + "-" + semesters[i];
+                            document.querySelector("select").appendChild(option);
+                          }
+                        </script>
                       </select>
                     </div>
+                    
                   </div>
                   <div class="row" id="timetable-container">
-                    <!-- <table class="table table-hover">
-                      <thead>
-                        <tr>
-                            <th style="width: 10%"></th>
-                            <th style="width: 15%">월</th>
-                            <th style="width: 15%">화</th>
-                            <th style="width: 15%">수</th>
-                            <th style="width: 15%">목</th>
-                            <th style="width: 15%">금</th>
-                          </tr>
-                        </thead>
-                        <tbody id="timetable">
-                          <tr>
-                            <th scope="row">1교시</th>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2교시</th>
-                            <td></td>
-                            <td></td>
-                            <td>머신러닝</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3교시</th>
-                            <td>머신러닝</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">4교시</th>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">5교시</th>
-                            <td>소프트웨어공학</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">6교시</th>
-                            <td></td>
-                            <td></td>
-                            <td>소프트웨어공학</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">7교시</th>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">8교시</th>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        </tbody> -->
-                    </table>
                     <!-- 서버로부터 시간표 정보 가져옴 -->
                     <script>
                       function getTimetable() {
