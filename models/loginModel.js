@@ -34,7 +34,6 @@ module.exports.authenticate = (schoolNumber, password, registerChoice) => {
     console.log(schoolNumber, password, registerChoice);
     conn.query('SELECT * FROM user WHERE user_id = ? AND password = ? AND user_class = ?', [schoolNumber, password, registerChoice], function(err, rows) {
       if (err) {
-        console.log('  ');
         reject(err);
       } else {
         if (rows.length) {

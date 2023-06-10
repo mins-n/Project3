@@ -22,6 +22,13 @@ exports.login = (req, res) => {
 
     loginModel.authenticate(schoolNumber, password, registerChoice)
       .then((result) => {
+        
+        // session
+        req.session.user = {
+          user_id: schoolNumber,
+          user_class: registerChoice
+        };
+
         // Authentication successful
         res.status(200).send('Login successful');
       })
