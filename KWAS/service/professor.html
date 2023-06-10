@@ -42,50 +42,12 @@
       ></div>
     </header>
 
-    <script>
-      // JavaScript code to load content dynamically into the second section
-      var dynamicHeader = document.getElementById("dynamicHeader");
-      fetch("../component/header.html")
-        .then((res) => res.text())
-        .then((data) => (dynamicHeader.innerHTML = data));
-    </script>
-    <script>
-      function openEditPopup() {
-        document.getElementById("editPopup").style.display = "block";
-      }
+    <script src="../js/component/header.js" defer></script>
 
-      function closeEditPopup() {
-        document.getElementById("editPopup").style.display = "none";
-      }
-
-      // Show/hide the link based on certain conditions
-      const isAdmin = true; // Change this value based on your logic
-
-      if (isAdmin) {
-        document.getElementById("editLink").style.display = "inline";
-      }
-    </script>
     <div id="layoutSidenav">
       <div id="layoutSidenav_nav">
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-          <script>
-            const nav = document.querySelector("nav");
-
-            fetch("../component/nav.html")
-              .then((res) => res.text())
-              .then((data) => {
-                // 버튼을 로드하기 전에 내비게이션 사이드바를 로드
-                nav.innerHTML = data;
-
-                // 내비게이션 사이드바를 로드한 후에 버튼에 대한 이벤트 리스너를 연결
-                const sidebarToggle = document.getElementById("sidebarToggle");
-                const layoutSidenav = document.getElementById("layoutSidenav");
-
-                sidebarToggle.addEventListener("click", () => {
-                  layoutSidenav.classList.toggle("sb-sidenav-toggled");
-                });
-              });
-          </script>
+          <script src="../js/component/nav.js" defer></script>
         </nav>
       </div>
 

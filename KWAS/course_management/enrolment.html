@@ -47,44 +47,12 @@
         .then((res) => res.text())
         .then((data) => (dynamicHeader.innerHTML = data));
     </script>
-    <script>
-      function openEditPopup() {
-        document.getElementById("editPopup").style.display = "block";
-      }
-
-      function closeEditPopup() {
-        document.getElementById("editPopup").style.display = "none";
-      }
-
-      // Show/hide the link based on certain conditions
-      const isAdmin = true; // Change this value based on your logic
-
-      if (isAdmin) {
-        document.getElementById("editLink").style.display = "inline";
-      }
-    </script>
+    <script src="../js/component/header.js" defer></script>
 
     <div id="layoutSidenav">
       <div id="layoutSidenav_nav">
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-          <script>
-            const nav = document.querySelector("nav");
-
-            fetch("../component/nav.html")
-              .then((res) => res.text())
-              .then((data) => {
-                // 버튼을 로드하기 전에 내비게이션 사이드바를 로드
-                nav.innerHTML = data;
-
-                // 내비게이션 사이드바를 로드한 후에 버튼에 대한 이벤트 리스너를 연결
-                const sidebarToggle = document.getElementById("sidebarToggle");
-                const layoutSidenav = document.getElementById("layoutSidenav");
-
-                sidebarToggle.addEventListener("click", () => {
-                  layoutSidenav.classList.toggle("sb-sidenav-toggled");
-                });
-              });
-          </script>
+          <script src="../js/component/nav.js" defer></script>
         </nav>
       </div>
 
@@ -111,54 +79,12 @@
                   style="width: 100%; margin: 0 auto"
                 ></div>
                 <!-- No. 학정번호 과목명 학점 교수명 여석 강의시간 비고 -->
-                <div class="container" style="width: 100%; margin: 0 auto">
-                  <table class="table table-hover">
-                    <thead>
-                      <tr>
-                        <th style="width: 5%">No.</th>
-                        <th style="width: 15%">학정번호</th>
-                        <th style="width: 15%">과목명</th>
-                        <th style="width: 5%">학점</th>
-                        <th style="width: 10%">교수명</th>
-                        <th style="width: 5%">여석</th>
-                        <th style="width: 10%">강의시간</th>
-                        <th style="width: 15%">비고</th>
-                        <th style="width: 10%">수강신청</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>H020-4-0846-01</td>
-                        <td>소프트웨어공학</td>
-                        <td>3</td>
-                        <td>이기훈</td>
-                        <td>10</td>
-                        <td>월 5, 수 6</td>
-                        <td></td>
-                        <td>
-                          <button type="button" class="btn btn-primary">
-                            수강신청
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>H020-4-8483-01</td>
-                        <td>머신러닝</td>
-                        <td>3</td>
-                        <td>박철수</td>
-                        <td>20</td>
-                        <td>월 3, 수 4</td>
-                        <td></td>
-                        <td>
-                          <button type="button" class="btn btn-primary">
-                            수강신청
-                          </button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                <div
+                  class="container"
+                  id="enrolment_container"
+                  style="width: 100%; margin: 0 auto"
+                >
+                  <script src="../js/enrolment_table.js" defer></script>
                 </div>
                 <table class="table table-hover">
                   <tbody>
