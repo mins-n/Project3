@@ -8,13 +8,14 @@ var bodyParser = require('body-parser');
 const mysql = require('mysql');
 
 var indexRouter = require('./routes/index');
-var loginRouter = require('./routes/loginRouter')
+var loginRouter = require('./routes/loginRouter');
+var boardRouter = require('./routes/boardRouter');
 
 const conn = mysql.createConnection({
-    host: '43.202.44.199',
+    host: '54.180.104.62',
     user: 'root',
     password: '1234',
-    port: '57776',
+    port: '53319',
     database: 'ManageSys',
 });
 
@@ -56,6 +57,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/', indexRouter);
 app.use('/main', indexRouter);
 app.use('/login_form', loginRouter);
+app.use('/boards', boardRouter);
+
+app.get('/', (req, res) => {res.sendFile(__dirname + '/KWAS/main/index.html');});
+app.get('/login_form/forget_id', (req, res) => {res.sendFile(__dirname + '/KWAS/login_form/forget_id.html');});
+app.get('/login_form/forget_password', (req, res) => {res.sendFile(__dirname + '/KWAS/login_form/forget_password.html');});
+app.get('/login_form/login', (req, res) => {res.sendFile(__dirname + '/KWAS/login_form/login.html');});
+app.get('/login_form/register', (req, res) => {res.sendFile(__dirname + '/KWAS/login_form/register.html');});
+app.get('/boards/boardList', (req, res) => {res.sendFile(__dirname + '/KWAS/boards/boardList.html');});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

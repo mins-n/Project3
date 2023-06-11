@@ -1,9 +1,9 @@
 const mysql = require('mysql');
 const conn = mysql.createConnection({
-  host: '43.202.44.199',
+  host: '54.180.104.62',
   user: 'root',
   password: '1234',
-  port: '57776',
+  port: '53319',
   database: 'ManageSys',
 });
 
@@ -29,7 +29,7 @@ module.exports.getLecture = (user_id, year, semester) => {
       FROM user_lecture u\
       INNER JOIN lecture l ON u.lecture_code = l.lecture_code\
       WHERE u.user_id = ? AND u.year = ? AND u.semester = ?\
-      ORDER BY l.lecture_name ASC', user_id, year, semester, function(err, rows) {
+      ORDER BY l.lecture_name ASC', [user_id, year, semester], function(err, rows) {
         if (err) {
           reject(err);
         } else {
@@ -46,7 +46,8 @@ module.exports.getPageCount = (user_id, lecture_code, board_name) => {
       INNER JOIN board b ON p.board_code = b.board_code\
       INNER JOIN user_lecture ul ON b.lecture_code = ul.lecture_code\
       INNER JOIN user u ON ul.user_id = u.user_id\
-      WHERE u.user_id = ? AND ul.lecture_code = ? AND b.board_name = ?', user_id, lecture_code, board_name, function(err, rows) {
+      WHERE u.user_id = ? AND ul.lecture_code = ? AND b.board_name = ?',
+     [user_id, lecture_code, board_name], function(err, rows) {
         if (err) {
           reject(err);
         } else {
@@ -66,7 +67,7 @@ module.exports.getList = (user_id, lecture_code, board_name, page) => {
       WHERE u.user_id = ? AND ul.lecture_code = ? AND b.board_name = ?\
       ORDER BY p.post_code DESC\
       LIMIT ?, ?'
-      , user_id, lecture_code, board_name, (page-1)*10,10, function(err, rows) {
+      , [user_id, lecture_code, board_name, (page-1)*10,10], function(err, rows) {
         if (err) {
           reject(err);
         } else {
