@@ -76,3 +76,19 @@ module.exports.getList = (user_id, lecture_code, board_name, page) => {
       });
     });
   }; 
+
+module.exports.getPost = (post_code) => {
+    return new Promise((resolve, reject) => {
+      conn.query('SELECT p.board_code, p.post_code, p.post_date, p.user_id AS post_user_id, p.title, p.post_contents,\
+       p.view_count, p.file, c.comment_code, c.comment_date, c.user_id AS comment_user_id, c.comment_contents\
+      FROM post p LEFT JOIN comment c ON p.post_code = c.post_code\
+      WHERE p.post_code = ?'
+      , post_code, function(err, rows) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(rows);
+        }
+      });
+    });
+}; 

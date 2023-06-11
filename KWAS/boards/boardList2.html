@@ -21,6 +21,7 @@
         let board_name = '자료실';
         let lecture_code = 'L01' ;
         let page ;
+
         // Send a GET request to fetch the board list
         axios.get("/boards/boardList", {
         params: {
@@ -34,13 +35,13 @@
         })
         .then(function(response) {
             var data = response.data;
-            displayBoardData(data); // 받은 데이터를 가공하여 출력
+            displayData(data); // 받은 데이터를 가공하여 출력
         })
         .catch(function(error) {
             console.error("Error fetching board data:", error);
         });
 
-        function displayBoardData(data) {
+        function displayData(data) {
             let boardList = data.list;
             var tableBody = document.querySelector("#boardTable tbody");
             tableBody.innerHTML = "";
@@ -128,7 +129,7 @@
                       <div class="row">
                         <div class="col-3 aC">수강학기</div>
                         <div class="col-9">
-                          <select name="selectYearhakgi" class="form-control form-control-sm">
+                          <select name="selectYearhakgi" class="form-control form-control-sm" onchange="updateBoardList()">
                             <!-- 수강학기 옵션들을 동적으로 생성하는 부분 -->
                           </select>
                         </div>
@@ -138,7 +139,7 @@
                       <div class="row">
                         <div class="col-3 aC">과목명</div>
                         <div class="col-9">
-                          <select name="selectLecture" class="form-control form-control-sm" style="width: 100%;">
+                          <select name="selectLecture" class="form-control form-control-sm" style="width: 100%;" onchange="updateBoardList()">
                             <!-- 과목명 옵션들을 동적으로 생성하는 부분 -->
                           </select>
                         </div>

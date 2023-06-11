@@ -59,16 +59,6 @@ app.use('/main', indexRouter);
 app.use('/login_form', loginRouter);
 app.use('/boards', boardRouter);
 
-/*
-app.get('/', (req, res) => {res.sendFile(__dirname + '/KWAS/main/index.html');});
-app.get('/login_form/forget_id', (req, res) => {res.sendFile(__dirname + '/KWAS/login_form/forget_id.html');});
-app.get('/login_form/forget_password', (req, res) => {res.sendFile(__dirname + '/KWAS/login_form/forget_password.html');});
-app.get('/login_form/login', (req, res) => {res.sendFile(__dirname + '/KWAS/login_form/login.html');});
-app.get('/login_form/register', (req, res) => {res.sendFile(__dirname + '/KWAS/login_form/register.html');});
-*/
-//app.get('/boards/boardList', (req, res) => {res.sendFile(__dirname + '/KWAS/boards/boardList.html');});
-
-
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));
