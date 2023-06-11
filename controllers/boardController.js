@@ -2,16 +2,13 @@ const express = require('express');
 const boardModel = require('../models/boardModel');
 
 exports.getList = async (req, res, next)=>{
-    
-    let user_id = req.body.user_id;
-    let year = req.body.year;
-    let semester = req.body.semester;
-    let board_name = req.body.board_name;
-    let lecture_code = req.body.lecture_code;
-    let page = req.body.page;
+    let user_id = req.query.user_id;
+    let year = req.query.year;
+    let semester = req.query.semester;
+    let board_name = req.query.board_name;
+    let lecture_code = req.query.lecture_code;
+    let page = req.query.page;
 
-    user_id = '2018202091';
-    board_name = '자료실';
 
     let semesterList = await boardModel.getSemester(user_id); //유저가 듣는 강의에 해당하는 년도, 학기를 내림차순으로 불러옴
     if(typeof semester === "undefined") //학기가 정해져 있지 않은경우
@@ -28,12 +25,14 @@ exports.getList = async (req, res, next)=>{
     pageCount = (pageCount[0].total_posts / 10 + 1).toString();
     if(typeof page === "undefined") page = '1';
     let list = await boardModel.getList(user_id, lecture_code, board_name, page);//해당 페이지에 대한 모든 게시글 가져옴
-
-    res.status(200).send({
+    
+    let result = {
         semesterList: semesterList,
         lectureList: lectureList,
         list: list,
         pageCount: pageCount,
         page: page
-      });
+      }
+    console.log(result);
+    res.status(200).send(result);
 }

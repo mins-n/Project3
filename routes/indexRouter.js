@@ -5,6 +5,6 @@ const router = express.Router();
 const indexController = require('../controllers/indexController');
 
 // Define the routes for the index page
-router.get('/index', indexController.getIndexPage);
+router.get('/index.html', indexController.getIndexPage);
 
 module.exports = router;

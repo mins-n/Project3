@@ -88,7 +88,7 @@
                               var form = document.querySelector('form');
                               var formData = new FormData(form);
 
-                              axios.post('/login_form/login.html', {
+                              axios.post('/login_form/login', {
                                 school_number: formData.get('school_number'),
                                 password: formData.get('password'),
                                 register_choice: formData.get('register_choice')
