@@ -1,5 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!DOCTYPE html>
+    <html lang="en">
+
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -12,97 +19,101 @@
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
 
-    <body class="sb-nav-fixed">
-        <header class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <!-- First Section -->
-            <div class="navbar-brand">
-                <a class="navbar-brand ps-3" href="../main/index.html">KWAS</a>
-            </div>
-            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
-                <i class="fas fa-bars"></i>
-            </button>
-        
-            <!-- Second Section (to be loaded with a script) -->
-            <div id="dynamicHeader" class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0"></div>
-        </header>
-        <script src="../js/component/header.js" defer></script>
+<body class="sb-nav-fixed">
+    <header class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <!-- First Section -->
+        <div class="navbar-brand">
+            <a class="navbar-brand ps-3" href="../main/index.html">KWAS</a>
+        </div>
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
+            <i class="fas fa-bars"></i>
+        </button>
 
-                
-        <div id="layoutSidenav">
-            <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                    <script src="../js/component/nav.js" defer></script>
-                </nav>
-            </div>
+        <!-- Second Section (to be loaded with a script) -->
+        <div id="dynamicHeader" class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0"></div>
+    </header>
+    <script src="../js/component/header.js" defer></script>
 
-            <!-- index contents ::: 여기에 템플릿 넣으세요 -->
-            <div id="layoutSidenav_content">
-                <main>
-                    <div class="container-fluid px -4">
-                        <div class = "align-items-center justify-content-center text-center">
-                            <a class="navbar-brand" href="../main/index.html"><img src="../img/kwas_logo.png" alt="kwas_logo" width="15%" height="20%"></a>
+
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <script src="../js/component/nav.js" defer></script>
+            </nav>
+        </div>
+
+        <!-- index contents ::: 여기에 템플릿 넣으세요 -->
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4" style="width: 100%; margin: 0 auto;">
+                    <div class="align-items-center justify-content-center text-center">
+                        <a class="navbar-brand" href="../main/index.html"><img src="../img/kwas_logo.png"
+                                alt="kwas_logo" width="15%" height="20%" /></a>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            게시판
                         </div>
+                        <div class="card-body">
+                            <div class="container" style="width: 100%; margin: 0 auto;">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 10%; text-align:center;">년도/학기</td>
+                                            <td style="width: 50%;">
+                                                <select class="form-select" aria-label="Default select example">
+                                                    <option selected>2023년</option>
+                                                    <option value="1">2022년</option>
+                                                    <option value="2">2021년</option>
+                                                    <option value="3">2020년</option>
+                                                    <option value="4">2019년</option>
+                                                    <option value="5">2018년</option>
+                                                    <option value="6">2017년</option>
+                                                </select>
+                                                <select class="form-select" aria-label="Default select example">
+                                                    <option selected>1학기</option>
+                                                    <option value="1">2학기</option>
+                                                    <option value="2">여름학기</option>
+                                                    <option value="3">겨울학기</option>
+                                                </select>
+                                            </td>
+                                            <td rowspan="4" style="width: 5%; text-align:center;">
+                                                <button type="button" class="btn btn-primary">조회</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 10%; text-align:center;">과목명</td>
+                                            <td style=" width: 20%;">
+                                                <select class=" form-select" aria-label="Default select example">
+                                                    <option selected>소프트웨어공학</option>
+                                                </select>
+                                            </td>
+                                        </tr>
 
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                게시판
+                                    </tbody>
+                                </table>
+                                <!-- <div class="d-flex justify-content-end">
+                                    <button type="button" class="btn btn-primary">조회</button>
+                                </div> -->
                             </div>
-                            <div class="card card-body selectsemester">
-                    <!-- style="border:1px solid #585858;" -->
-
-                    <div id="appSelectSubj" class="row"><div class="col-md-5"><div class="row"><div class="col-3 aC">수강학기</div> <div class="col-9"><select name="selectYearhakgi" class="form-control form-control-sm"><option value="[object Object]">
-                                            4-2학기
-                                        </option><option value="[object Object]">
-                                            4-1학기
-                                        </option><option value="[object Object]">
-                                            3-2학기
-                                        </option><option value="[object Object]">
-                                            3-1학기
-                                        </option><option value="[object Object]">
-                                            2-2학기
-                                        </option><option value="[object Object]">
-                                            2-1학기
-                                        </option><option value="[object Object]">
-                                            1-2학기
-                                        </option><option value="[object Object]">
-                                            1-1학기
-                                        </option></select></div></div></div> <div class="col-md-7"><div class="row"><div class="col-3 aC">과목명</div> <div class="col-9"><select name="selectSubj" class="form-control form-control-sm" style="width: 100%;"><option value="[object Object]">
-                                            소프트웨어공학 (H020-4-0846-01) - 이기훈
-                                        </option><option value="[object Object]">
-                                            확률및통계 (H030-3-1942-01) - 최원근
-                                        </option><option value="[object Object]">
-                                            인터넷활용 (0000-2-3029-03) - 김진수
-                                        </option><option value="[object Object]">
-                                            OPIc연습 (0000-3-4106-01) - 토미
-                                        </option><option value="[object Object]">
-                                            기업경영과비즈니스전략 (0000-1-6997-01) - 
-                                        </option></select></div></div></div></div>
-
-                </div>
                             <div class="card-body">
-                                
+
 
                                 <div class="container" style="width: 100%; margin: 0 auto;">
-						
-                                    <form id="searchForm" method="get">
-                                        <div style="float: right">
-                                            <input type="text" name="keyword" placeholder="검색어를 입력하세요"/>
-                                            <button id="searchButton" class="btn btn-secondary">검색</button>
-                                        </div>
-                                    </form>
-                    
-                                <table class="table table-hover" style="text-align: center;">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">번호</th>
-                                            <th scope="col">제목</th>
-                                            <th scope="col">작성자</th>
-                                            <th scope="col">등록일</th>
-                                            <th scope="col">조회수</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        
+
+                                    <table class="table table-hover" style="text-align: center;">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">번호</th>
+                                                <th scope="col">제목</th>
+                                                <th scope="col">작성자</th>
+                                                <th scope="col">등록일</th>
+                                                <th scope="col">조회수</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
                                             <tr>
                                                 <td>
                                                     1
@@ -120,16 +131,16 @@
                                                     2
                                                 </td>
                                             </tr>
-                                            
-                                        </c:forEach>
-                    
-                                    </tbody>
-                                </table>
-                                
-                                <!--  pagination :: 페이징 처리 해야되는 부분 -->
-                                
-                                <div class="center">
-                                    <ul class="pagination justify-content-center">
+
+                                            </c:forEach>
+
+                                        </tbody>
+                                    </table>
+
+                                    <!--  pagination :: 페이징 처리 해야되는 부분 -->
+
+                                    <div class="center">
+                                        <ul class="pagination justify-content-center">
 
                                             <li class="page-item"><a class="page-link" href="#">Previous</a></li>
                                             <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -137,49 +148,49 @@
                                             <li class="page-item"><a class="page-link" href="#">3</a></li>
                                             <li class="page-item"><a class="page-link" href="#">Next</a></li>
 
-                                    </ul>
-                                </div>
-                                
-                    
-                                <!-- 글쓰기 버튼 :: form data 전송 해야 되는 부분-->
-                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                        <a href="../boards/writeForm.html" class="btn btn-dark">작성</a>
+                                            <a type="button" class="btn btn-primary"
+                                                href="/KWAS/boards/writeForm.html">작성</a>
+
+                                        </ul>
+
                                     </div>
-                            </div>
-                    
 
 
+                                    <form id="searchForm" method="get">
+                                        <div style="float: right">
+                                            <input type="text" name="keyword" placeholder="검색어를 입력하세요" />
+                                            <button id="searchButton" class="btn btn-primary">검색</button>
+                                        </div>
+                                    </form>
 
+                                </div>
                             </div>
                         </div>
                     </div>
-                </main>
-                <footer class="py-4 bg-light mt-auto">
-                    <script>
-                        const footer = document.querySelector('footer');
-
-                        fetch('../component/footer.html')
-                        .then(res => res.text())
-                        .then(data => footer.innerHTML = data);
-                    </script>
-                </footer>
-            </div>
+                </div>
         </div>
-        <script
-          src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-          crossorigin="anonymous"
-        ></script>
-        <script src="../js/scripts.js"></script>
-        <script
-          src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
-          crossorigin="anonymous"
-        ></script>
-        <script src="../assets/demo/chart-area-demo.js"></script>
-        <script src="../assets/demo/chart-bar-demo.js"></script>
-        <script
-          src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
-          crossorigin="anonymous"
-        ></script>
-        <script src="../js/datatables-simple-demo.js"></script>
-      </body>
-    </html>
+    </div>
+    </main>
+    <footer class="py-4 bg-light mt-auto">
+        <script>
+            const footer = document.querySelector('footer');
+
+            fetch('../component/footer.html')
+                .then(res => res.text())
+                .then(data => footer.innerHTML = data);
+        </script>
+    </footer>
+    </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+    <script src="../js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="../assets/demo/chart-area-demo.js"></script>
+    <script src="../assets/demo/chart-bar-demo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+        crossorigin="anonymous"></script>
+    <script src="../js/datatables-simple-demo.js"></script>
+</body>
+
+</html>
