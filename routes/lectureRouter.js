@@ -4,7 +4,7 @@ const lectureController = require('../controllers/lectureController');
 
 router.get('/syllabus_inquiry', lectureController.getLecture);
 router.get('/enrolment', lectureController.getLecture2);
-//router.post('/enrolment', lectureController.enrolment);
+router.post('/enrolment', lectureController.enrolment);
 
 module.exports = router;
 
