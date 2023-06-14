@@ -1,24 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <!DOCTYPE html>
-    <html lang="en">
-
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>학사정보관리시스템</title>
-        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-        <link href="../css/styles.css" rel="stylesheet" />
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer></script>
-    </head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>학사정보관리시스템</title>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <link href="../css/styles.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
 
 <body class="sb-nav-fixed">
     <header class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -80,7 +78,8 @@
                                                 </select>
                                             </td>
                                             <td rowspan="4" style="width: 5%; text-align:center;">
-                                                <button type="button" class="btn btn-primary">조회</button>
+                                                <button type="button" class="btn btn-primary"
+                                                    name="searchbtn">조회</button>
                                             </td>
                                         </tr>
                                         <tr>
@@ -94,15 +93,10 @@
 
                                     </tbody>
                                 </table>
-                                <!-- <div class="d-flex justify-content-end">
-                                    <button type="button" class="btn btn-primary">조회</button>
-                                </div> -->
                             </div>
                             <div class="card-body">
 
-
                                 <div class="container" style="width: 100%; margin: 0 auto;">
-
                                     <table class="table table-hover" style="text-align: center;">
                                         <thead>
                                             <tr>
@@ -133,8 +127,6 @@
                                                 </td>
                                             </tr>
 
-                                            </c:forEach>
-
                                         </tbody>
                                     </table>
 
@@ -153,10 +145,9 @@
                                                 href="/KWAS/boards/writeForm.html">작성</a>
 
                                         </ul>
-
                                     </div>
 
-
+                                    <!-- 검색 부분 -->
                                     <form id="searchForm" method="get">
                                         <div style="float: right">
                                             <input type="text" name="keyword" placeholder="검색어를 입력하세요" />
@@ -179,6 +170,33 @@
             fetch('../component/footer.html')
                 .then(res => res.text())
                 .then(data => footer.innerHTML = data);
+
+            const button = document.querySelector('button[name="searchbtn"]');
+
+            button.addEventListener('click', () => {
+                const user_id = '2018202091';
+                const year = '2023';
+                const semester = '1';
+                const board_code = '1';
+                const lecture_code = 'C04';
+
+                axios.get("/boards/boardList", {
+                    params: {
+                        user_id: user_id,
+                        year: year,
+                        semester: semester,
+                        board_code: board_code,
+                        lecture_code: lecture_code
+                    }
+                })
+                    .then(response => {
+                        console.log(response.data);
+                    })
+                    .catch(error => {
+                        console.error("omg");
+                    })
+
+            });
         </script>
     </footer>
     </div>
