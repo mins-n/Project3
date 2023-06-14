@@ -17,7 +17,6 @@ axios
       ];
       processedData.push(lectureData);
     });
-    console.log(processedData);
     Timetable(processedData);
   })
   .catch(function (error) {

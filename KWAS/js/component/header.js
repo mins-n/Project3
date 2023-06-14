@@ -1,19 +1,26 @@
-// JavaScript code to load content dynamically into the second section
-var dynamicHeader = document.getElementById("dynamicHeader");
-fetch("../component/header.html")
-  .then((res) => res.text())
-  .then((data) => {
-    dynamicHeader.innerHTML = data;
-    initializeHeader();
+axios
+  .get("/main/header", {})
+  .then(function (response) {
+    let data = response.data;
+    user_id = data[0].user_id;
+    user_name = data[0].name;
+    initializeHeader(user_id, user_name);
+  })
+  .catch(function (error) {
+    console.log(error);
   });
 
-function initializeHeader() {
-  const userNameContainer = document.getElementById("navbarDropdown");
-  if (userNameContainer) {
-    const studentId = 2018202000;
-    const name = "김이름";
-    userNameContainer.innerHTML = `<i class="fas fa-user fa-fw"></i> ${studentId} ${name}`;
-  }
+function initializeHeader(studentId, name) {
+  var dynamicHeader = document.getElementById("dynamicHeader");
+  fetch("../component/header.html")
+    .then((res) => res.text())
+    .then((data) => {
+      dynamicHeader.innerHTML = data;
+      const userNameContainer = document.getElementById("navbarDropdown");
+      if (userNameContainer) {
+        userNameContainer.innerHTML = `<i class="fas fa-user fa-fw"></i> ${studentId} ${name}`;
+      }
+    });
 }
 
 function openEditPopup() {

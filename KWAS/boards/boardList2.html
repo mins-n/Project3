@@ -1,184 +1,220 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>학사정보관리시스템</title>
-        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-        <link href="../css/styles.css" rel="stylesheet" />
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    </head>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>학사정보관리시스템</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
+      rel="stylesheet"
+    />
+    <link href="../css/styles.css" rel="stylesheet" />
+    <script
+      src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"
+      defer
+    ></script>
+  </head>
 
-    <body class="sb-nav-fixed">
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <body class="sb-nav-fixed">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        let user_id ;
-        let year ;
-        let semester ;
-        let board_name = '자료실';
-        let lecture_code = 'L01' ;
-        let page ;
+      let user_id;
+      let year;
+      let semester;
+      let board_name = "자료실";
+      let lecture_code = "L01";
+      let page;
 
-        // Send a GET request to fetch the board list
-        axios.get("/boards/boardList", {
-        params: {
-            user_id : user_id,
-            year : year,
-            semester : semester, 
-            board_name : board_name,
-            lecture_code : lecture_code,
-            page : page
-        }
+      // Send a GET request to fetch the board list
+      axios
+        .get("/boards/boardList", {
+          params: {
+            user_id: user_id,
+            year: year,
+            semester: semester,
+            board_name: board_name,
+            lecture_code: lecture_code,
+            page: page,
+          },
         })
-        .then(function(response) {
-            var data = response.data;
-            displayData(data); // 받은 데이터를 가공하여 출력
+        .then(function (response) {
+          var data = response.data;
+          displayData(data); // 받은 데이터를 가공하여 출력
         })
-        .catch(function(error) {
-            console.error("Error fetching board data:", error);
+        .catch(function (error) {
+          console.error("Error fetching board data:", error);
         });
 
-        function displayData(data) {
-            console.log(data);
-            let boardList = data.list;
-            var tableBody = document.querySelector("#boardTable tbody");
-            tableBody.innerHTML = "";
+      function displayData(data) {
+        console.log(data);
+        let boardList = data.list;
+        var tableBody = document.querySelector("#boardTable tbody");
+        tableBody.innerHTML = "";
 
-            for (var i = 0; i < boardList.length; i++) {
-                var board = boardList[i];
-                var row = document.createElement("tr");
+        for (var i = 0; i < boardList.length; i++) {
+          var board = boardList[i];
+          var row = document.createElement("tr");
 
-                var numberCell = document.createElement("td");
-                numberCell.textContent = board.post_code;
-                row.appendChild(numberCell);
+          var numberCell = document.createElement("td");
+          numberCell.textContent = board.post_code;
+          row.appendChild(numberCell);
 
-                var titleCell = document.createElement("td");
-                var titleLink = document.createElement("a");
-                titleLink.href = "../boards/contentForm.html"; // 게시글 내용 페이지로 링크 설정
-                titleLink.textContent = board.title;
-                titleCell.appendChild(titleLink);
-                row.appendChild(titleCell);
+          var titleCell = document.createElement("td");
+          var titleLink = document.createElement("a");
+          titleLink.href = "../boards/contentForm.html"; // 게시글 내용 페이지로 링크 설정
+          titleLink.textContent = board.title;
+          titleCell.appendChild(titleLink);
+          row.appendChild(titleCell);
 
-                var authorCell = document.createElement("td");
-                authorCell.textContent = board.name;
-                row.appendChild(authorCell);
+          var authorCell = document.createElement("td");
+          authorCell.textContent = board.name;
+          row.appendChild(authorCell);
 
-                var dateCell = document.createElement("td");
-                dateCell.textContent = board.post_date;
-                row.appendChild(dateCell);
+          var dateCell = document.createElement("td");
+          dateCell.textContent = board.post_date;
+          row.appendChild(dateCell);
 
-                var viewsCell = document.createElement("td");
-                viewsCell.textContent = board.view_count;
-                row.appendChild(viewsCell);
+          var viewsCell = document.createElement("td");
+          viewsCell.textContent = board.view_count;
+          row.appendChild(viewsCell);
 
-                tableBody.appendChild(row);
-
-            }
-
-            let semesterList = data.semesterList;
-            var selectYearhakgi = document.querySelector('select[name="selectYearhakgi"]');
-            for (var i = 0; i < semesterList.length; i++) {
-                var semester = semesterList[i];
-                var option = document.createElement('option');
-                option.value = `${semester.year}-${semester.semester}`;
-                option.textContent = `${semester.year}년 ${semester.semester}학기`;
-                selectYearhakgi.appendChild(option);
-            }
-            
-            let lectureList = data.lectureList;
-            var selectLecture = document.querySelector('select[name="selectLecture"]');
-            for (var i = 0; i < lectureList.length; i++) {
-                var lecture = lectureList[i];
-                var option = document.createElement('option');
-                option.value = lecture.lecture_code;
-                option.textContent = lecture.lecture_name;
-                selectLecture.appendChild(option);
-            }
+          tableBody.appendChild(row);
         }
 
-        </script>
+        let semesterList = data.semesterList;
+        var selectYearhakgi = document.querySelector(
+          'select[name="selectYearhakgi"]'
+        );
+        for (var i = 0; i < semesterList.length; i++) {
+          var semester = semesterList[i];
+          var option = document.createElement("option");
+          option.value = `${semester.year}-${semester.semester}`;
+          option.textContent = `${semester.year}년 ${semester.semester}학기`;
+          selectYearhakgi.appendChild(option);
+        }
+
+        let lectureList = data.lectureList;
+        var selectLecture = document.querySelector(
+          'select[name="selectLecture"]'
+        );
+        for (var i = 0; i < lectureList.length; i++) {
+          var lecture = lectureList[i];
+          var option = document.createElement("option");
+          option.value = lecture.lecture_code;
+          option.textContent = lecture.lecture_name;
+          selectLecture.appendChild(option);
+        }
+      }
+    </script>
 
     <header class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        <!-- First Section -->
-        <div class="navbar-brand">
-            <a class="navbar-brand ps-3" href="../main/index.html">KWAS</a>
-        </div>
-        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
-            <i class="fas fa-bars"></i>
-        </button>
+      <!-- First Section -->
+      <div class="navbar-brand">
+        <a class="navbar-brand ps-3" href="../main/index.html">KWAS</a>
+      </div>
+      <button
+        class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
+        id="sidebarToggle"
+        href="#!"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
 
-        <!-- Second Section (to be loaded with a script) -->
-        <div id="dynamicHeader" class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0"></div>
+      <!-- Second Section (to be loaded with a script) -->
+      <div
+        id="dynamicHeader"
+        class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0"
+      ></div>
     </header>
     <script src="../js/component/header.js" defer></script>
 
-
     <div id="layoutSidenav">
-        <div id="layoutSidenav_nav">
-            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                <script src="../js/component/nav.js" defer></script>
-            </nav>
-        </div>
-          
-        <div id="layoutSidenav_content">
-            <main>
-                <div id="appSelectSubj" class="row">
-                    <div class="col-md-5">
-                      <div class="row">
-                        <div class="col-3 aC">수강학기</div>
-                        <div class="col-9">
-                          <select name="selectYearhakgi" class="form-control form-control-sm" onchange="updateBoardList()">
-                            <!-- 수강학기 옵션들을 동적으로 생성하는 부분 -->
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-7">
-                      <div class="row">
-                        <div class="col-3 aC">과목명</div>
-                        <div class="col-9">
-                          <select name="selectLecture" class="form-control form-control-sm" style="width: 100%;" onchange="updateBoardList()">
-                            <!-- 과목명 옵션들을 동적으로 생성하는 부분 -->
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                <div class="container-fluid">
-                    <h1 class="mt-4">게시판</h1>
-                    <div class="card mb-4">
-                        <div class="card-header">
-                            <i class="fas fa-table me-1"></i>
-                            게시글 목록
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="boardTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>번호</th>
-                                            <th>제목</th>
-                                            <th>작성자</th>
-                                            <th>날짜</th>
-                                            <th>조회수</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <!-- 게시글 데이터가 자동으로 추가될 자리 -->
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+      <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+          <script src="../js/component/nav.js" defer></script>
+        </nav>
+      </div>
+
+      <div id="layoutSidenav_content">
+        <main>
+          <div id="appSelectSubj" class="row">
+            <div class="col-md-5">
+              <div class="row">
+                <div class="col-3 aC">수강학기</div>
+                <div class="col-9">
+                  <select
+                    name="selectYearhakgi"
+                    class="form-control form-control-sm"
+                    onchange="updateBoardList()"
+                  >
+                    <!-- 수강학기 옵션들을 동적으로 생성하는 부분 -->
+                  </select>
                 </div>
-            </main>
-        </div>
+              </div>
+            </div>
+            <div class="col-md-7">
+              <div class="row">
+                <div class="col-3 aC">과목명</div>
+                <div class="col-9">
+                  <select
+                    name="selectLecture"
+                    class="form-control form-control-sm"
+                    style="width: 100%"
+                    onchange="updateBoardList()"
+                  >
+                    <!-- 과목명 옵션들을 동적으로 생성하는 부분 -->
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="container-fluid">
+            <h1 class="mt-4">게시판</h1>
+            <div class="card mb-4">
+              <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                게시글 목록
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table
+                    class="table table-bordered"
+                    id="boardTable"
+                    width="100%"
+                    cellspacing="0"
+                  >
+                    <thead>
+                      <tr>
+                        <th>번호</th>
+                        <th>제목</th>
+                        <th>작성자</th>
+                        <th>날짜</th>
+                        <th>조회수</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- 게시글 데이터가 자동으로 추가될 자리 -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/datatables.js"></script>
     <script src="../js/scripts.js"></script>
-</body>
+  </body>
 </html>

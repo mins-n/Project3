@@ -1,10 +1,10 @@
 const mysql = require('mysql');
 const conn = mysql.createConnection({
-  host: '43.202.44.199',
-  user: 'root',
-  password: '1234',
-  port: '59752',
-  database: 'ManageSys',
+    host: '43.202.44.199',
+    user: 'root',
+    password: '1234',
+    port: '54189',
+    database: 'ManageSys',
 });
 
 // Fetch the timetable data for a specific user
@@ -53,17 +53,13 @@ module.exports.getTimetable = (req) => {
 };
 
 module.exports.getUserInfo = (user_id) => {
-  return new Promise((resolve, reject) => {
-      conn.query(
-          'SELECT user_id, name, user_class FROM user WHERE user_id = ?',
-          user_id,
-          function (err, rows) {
-              if (err) {
-                  reject(err);
-              } else {
-                  resolve(rows);
-              }
-          }
-      );
-  });
+    return new Promise((resolve, reject) => {
+        conn.query('SELECT user_id, name, user_class FROM user WHERE user_id = ?', user_id, function (err, rows) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(rows);
+            }
+        });
+    });
 };

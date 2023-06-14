@@ -3,7 +3,7 @@ const conn = mysql.createConnection({
     host: '43.202.44.199',
     user: 'root',
     password: '1234',
-    port: '59752',
+    port: '54189',
     database: 'ManageSys',
 });
 
@@ -53,23 +53,29 @@ module.exports.getLecture2 = (department, lecture_name) => {
 };
 
 module.exports.enrolment = (user_id, lecture_code) => {
-  return new Promise((resolve, reject) => {
-      conn.query('INSERT INTO user_lecture(user_id, lecture_code) VALUES (?,?)'
-      ,[user_id, lecture_code], function (err, rows) {
-          if (err) {
-              reject(err);
-          } else {
-            conn.query('UPDATE lecture\
-            SET seat = seat - 1\
-            WHERE lecture_code = ?'
-            , lecture_code, function (err, rows) {
+    return new Promise((resolve, reject) => {
+        conn.query(
+            'INSERT INTO user_lecture(user_id, lecture_code) VALUES (?,?)',
+            [user_id, lecture_code],
+            function (err, rows) {
                 if (err) {
                     reject(err);
                 } else {
-                  resolve(rows)
+                    conn.query(
+                        'UPDATE lecture\
+            SET seat = seat - 1\
+            WHERE lecture_code = ?',
+                        lecture_code,
+                        function (err, rows) {
+                            if (err) {
+                                reject(err);
+                            } else {
+                                resolve(rows);
+                            }
+                        }
+                    );
                 }
-              })
-          }
-      });
-  });
+            }
+        );
+    });
 };

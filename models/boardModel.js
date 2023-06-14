@@ -3,9 +3,9 @@ const conn = mysql.createConnection({
     host: '43.202.44.199',
     user: 'root',
     password: '1234',
-    port: '59752',
+    port: '54189',
     database: 'ManageSys',
-  });
+});
 
 module.exports.getSemester = (user_id) => {
     return new Promise((resolve, reject) => {

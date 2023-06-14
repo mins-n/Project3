@@ -1,10 +1,10 @@
 const mysql = require('mysql');
 const conn = mysql.createConnection({
-  host: '43.202.44.199',
-  user: 'root',
-  password: '1234',
-  port: '59752',
-  database: 'ManageSys',
+    host: '43.202.44.199',
+    user: 'root',
+    password: '1234',
+    port: '54189',
+    database: 'ManageSys',
 });
 
 module.exports.join = (datas) => {
@@ -44,7 +44,6 @@ module.exports.authenticate = (schoolNumber, password, registerChoice) => {
                     reject(err);
                 } else {
                     if (rows.length) {
-                        
                         // User authenticated successfully
                         resolve(rows[0]); // Return the user object
                     } else {
