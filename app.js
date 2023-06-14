@@ -8,7 +8,6 @@ var bodyParser = require('body-parser');
 const mysql = require('mysql');
 
 var indexRouter = require('./routes/indexRouter');
-var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/loginRouter');
 var boardRouter = require('./routes/boardRouter');
 var lectureRouter = require('./routes/lectureRouter');
