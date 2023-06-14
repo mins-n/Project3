@@ -1,26 +1,19 @@
-let user_id = "2018202091";
-let year = "2023";
-let semester = "1";
-
 axios
-  .get("/course_management/syllabus_inquiry", {
-    params: {
-      user_id: user_id,
-    },
+  .get("/course_management/enrolment", {
+    params: {},
   })
   .then(function (response) {
     let data = response.data;
     var processedData = [];
-
+    index = 1;
     data.forEach(function (item) {
-      index = 1;
       var lectureData = [
         index++,
         item.lecture_code,
         item.lecture_name,
         item.credit.toString(),
         item.name,
-        "0",
+        item.seat,
         getDate(item.lecture_week1) +
           " " +
           item.lecture_time1 +
