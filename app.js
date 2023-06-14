@@ -10,8 +10,7 @@ const mysql = require('mysql');
 var indexRouter = require('./routes/indexRouter');
 var loginRouter = require('./routes/loginRouter');
 var boardRouter = require('./routes/boardRouter');
-var lectureRouter = require('./routes/lectureRouter');
-
+//var lectureRouter = require('./routes/lectureRouter');
 
 const conn = mysql.createConnection({
     host: '3.34.200.80',
@@ -60,7 +59,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/main', indexRouter);
 app.use('/login_form', loginRouter);
 app.use('/boards', boardRouter);
-app.use('/course_management', lectureRouter);
+//app.use('/course_management', lectureRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
