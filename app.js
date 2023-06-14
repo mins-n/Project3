@@ -7,9 +7,8 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 const mysql = require('mysql');
 
-var indexRouter = require('./routes/index');
-var loginRouter = require('./routes/loginRouter');
-var boardRouter = require('./routes/boardRouter');
+var indexRouter = require('./routes/indexRouter');
+var loginRouter = require('./routes/loginRouter')
 
 const conn = mysql.createConnection({
     host: '3.34.200.80',
