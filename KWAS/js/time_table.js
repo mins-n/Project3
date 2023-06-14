@@ -18,13 +18,13 @@ axios
         item.lecture_name,
         item.lecture_week1,
         item.lecture_week2,
-        item.lectire_time1,
-        item.lectire_time2,
+        item.lecture_time1,
+        item.lecture_time2,
       ];
       processedData.push(lectureData);
     });
     console.log(processedData);
-    display(processedData);
+    Timetable(processedData);
   })
   .catch(function (error) {
     console.log(error);
@@ -44,14 +44,12 @@ function Timetable(timetableDataList) {
   ];
 
   // 강의 데이터를 시간표에 추가
-  timetableDataList.forEach(function (timetableData) {
-    timetable[timetableData.lecture_time1 - 1][
-      timetableData.lecture_week1 - 1
-    ] = timetableData.lecture_name;
-    timetable[timetableData.lecture_time2 - 1][
-      timetableData.lecture_week2 - 1
-    ] = timetableData.lecture_name;
-  });
+  for (let i = 0; i < timetableDataList.length; i++) {
+    timetable[timetableDataList[i][3] - 1][timetableDataList[i][1] - 1] =
+      timetableDataList[i][0];
+    timetable[timetableDataList[i][4] - 1][timetableDataList[i][2] - 1] =
+      timetableDataList[i][0];
+  }
 
   // 시간표 HTML 생성
   const table = document.createElement("table");
@@ -103,21 +101,25 @@ function Timetable(timetableDataList) {
   timetableContainer.appendChild(table);
 }
 
-// const timetableDataList = [
-//   {
-//     lecture_name: "소프트웨어공학",
-//     lecture_week1: "1",
-//     lecture_week2: "3",
-//     lecture_time1: "5",
-//     lecture_time2: "6",
-//   },
-//   {
-//     lecture_name: "데이터베이스",
-//     lecture_week1: "2",
-//     lecture_week2: "4",
-//     lecture_time1: "1",
-//     lecture_time2: "2",
-//   },
-// ];
+const timetableDataList = [
+  {
+    lecture_name: "소프트웨어공학",
+    lecture_week1: "1",
+    lecture_week2: "3",
+    lecture_time1: "5",
+    lecture_time2: "6",
+  },
+  {
+    lecture_name: "데이터베이스",
+    lecture_week1: "2",
+    lecture_week2: "4",
+    lecture_time1: "1",
+    lecture_time2: "2",
+  },
+];
 
+tabl_list = [
+  ["소프트웨어공학", 1, 2, 4, 5],
+  ["데이터베이스", 2, 4, 1, 2],
+];
 // Timetable(timetableDataList);

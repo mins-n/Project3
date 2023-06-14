@@ -33,12 +33,12 @@ conn.connect(function (err) {
 
 app.use(
     session({
-      secret: 'your-secret-key',
-      resave: false,
-      saveUninitialized: true,
-      cookie: { secure: false } // Set 'secure' to 'true' if using HTTPS
+        secret: 'your-secret-key',
+        resave: false,
+        saveUninitialized: true,
+        cookie: { secure: false }, // Set 'secure' to 'true' if using HTTPS
     })
-  );
+);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
