@@ -1,20 +1,20 @@
 const mysql = require('mysql');
 const conn = mysql.createConnection({
-    host: '3.34.200.80',
+    host: '43.202.44.199',
     user: 'root',
     password: '1234',
-    port: '57676',
+    port: '59752',
     database: 'ManageSys',
-});
+  });
 
 module.exports.getSemester = (user_id) => {
     return new Promise((resolve, reject) => {
         conn.query(
-            'SELECT u.year, u.semester\
+            'SELECT l.year, l.semester\
         FROM user_lecture u\
         INNER JOIN lecture l ON u.lecture_code = l.lecture_code\
         WHERE u.user_id = ?\
-        ORDER BY u.year DESC, u.semester DESC',
+        ORDER BY l.year DESC, l.semester DESC',
             user_id,
             function (err, rows) {
                 if (err) {
@@ -33,7 +33,7 @@ module.exports.getLecture = (user_id, year, semester) => {
             'SELECT l.lecture_code, l.lecture_name\
       FROM user_lecture u\
       INNER JOIN lecture l ON u.lecture_code = l.lecture_code\
-      WHERE u.user_id = ? AND u.year = ? AND u.semester = ?\
+      WHERE u.user_id = ? AND l.year = ? AND l.semester = ?\
       ORDER BY l.lecture_name ASC',
             [user_id, year, semester],
             function (err, rows) {
