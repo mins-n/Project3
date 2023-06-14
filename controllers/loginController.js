@@ -28,7 +28,7 @@ exports.login = (req, res) => {
           user_id: schoolNumber,
           user_class: registerChoice
         };
-
+        console.log(req.session.user)
         // Authentication successful
         res.status(200).send('Login successful');
       })
