@@ -15,7 +15,6 @@ exports.join = (req, res)=>{
     }
 
 exports.login = (req, res) => {
-    console.log(req.body);
     const schoolNumber = req.body.school_number;
     const password = req.body.password;
     const registerChoice = req.body.register_choice;
@@ -27,7 +26,7 @@ exports.login = (req, res) => {
         req.session.user = {
           user_id: schoolNumber,
           user_class: registerChoice,
-          name : result.name
+          name: result.name
         };
         console.log(req.session.user)
         // Authentication successful
