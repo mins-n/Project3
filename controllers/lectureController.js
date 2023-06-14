@@ -49,13 +49,7 @@ exports.getLecture2 = (req, res)=>{
 exports.enrolment = (req, res)=>{
   let user_id = '2018202091';
   let lecture_code = req.query.lecture_code;
-
-  if(typeof lecture_name === "undefined")
-    lecture_name = "";
-  if(typeof department === "undefined") 
-  department = "";
-  lecture_name = "%" + lecture_name + "%";
-  department = "%" + department + "%";
+  
 
   lectureModel.getLecture2(department, lecture_name)
     .then((result) => {
