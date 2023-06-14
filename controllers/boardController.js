@@ -35,14 +35,24 @@ exports.getList = async (req, res, next)=>{
 }
 
 exports.getPost = (req, res)=>{
-    let post_code = req.params.idx;
-    console.log(post_code)
+    let post_code = req.params.post_code;
     boardModel.getPost(post_code)
       .then((result) => {
         res.status(200).send(result);
       })
       .catch((error) => {
-        // Authentication failed
         res.status(400).send('Invalid credentials');
       });
 }
+
+exports.setPost = (req, res)=>{
+  let post_code = req.params.post_code;
+  boardModel.getPost(post_code)
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch((error) => {
+      res.status(400).send('Invalid credentials');
+    });
+}
+
