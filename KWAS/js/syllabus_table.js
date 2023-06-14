@@ -1,13 +1,5 @@
-let user_id = "2018202091";
-let year = "2023";
-let semester = "1";
-
 axios
-  .get("/course_management/syllabus_inquiry", {
-    params: {
-      user_id: user_id,
-    },
-  })
+  .get("/course_management/syllabus_inquiry", {})
   .then(function (response) {
     let data = response.data;
     var processedData = [];
@@ -29,6 +21,38 @@ axios
   .catch(function (error) {
     console.log(error);
   });
+
+function loadTable(year, semester, lecture_name, name) {
+  axios
+    .get("/course_management/syllabus_inquiry", {
+      params: {
+        year: year,
+        semester: semester,
+        lecture_name: lecture_name,
+        professor_name: name,
+      },
+    })
+    .then(function (response) {
+      let data = response.data;
+      var processedData = [];
+
+      data.forEach(function (item) {
+        var lectureData = [
+          item.lecture_code,
+          item.lecture_name,
+          item.lecture_class,
+          item.credit.toString(),
+          item.name,
+          item.phone_num,
+        ];
+        processedData.push(lectureData);
+      });
+      display(processedData);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
 
 function display(data) {
   var itemsPerPage = 10; // 한 페이지에 표시할 항목 수
