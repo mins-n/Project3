@@ -23,11 +23,11 @@ axios
         "0",
         getDate(item.lecture_week1) +
           " " +
-          item.lectire_time1 +
+          item.lecture_time1 +
           ", " +
           getDate(item.lecture_week2) +
           " " +
-          item.lectire_time2,
+          item.lecture_time2,
       ];
       processedData.push(lectureData);
     });

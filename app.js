@@ -13,10 +13,10 @@ var boardRouter = require('./routes/boardRouter');
 var lectureRouter = require('./routes/lectureRouter');
 
 const conn = mysql.createConnection({
-    host: '3.34.200.80',
+    host: '43.202.44.199',
     user: 'root',
     password: '1234',
-    port: '57676',
+    port: '59752',
     database: 'ManageSys',
 });
 
@@ -33,12 +33,12 @@ conn.connect(function (err) {
 
 app.use(
     session({
-      secret: 'your-secret-key',
-      resave: false,
-      saveUninitialized: true,
-      cookie: { secure: false } // Set 'secure' to 'true' if using HTTPS
+        secret: 'your-secret-key',
+        resave: false,
+        saveUninitialized: true,
+        cookie: { secure: false }, // Set 'secure' to 'true' if using HTTPS
     })
-  );
+);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
