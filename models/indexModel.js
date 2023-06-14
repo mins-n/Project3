@@ -51,3 +51,19 @@ module.exports.getTimetable = (req) => {
 
     return data;
 };
+
+module.exports.getUserInfo = (user_id) => {
+  return new Promise((resolve, reject) => {
+      conn.query(
+          'SELECT user_id, name, user_class FROM user WHERE user_id = ?',
+          user_id,
+          function (err, rows) {
+              if (err) {
+                  reject(err);
+              } else {
+                  resolve(rows);
+              }
+          }
+      );
+  });
+};

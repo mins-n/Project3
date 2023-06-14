@@ -9,3 +9,15 @@ exports.getIndexPage = (req, res) => {
   // Render the index view and pass the data
   res.render('index', { data });
 };
+
+exports.getUserInfo = (req, res)=>{
+  let user_id = req.session.user.user_id;
+
+  indexModel.getUserInfo(user_id)
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch((error) => {
+      res.status(400).send('Invalid credentials');
+    });
+}
