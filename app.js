@@ -9,12 +9,13 @@ const mysql = require('mysql');
 
 var indexRouter = require('./routes/indexRouter');
 var loginRouter = require('./routes/loginRouter')
+var boardRouter = require('./routes/boardRouter')
 
 const conn = mysql.createConnection({
     host: '3.34.200.80',
     user: 'root',
     password: '1234',
-    port: '50731',
+    port: '57676',
     database: 'ManageSys',
 });
 
