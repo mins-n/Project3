@@ -1,12 +1,6 @@
-let user_id = "2018202091";
-let year = "2023";
-let semester = "1";
-
 axios
   .get("/course_management/syllabus_inquiry", {
-    params: {
-      user_id: user_id,
-    },
+    params: {},
   })
   .then(function (response) {
     let data = response.data;
