@@ -2,11 +2,16 @@ const express = require('express');
 const boardModel = require('../models/boardModel');
 
 exports.getList = async (req, res, next)=>{
-    let user_id = req.query.user_id;
+    // let user_id = req.query.user_id;
+    let user_id = req.session.user.user_id
+    console.log(user_id)
     let year = req.query.year;
     let semester = req.query.semester;
-    let board_name = req.query.board_name;
-    let lecture_code = req.query.lecture_code;
+    // let board_name = req.query.board_name;
+    // let lecture_code = req.query.lecture_code;
+
+    let board_name = '자료실';
+    let lecture_code = 'L01';
 
     let semesterList = await boardModel.getSemester(user_id); //유저가 듣는 강의에 해당하는 년도, 학기를 내림차순으로 불러옴
     if(typeof year === "undefined" || typeof semester === "undefined" || year === "" || semester === "") //학기가 정해져 있지 않은경우
