@@ -104,7 +104,18 @@ function display(data) {
 
       row.forEach(function (cellData, index) {
         var cell = document.createElement("td");
-        cell.appendChild(document.createTextNode(cellData));
+
+              // Check if it's the 학정번호 column (index 0)
+        if (index === 0) {
+          var link = document.createElement("a");
+          link.href = "/course_management/plan.html?lecture_code=" + cellData;
+          link.textContent = cellData;
+          cell.appendChild(link);
+        } else {
+          cell.appendChild(document.createTextNode(cellData));
+        }
+
+
 
         // Style the first column as "No."
         if (index === 0) {

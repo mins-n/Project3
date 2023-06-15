@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>학사정보관리시스템</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
+      rel="stylesheet"
+    />
+    <link href="../css/styles.css" rel="stylesheet" />
+    <script
+      src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+        // 현재 페이지 URL 가져오기
+        var currentUrl = window.location.href;
+    
+        // URL 매개변수 추출 함수
+        function getUrlParameter(name) {
+          name = name.replace(/[\[\]]/g, "\\$&");
+          var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+              results = regex.exec(currentUrl);
+          if (!results) return null;
+          if (!results[2]) return '';
+          return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+    
+        // lecture_code 추출
+        var lectureCode = getUrlParameter("lecture_code");
+    
+        // lecture_code 활용하여 추가 작업 수행
+        if (lectureCode) {
+          console.log("Received lecture_code:", lectureCode);
+          // 추가 작업을 수행하거나 필요한 로직을 구현할 수 있습니다.
+        } else {
+          console.log("lecture_code not found in URL");
+        }
+      </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"
+      defer
+    ></script>
+    <script src="../js/plan.js" defer></script>
+
+    <style>
+      #planTable th:first-child,
+      #planTable td:first-child {
+        width: 1px; /* 원하는 너비로 조정하세요 */
+      }
+    </style>
+    
+  </head>
+  <body class="sb-nav-fixed">
+    <header class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+      <!-- First Section -->
+      <div class="navbar-brand">
+        <a class="navbar-brand ps-3" href="/KWAS/main/index.html">KWAS</a>
+      </div>
+      <button
+        class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
+        id="sidebarToggle"
+        href="#!"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Second Section (to be loaded with a script) -->
+      <div
+        id="dynamicHeader"
+        class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0"
+      ></div>
+    </header>
+    <script src="../js/component/header.js" defer></script>
+
+    <div id="layoutSidenav">
+      <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+          <script src="../js/component/nav.js" defer></script>
+        </nav>
+      </div>
+
+      <!-- index contents ::: 여기에 템플릿 넣으세요 -->
+      <div id="layoutSidenav_content">
+        <main>
+          <div class="container-fluid px-4" style="width: 100%; margin: 0 auto">
+            <div class="align-items-center justify-content-center text-center">
+              <a class="navbar-brand" href="../main/index.html"
+                ><img
+                  src="../img/kwas_logo.png"
+                  alt="kwas_logo"
+                  width="15%"
+                  height="20%"
+              /></a>
+            </div>
+
+            <div class="card mb-4">
+              <div class="card-header">강의계획서 조회</div>
+              <div class="card-body">
+                <h1>강의 계획서 조회</h1>
+<table id="lectureInfoTable" class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Attribute</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<h2>강의 계획서</h2>
+<table id="planTable" class="table table-bordered">
+  <thead>
+    <tr>
+      <th>주차</th>
+      <th>강의 내용</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+            </div>
+            </div>
+        </main>
+        <footer class="py-4 bg-light mt-auto">
+          <script>
+            const footer = document.querySelector("footer");
+
+            fetch("../component/footer.html")
+              .then((res) => res.text())
+              .then((data) => (footer.innerHTML = data));
+          </script>
+        </footer>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../js/scripts.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="assets/demo/chart-area-demo.js"></script>
+    <script src="assets/demo/chart-bar-demo.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../js/datatables-simple-demo.js"></script>
+    <style>
+      #planTable th:first-child,
+      #planTable td:first-child {
+        width: 100px;
+      }
+    </style>
+  </body>
+</html>
