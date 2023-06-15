@@ -50,7 +50,7 @@ module.exports.getLecture = (user_id, year, semester) => {
 module.exports.getList = (user_id, lecture_code, board_name) => {
     return new Promise((resolve, reject) => {
         conn.query(
-            'SELECT p.board_code, p.post_code, p.post_date, u.name, p.title, p.view_count\
+            'SELECT b.board_code, p.post_code, p.post_date, u.name, p.title, p.view_count\
       FROM post p\
       INNER JOIN board b ON p.board_code = b.board_code\
       INNER JOIN user_lecture ul ON b.lecture_code = ul.lecture_code\
