@@ -153,12 +153,10 @@ module.exports.getLecture = (user_id) => {
 module.exports.getLecture = (user_id) => {
     return new Promise((resolve, reject) => {
         conn.query(
-            'SELECT s.year, s.semester, s.name AS scholarship_name, \
-            s.price, d.department_name, u.name, u.academic_info, u.grade, u.semester\
-            FROM scholarship s\
-            JOIN user u ON s.user_id = u.user_id\
-            JOIN department d ON u.department_code = d.department_code\
-            WHERE s.user_id = ?',
+            'SELECT lecture_code, lecture_name, lecture_class, lecture_week1, \
+            lecture_time1, lecture_week2, lecture_time2, professor_id, year, semester\
+            FROM lecture\
+            WHERE professor_id = ?',
             user_id,
             function (err, rows) {
                 if (err) {
@@ -171,16 +169,14 @@ module.exports.getLecture = (user_id) => {
     });
 };
 
-module.exports.getStudent = (user_id) => {
+module.exports.getStudent = (lecture_code) => {
     return new Promise((resolve, reject) => {
         conn.query(
-            'SELECT s.year, s.semester, s.name AS scholarship_name, \
-            s.price, d.department_name, u.name, u.academic_info, u.grade, u.semester\
-            FROM scholarship s\
-            JOIN user u ON s.user_id = u.user_id\
-            JOIN department d ON u.department_code = d.department_code\
-            WHERE s.user_id = ?',
-            user_id,
+            'SELECT u.user_id, u.name\
+            FROM user_lecture ul\
+            JOIN user u ON ul.user_id = u.user_id\
+            WHERE ul.lecture_code = ?',
+            lecture_code,
             function (err, rows) {
                 if (err) {
                     reject(err);

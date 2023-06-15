@@ -98,10 +98,9 @@ exports.getLecture = (req, res)=>{
 
 
 exports.getStudent = (req, res)=>{
-    let user_id = req.session.user.user_id;
     let lecture_code = req.params.lecture_code;
 
-    userModel.getStudent(user_id, lecture_code)
+    userModel.getStudent(lecture_code)
       .then((result) => {
         res.status(200).send(result);
       })
@@ -111,9 +110,11 @@ exports.getStudent = (req, res)=>{
 }
 
 exports.setScore = (req, res)=>{
-    let user_id = req.session.user.user_id;
-    let email = req.body.email;
-    userModel.setScore(user_id)
+    let user_id = req.body.user_id;
+    let grade = req.body.grade;
+    let lecture_code = req.body.lecture_code;
+
+    userModel.setScore(user_id,lecture_code,grade)
       .then((result) => {
         res.status(200).send(result);
       })
