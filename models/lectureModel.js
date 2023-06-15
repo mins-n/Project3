@@ -127,7 +127,7 @@ module.exports.getUserLecture = (user_id) => {
 module.exports.evaluate = (user_id, lecture_code, evaluation, evaluation_score) => {
     return new Promise((resolve, reject) => {
         conn.query(
-            'INSERT INTO (user_id, lecture_code, evaluation, evaluation_score)\
+            'INSERT INTO user_lecture (user_id, lecture_code, evaluation, evaluation_score)\
             VALUES (?,?,?,?)',
             [user_id, lecture_code, evaluation, evaluation_score],
             function (err, rows) {
