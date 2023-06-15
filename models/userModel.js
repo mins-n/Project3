@@ -149,8 +149,7 @@ module.exports.getGeScoreAvg = (user_id, year, semester) => {
 module.exports.getAdviser = (user_id) => {
     return new Promise((resolve, reject) => {
         conn.query(
-            'SELECT u.name, d.department_name, u.phone_num,\
-             u.email, u.academic_info AS spot, u.profile\
+            'SELECT u.name, d.department_name, u.phone_num, u.email, d.department_name, u.academic_info AS spot, u.profile, u.lab, u.major\
             FROM adviser a\
             JOIN user u ON a.professor_id = u.user_id\
             JOIN department d ON u.department_code = d.department_code\

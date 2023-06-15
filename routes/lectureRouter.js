@@ -3,7 +3,7 @@ var router = express.Router();
 const lectureController = require('../controllers/lectureController');
 
 router.get('/syllabus_inquiry', lectureController.getLecture);  //강의목록 조회
-router.get('/plan', lectureController.getPlan);
+router.get('/plan', lectureController.getPlan); //강의 계획표 조회
 router.get('/enrolment', lectureController.getLectureSeat);    //수강신청 목록 조회
 router.post('/enrolment', lectureController.enrolment); //수강 신청
 router.post('/delete', lectureController.deleteEnrolment); //수강 삭제
