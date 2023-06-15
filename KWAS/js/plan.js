@@ -9,10 +9,10 @@ axios.get("/course_management/plan?lecture_code=" + lectureCode)
     lectureInfoTable.innerHTML = ""; // Clear existing table content
 
     var lectureInfoRows = "";
-    lectureInfoRows += "<tr><th>Lecture Code</th><td>" + lectureInfo.lecture_code + "</td></tr>";
-    lectureInfoRows += "<tr><th>Lecture Name</th><td>" + lectureInfo.lecture_name + "</td></tr>";
-    lectureInfoRows += "<tr><th>Lecture Class</th><td>" + lectureInfo.lecture_class + "</td></tr>";
-    lectureInfoRows += "<tr><th>Lecture Info</th><td>" + lectureInfo.lecture_info + "</td></tr>";
+    lectureInfoRows += "<tr><th>학정 번호</th><td>" + lectureInfo.lecture_code + "</td></tr>";
+    lectureInfoRows += "<tr><th>교과명</th><td>" + lectureInfo.lecture_name + "</td></tr>";
+    lectureInfoRows += "<tr><th>이수구분</th><td>" + lectureInfo.lecture_class + "</td></tr>";
+    lectureInfoRows += "<tr><th>교과목 개요</th><td>" + lectureInfo.lecture_info + "</td></tr>";
     lectureInfoTable.innerHTML = lectureInfoRows;
 
     // Display weekly plan
