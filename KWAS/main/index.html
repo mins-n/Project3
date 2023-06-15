@@ -45,16 +45,12 @@
     </header>
     <script src="../js/component/header.js" defer></script>
 
-
-
-
     <div id="layoutSidenav">
       <div id="layoutSidenav_nav">
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
           <script src="../js/component/nav.js" defer></script>
         </nav>
       </div>
-
       <!-- index contents ::: 여기에 템플릿 넣으세요 -->
       <div id="layoutSidenav_content">
         <main>
@@ -79,27 +75,26 @@
                   <!-- 오른쪽 정렬 -->
                   <div class="d-flex justify-content-end">
                     <div class="input-group mb-3" style="width: 10%;">
-                      <select class="form-select" aria-label="Default select example" onchange="timetable(this.value)">
+                      <select class="form-select" aria-label="Default select example" id="user_year_semester">
                         <!-- JavaScript로 동적으로 옵션을 생성합니다 -->
-                        <script>
-                          // 서버로부터 받아온 year과 semester 정보를 가정합니다
-                          var years = ["2018", "2018", "2021", "2021", "2022", "2022", "2023"];
-                          var semesters = ["1학기", "2학기", "1학기", "2학기", "1학기", "2학기", "1학기"];
-                    
-                          // 옵션을 동적으로 생성합니다
-                          for (var i = 0; i < years.length; i++) {
-                            var option = document.createElement("option");
-                            option.value = i + 1;
-                            option.text = years[i] + "-" + semesters[i];
-                            document.querySelector("select").appendChild(option);
-                          }
+                        <script src="../js/get_year_semester.js" defer></script>
                         </script>
                       </select>
                     </div>
-                    
                   </div>
                   <div class="row" id="timetable-container">
                     <!-- 서버로부터 시간표 정보 가져옴 -->
+                    <script defer>
+                      const user_select = document.getElementById("user_year_semester");
+                      // 사용자가 학기를 선택하면 실행
+                      user_select.addEventListener("change", () => {
+                        console.log(user_select.value);
+                        selected_list = JSON.parse(user_select.value);
+                        const year = selected_list[0];
+                        const semester = selected_list[1];
+                        user_Timetable(year, semester) 
+                      });
+                    </script>
               </div>
             </div>
           </div>

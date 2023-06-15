@@ -1,30 +1,37 @@
-axios
-  .get("/course_management/syllabus_inquiry", {
-    params: {},
-  })
-  .then(function (response) {
-    let data = response.data;
-    var processedData = [];
+function user_Timetable(year, semester) {
+  axios
+    .get("/course_management/schedule", {
+      params: {
+        year: year,
+        semester: semester,
+      },
+    })
+    .then(function (response) {
+      let data = response.data.lectureList;
+      var processedData = [];
 
-    data.forEach(function (item) {
-      index = 1;
-      var lectureData = [
-        item.lecture_name,
-        item.lecture_week1,
-        item.lecture_week2,
-        item.lecture_time1,
-        item.lecture_time2,
-      ];
-      processedData.push(lectureData);
+      data.forEach(function (item) {
+        index = 1;
+        var lectureData = [
+          item.lecture_name,
+          item.lecture_week1,
+          item.lecture_week2,
+          item.lecture_time1,
+          item.lecture_time2,
+        ];
+        processedData.push(lectureData);
+      });
+      Timetable(processedData);
+    })
+    .catch(function (error) {
+      console.log(error);
     });
-    Timetable(processedData);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+}
 
 function Timetable(timetableDataList) {
+  const timetableContainer = document.getElementById("timetable-container");
   // 시간표 데이터 초기화
+  timetableContainer.innerHTML = "";
   const timetable = [
     ["", "", "", "", ""],
     ["", "", "", "", ""],
@@ -90,29 +97,5 @@ function Timetable(timetableDataList) {
   table.appendChild(tbody);
 
   // 시간표 HTML 추가
-  const timetableContainer = document.getElementById("timetable-container");
   timetableContainer.appendChild(table);
 }
-
-const timetableDataList = [
-  {
-    lecture_name: "소프트웨어공학",
-    lecture_week1: "1",
-    lecture_week2: "3",
-    lecture_time1: "5",
-    lecture_time2: "6",
-  },
-  {
-    lecture_name: "데이터베이스",
-    lecture_week1: "2",
-    lecture_week2: "4",
-    lecture_time1: "1",
-    lecture_time2: "2",
-  },
-];
-
-tabl_list = [
-  ["소프트웨어공학", 1, 2, 4, 5],
-  ["데이터베이스", 2, 4, 1, 2],
-];
-// Timetable(timetableDataList);

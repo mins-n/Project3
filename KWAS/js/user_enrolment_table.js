@@ -107,12 +107,11 @@ function user_enrolment_table(data) {
   user_enrolmentContainer.appendChild(table);
 }
 
-function post_enrolment(lecture_code) {
+function post_delete_enrolment(lecture_code) {
   console.log(lecture_code);
   axios
-    .post("/course_management/enrolment", { lecture_code })
+    .post("/course_management/delete", { lecture_code })
     .then((res) => {
-      console.log(res);
       alert("수강삭제 성공");
       window.location.reload();
     })
