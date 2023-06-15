@@ -70,7 +70,7 @@ exports.getEvaluatedLecture = (req, res)=>{
     name = "";
   lecture_name = "%" + lecture_name + "%";
   name = "%" + name + "%";
-
+  
   lectureModel.getEvaluatedLecture(name, lecture_name)
     .then((result) => {
       res.status(200).send(result);
