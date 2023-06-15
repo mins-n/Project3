@@ -23,6 +23,7 @@
       src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"
       defer
     ></script>
+    <script src="../js/professor_table.js" defer></script>
   </head>
 
   <body class="sb-nav-fixed">
@@ -70,70 +71,35 @@
             </div>
 
             <div class="card mb-4">
-              <div class="card-header">게시판</div>
+              <div class="card-header">교수정보조회</div>
               <div class="card-body">
                 <div class="container" style="width: 100%; margin: 0 auto">
-                  <form id="searchForm" method="get">
                     <div style="float: right">
                       <input
                         type="text"
                         name="keyword"
-                        placeholder="검색어를 입력하세요"
+                        placeholder="교수명"
+                        id = "professor"
                       />
-                      <button id="searchButton" class="btn btn-secondary">
+                      <button id="searchButton" class="btn btn-primary">
                         검색
                       </button>
                     </div>
-                  </form>
-
-                  <table class="table table-hover" style="text-align: center">
-                    <thead>
-                      <tr>
-                        <th scope="col">재직학과</th>
-                        <th scope="col">이름</th>
-                        <th scope="col">직위</th>
-                        <th scope="col">연구실</th>
-                        <th scope="col">위치</th>
-                        <th scope="col">전공분야</th>
-                        <th scope="col">전화번호</th>
-                        <th scope="col">이메일</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>컴퓨터정보공학부</td>
-                        <td>이혁준</td>
-                        <td>교수</td>
-                        <td>인공지능</td>
-                        <td>새707(708)</td>
-                        <td>이동 컴퓨팅, 인공 지능</td>
-                        <td>5127</td>
-                        <td>hlee</td>
-                      </tr>
-                    </tbody>
-                  </table>
-
-                  <!--  pagination :: 페이징 처리 해야되는 부분 -->
-
-                  <div class="center">
-                    <ul class="pagination justify-content-center">
-                      <li class="page-item">
-                        <a class="page-link" href="#">Previous</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">1</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">2</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">3</a>
-                      </li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                      </li>
-                    </ul>
-                  </div>
+                </div>
+                <div
+                class="container"
+                id="professor_container"
+                style="width: 100%; margin: 0 auto"
+                >
+                  <script>
+                    document
+                      .getElementById("searchButton")
+                      .addEventListener("click", function () {
+                        var professorName =
+                          document.getElementById("professor").value;
+                        loadTable(professorName);
+                      });
+                  </script>
                 </div>
               </div>
             </div>
