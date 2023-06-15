@@ -86,70 +86,73 @@
                   <tr>
                     <td>
                       <select
-                              class="form-select"
-                              aria-label="Default select example"
-                              id="pro_lec"
-                            >
-                              <option value="professor" selected>교수명</option>
-                              <option value="lecture">강의명</option>
-                            </select>
-                          </td>              
-                    <td>
-                      <input
-                          type="text"
-                          name="keyword"
-                          placeholder=""
-                          id = "search_value"
-                          >
+                        class="form-select"
+                        aria-label="Default select example"
+                        id="pro_lec"
+                      >
+                        <option value="professor" selected>교수명</option>
+                        <option value="lecture">강의명</option>
+                      </select>
                     </td>
                     <td>
-                        <button id="searchButton" class="btn btn-primary">
-                          검색
-                        </button>
+                      <input
+                        type="text"
+                        name="keyword"
+                        placeholder=""
+                        id="search_value"
+                      />
+                    </td>
+                    <td>
+                      <button id="searchButton" class="btn btn-primary">
+                        검색
+                      </button>
                     </td>
                   </tr>
                 </table>
-                
+
                 <div class="container" style="width: 100%; margin: 0 auto">
                   <!-- 댓글 노출 & 작성 & 댓글 삭제-->
                   <div style="margin-top: 30px; margin-bottom: 30px">
                     <div
-                class="container"
-                id="rating_container"
-                style="width: 100%; margin: 0 auto"
-                >
-                  <script>
-                    document
-                      .getElementById("searchButton")
-                      .addEventListener("click", function () {
-                        if (document.getElementById("pro_lec").value == "professor") {
-                          var professorName =
-                            document.getElementById("search_value").value;
-                          var lectureName = "";
-                        } else {
-                          var professorName = "";
-                          var lectureName =
-                            document.getElementById("search_value").value;
-                        }
-                        loadTable(professorName, lectureName);
-                      });
-                  </script>
-                </div>
+                      class="container"
+                      id="rating_container"
+                      style="width: 100%; margin: 0 auto"
+                    >
+                      <script>
+                        document
+                          .getElementById("searchButton")
+                          .addEventListener("click", function () {
+                            if (
+                              document.getElementById("pro_lec").value ==
+                              "professor"
+                            ) {
+                              var professorName =
+                                document.getElementById("search_value").value;
+                              var lectureName = "";
+                            } else {
+                              var professorName = "";
+                              var lectureName =
+                                document.getElementById("search_value").value;
+                            }
+                            loadTable(professorName, lectureName);
+                          });
+                      </script>
+                    </div>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                      <a
-                        class="btn btn-dark"
-                        onclick="openWritePopup()"
+                      <a class="btn btn-dark" onclick="openWritePopup()"
                         >작성</a
                       >
                     </div>
                     <script>
                       function openWritePopup() {
-                          document.getElementById("writePopup").style.display = "block";
-                        }
+                        document.getElementById("writePopup").style.display =
+                          "block";
+                      }
 
-                        function closeWritePopup() {
-                          document.getElementById("writePopup").style.display = "none";
-                        }
+                      function closeWritePopup() {
+                        document.getElementById("writePopup").style.display =
+                          "none";
+                      }
                     </script>
                   </div>
                 </div>
@@ -172,17 +175,19 @@
     <div id="writePopup" class="popup">
       <div class="popup-content">
         <div class="popup-header">
-
           <span class="close" onclick="closeWritePopup()">&times;</span>
         </div>
         <div class="popup-body">
-          <div id = "rating_write_table" class="container text-center justify-content-center" style="width: 100%; height: 100%; margin: 0 auto">
-          </div>
-          <script src = "../js/rating_write_popup.js" defer></script>
+          <div
+            id="rating_write_table"
+            class="container text-center justify-content-center"
+            style="width: 100%; height: 100%; margin: 0 auto"
+          ></div>
+          <script src="../js/rating_write_popup.js" defer></script>
         </div>
       </div>
     </div>
-    
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
       crossorigin="anonymous"
