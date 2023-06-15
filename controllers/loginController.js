@@ -2,8 +2,10 @@ const express = require('express');
 const loginModel = require('../models/loginModel');
 
 exports.join = (req, res)=>{
+  console.log(req);
     var datas = [req.body.school_number, req.body.password, req.body.name, req.body.telephone,
         req.body.inputEmail,req.body.register_choice];
+    console.log(datas);
     loginModel.join(datas)
       .then((result) => {
         res.status(200).send('회원가입 성공');
@@ -49,7 +51,7 @@ exports.findId = (req, res)=>{
         // Authentication failed
         res.status(400).send('Invalid credentials');
       });
-    }
+}
 exports.findPw = (req, res)=>{
   const user_id = req.body.inputName;
     const name = req.body.inputName;
