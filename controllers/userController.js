@@ -59,6 +59,24 @@ exports.getScore = (req, res)=>{
       });
 }
 
+exports.getScore = async (req, res, next)=>{
+    let user_id = req.session.user.user_id;
+    let result = [];
+    let semesterList = await boardModel.getSemester(user_id); //유저가 듣는 강의에 해당하는 년도, 학기를 내림차순으로 불러옴
+    
+    for (let i = 0; i < semesterList.length; i++) {
+        let year = semesterList[i].year.toString();
+        let semester = semesterList[i].semester.toString();
+        console.log(user_id, year, semester);
+        let grade = await userModel.getScore(user_id, year, semester);
+        console.log(grade);
+        result.push({ year: year, semester: semester, grade: grade });
+    }
+    
+    console.log(result);
+    res.status(200).send(result);
+}
+
 exports.getScoreAvg = async (req, res, next)=>{
     let user_id = req.session.user.user_id;
     let result = [];

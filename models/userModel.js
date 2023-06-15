@@ -64,7 +64,7 @@ module.exports.getProfessor = (name) => {
     });
 };
 
-module.exports.getScore = (user_id) => {
+module.exports.getScore = (user_id, year, semester) => {
     return new Promise((resolve, reject) => {
         conn.query(
             'SELECT l.lecture_code, l.lecture_name, l.lecture_class,\
@@ -73,8 +73,8 @@ module.exports.getScore = (user_id) => {
             JOIN lecture l ON ul.lecture_code = l.lecture_code\
             JOIN user u ON l.professor_id = u.user_id\
             JOIN department d ON l.department_code = d.department_code\
-            WHERE ul.user_id = ?',
-            user_id,
+            WHERE ul.user_id = ? AND l.year = ? AND l.semester = ?',
+            [user_id, year, semester],
             function (err, rows) {
                 if (err) {
                     reject(err);
