@@ -3,7 +3,13 @@ const boardModel = require('../models/boardModel');
 const moment = require('moment');
 
 exports.getList = async (req, res, next)=>{
-    let user_id = req.session.user.user_id;
+    let user_id = null;
+  if (req.session.user) {
+    user_id = req.session.user.user_id;
+  } else {
+    res.status(400).send("세션이 없습니다.");
+    return;
+  }
     let year = req.query.year;
     let semester = req.query.semester;
     let board_name = req.query.board_name;
@@ -48,7 +54,13 @@ exports.getPost = (req, res)=>{
 }
 
 exports.setPost = (req, res)=>{
-  let user_id = req.session.user.user_id;
+  let user_id = null;
+  if (req.session.user) {
+    user_id = req.session.user.user_id;
+  } else {
+    res.status(400).send("세션이 없습니다.");
+    return;
+  }
   let board_code = req.body.board_code;
   let title = req.body.title;
   let post_contents = req.body.post_contents;
@@ -98,7 +110,13 @@ exports.deletePost = (req, res)=>{
 }
 
 exports.setComment = (req, res)=>{
-  let user_id = req.session.user.user_id;
+  let user_id = null;
+  if (req.session.user) {
+    user_id = req.session.user.user_id;
+  } else {
+    res.status(400).send("세션이 없습니다.");
+    return;
+  }
   let post_code = req.body.board_code;
   let comment_contents = req.body.post_contents;
   let comment_date = moment().format("YYYY-MM-DD HH:mm:ss");

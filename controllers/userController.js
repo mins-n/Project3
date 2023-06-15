@@ -4,7 +4,13 @@ const boardModel = require('../models/boardModel');
 const moment = require('moment');
 
 exports.getUser = (req, res)=>{
-    let user_id = req.session.user.user_id;
+    let user_id = null;
+  if (req.session.user) {
+    user_id = req.session.user.user_id;
+  } else {
+    res.status(400).send("세션이 없습니다.");
+    return;
+  }
 
     userModel.getUser(user_id)
       .then((result) => {
@@ -16,7 +22,13 @@ exports.getUser = (req, res)=>{
 }
 
 exports.updateUser = (req, res)=>{
-    let user_id = req.session.user.user_id;
+    let user_id = null;
+  if (req.session.user) {
+    user_id = req.session.user.user_id;
+  } else {
+    res.status(400).send("세션이 없습니다.");
+    return;
+  }
     let email = req.body.email;
     let phone_num = req.body.phone_num;
     let password = req.body.password;
@@ -48,7 +60,13 @@ exports.getProfessor = (req, res)=>{
 
 
 exports.getScore = (req, res)=>{
-    let user_id = req.session.user.user_id;
+    let user_id = null;
+  if (req.session.user) {
+    user_id = req.session.user.user_id;
+  } else {
+    res.status(400).send("세션이 없습니다.");
+    return;
+  }
 
     userModel.getScore(user_id)
       .then((result) => {
@@ -60,7 +78,13 @@ exports.getScore = (req, res)=>{
 }
 
 exports.getScore = async (req, res, next)=>{
-    let user_id = req.session.user.user_id;
+    let user_id = null;
+  if (req.session.user) {
+    user_id = req.session.user.user_id;
+  } else {
+    res.status(400).send("세션이 없습니다.");
+    return;
+  }
     let result = [];
     let semesterList = await boardModel.getSemester(user_id); //유저가 듣는 강의에 해당하는 년도, 학기를 내림차순으로 불러옴
     
@@ -78,7 +102,13 @@ exports.getScore = async (req, res, next)=>{
 }
 
 exports.getScoreAvg = async (req, res, next)=>{
-    let user_id = req.session.user.user_id;
+    let user_id = null;
+  if (req.session.user) {
+    user_id = req.session.user.user_id;
+  } else {
+    res.status(400).send("세션이 없습니다.");
+    return;
+  }
     let result = [];
     let semesterList = await boardModel.getSemester(user_id); 
     
@@ -100,7 +130,13 @@ exports.getScoreAvg = async (req, res, next)=>{
 
 
 exports.getAdviser = (req, res)=>{
-    let user_id = req.session.user.user_id;
+    let user_id = null;
+  if (req.session.user) {
+    user_id = req.session.user.user_id;
+  } else {
+    res.status(400).send("세션이 없습니다.");
+    return;
+  }
     
     userModel.getAdviser(user_id)
       .then((result) => {
@@ -113,7 +149,13 @@ exports.getAdviser = (req, res)=>{
 
 
 exports.getScholarship = (req, res)=>{
-    let user_id = req.session.user.user_id;
+    let user_id = null;
+  if (req.session.user) {
+    user_id = req.session.user.user_id;
+  } else {
+    res.status(400).send("세션이 없습니다.");
+    return;
+  }
     
     userModel.getScholarship(user_id)
       .then((result) => {
@@ -125,7 +167,13 @@ exports.getScholarship = (req, res)=>{
 }
 
 exports.getLecture = (req, res)=>{
-    let user_id = req.session.user.user_id;
+    let user_id = null;
+  if (req.session.user) {
+    user_id = req.session.user.user_id;
+  } else {
+    res.status(400).send("세션이 없습니다.");
+    return;
+  }
     
     userModel.getLecture(user_id)
       .then((result) => {

@@ -11,7 +11,13 @@ exports.getIndexPage = (req, res) => {
 };
 
 exports.getUserInfo = (req, res)=>{
-  let user_id = req.session.user.user_id;
+  let user_id = null;
+  if (req.session.user) {
+    user_id = req.session.user.user_id;
+  } else {
+    res.status(400).send("세션이 없습니다.");
+    return;
+  }
 
   indexModel.getUserInfo(user_id)
     .then((result) => {
