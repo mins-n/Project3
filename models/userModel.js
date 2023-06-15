@@ -10,7 +10,8 @@ const conn = mysql.createConnection({
 module.exports.getUser = (user_id) => {
     return new Promise((resolve, reject) => {
         conn.query(
-            'SELECT * FROM user\
+            'SELECT u.*, d.department_name FROM user u INNER JOIN department d\
+            ON u.department_code = d.department_code\
             WHERE user_id = ?',
             user_id,
             function (err, rows) {
@@ -174,7 +175,8 @@ module.exports.getScholarship = (user_id) => {
             FROM scholarship s\
             JOIN user u ON s.user_id = u.user_id\
             JOIN department d ON u.department_code = d.department_code\
-            WHERE s.user_id = ?',
+            WHERE s.user_id = ?\
+            ORDER BY s.year DESC, s.semester DESC',
             user_id,
             function (err, rows) {
                 if (err) {
