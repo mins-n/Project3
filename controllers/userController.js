@@ -1,5 +1,6 @@
 const express = require('express');
 const userModel = require('../models/userModel');
+const boardModel = require('../models/boardModel');
 const moment = require('moment');
 
 exports.getUser = (req, res)=>{
@@ -59,6 +60,25 @@ exports.getScore = (req, res)=>{
       });
 }
 
+exports.getScoreAvg = async (req, res, next)=>{
+    let user_id = req.session.user.user_id;
+    let result = [];
+    let semesterList = await boardModel.getSemester(user_id); //유저가 듣는 강의에 해당하는 년도, 학기를 내림차순으로 불러옴
+    
+    for (let i = 0; i < semesterList.length; i++) {
+        let year = semesterList[i].year.toString();
+        let semester = semesterList[i].semester.toString();
+        console.log(user_id, year, semester);
+        let averageGrade = await userModel.getGrade(user_id, year, semester);
+        console.log(averageGrade);
+        result.push({ year: year, semester: semester, averageGrade: averageGrade[0].average_grade });
+    }
+    
+    console.log(result);
+    res.status(200).send(result);
+}
+
+
 exports.getAdviser = (req, res)=>{
     let user_id = req.session.user.user_id;
     
@@ -114,6 +134,7 @@ exports.setScore = (req, res)=>{
     let grade = req.body.grade;
     let lecture_code = req.body.lecture_code;
 
+    console.log(user_id,lecture_code,grade);
     userModel.setScore(user_id,lecture_code,grade)
       .then((result) => {
         res.status(200).send(result);

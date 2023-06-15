@@ -87,6 +87,27 @@ module.exports.getScore = (user_id) => {
     });
 };
 
+module.exports.getGrade = (user_id, year, semester) => {
+    return new Promise((resolve, reject) => {
+        conn.query(
+            'SELECT ROUND(AVG(ul.grade), 2) AS average_grade\
+            FROM user_lecture ul\
+            JOIN lecture l ON ul.lecture_code = l.lecture_code\
+            WHERE ul.user_id = ? AND l.year = ? AND l.semester = ?\
+            ',
+            [user_id, year, semester],
+            function (err, rows) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            }
+        );
+    });
+};
+
+
 module.exports.getAdviser = (user_id) => {
     return new Promise((resolve, reject) => {
         conn.query(
@@ -177,6 +198,24 @@ module.exports.getStudent = (lecture_code) => {
             JOIN user u ON ul.user_id = u.user_id\
             WHERE ul.lecture_code = ?',
             lecture_code,
+            function (err, rows) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            }
+        );
+    });
+};
+
+module.exports.setScore = (user_id,lecture_code,grade) => {
+    return new Promise((resolve, reject) => {
+        conn.query(
+            'UPDATE user_lecture\
+            SET grade = ?\
+            WHERE user_id = ? AND lecture_code = ?',
+            [grade, user_id,lecture_code],
             function (err, rows) {
                 if (err) {
                     reject(err);
