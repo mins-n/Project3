@@ -6,6 +6,7 @@ const conn = mysql.createConnection({
     port: '51935',
     database: 'ManageSys',
 });
+
 module.exports.getSemester = (user_id) => {
     return new Promise((resolve, reject) => {
         conn.query(
@@ -76,6 +77,23 @@ module.exports.getPost = (post_code) => {
       FROM post p LEFT JOIN comment c ON p.post_code = c.post_code\
       WHERE p.post_code = ?',
             post_code,
+            function (err, rows) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            }
+        );
+    });
+};
+
+module.exports.setPost = (user_id, board_code, post_date, title, post_contents, file) => {
+    return new Promise((resolve, reject) => {
+        conn.query(
+            'INSERT INTO post(board_code, post_date, user_id, title, post_contents, file)\
+             VALUES (?,?,?,?,?,?)',
+            [board_code, post_date, user_id, title, post_contents, file],
             function (err, rows) {
                 if (err) {
                     reject(err);

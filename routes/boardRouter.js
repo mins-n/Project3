@@ -3,11 +3,10 @@ var router = express.Router();
 const boardController = require('../controllers/boardController');
 
 router.get('/boardList', boardController.getList);
-router.get('/post/:idx', boardController.getPost);
-
-/*
+router.get('/post/:post_code', boardController.getPost);
 router.post('/post/write', boardController.setPost);
 router.get('/post/update', boardController.updatePost);
+/*
 router.post('/post/update', boardController.updatePost);
 router.post('/post/delete', boardController.deletePost);
 router.post('/comment/write', boardController.setComment);
