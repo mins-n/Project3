@@ -192,7 +192,7 @@ exports.schedule = async (req, res, next) => {
 
   let year = req.query.year;
   let semester = req.query.semester;
-
+  let result = [];
   let semesterList = await boardModel.getSemester(user_id);
 
   if (typeof semesterList[0] !== "undefined") {
@@ -201,13 +201,12 @@ exports.schedule = async (req, res, next) => {
       semester = semesterList[0].semester.toString();
     }
     lectureList = await boardModel.getLecture(user_id, year, semester);
+ 
+    result = {
+      semesterList: semesterList,
+      lectureList: lectureList
+    }
   }
-
-  let result = {
-    semesterList: semesterList,
-    lectureList: lectureList
-  }
-
   console.log(result);
   res.status(200).send(result);
 }

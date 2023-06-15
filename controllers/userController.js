@@ -187,7 +187,7 @@ exports.getLecture = (req, res)=>{
 
 exports.getStudent = (req, res)=>{
     let lecture_code = req.params.lecture_code;
-
+    console.log(lecture_code)
     userModel.getStudent(lecture_code)
       .then((result) => {
         res.status(200).send(result);

@@ -18,7 +18,7 @@ const conn = mysql.createConnection({
     host: '43.202.44.199',
     user: 'root',
     password: '1234',
-    port: '57669',
+    port: '58283',
     database: 'ManageSys',
 });
 

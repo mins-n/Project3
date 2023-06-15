@@ -3,7 +3,7 @@ const conn = mysql.createConnection({
     host: '43.202.44.199',
     user: 'root',
     password: '1234',
-    port: '57669',
+    port: '58283',
     database: 'ManageSys',
 });
 
@@ -232,7 +232,7 @@ module.exports.getLecture = (user_id) => {
 module.exports.getStudent = (lecture_code) => {
     return new Promise((resolve, reject) => {
         conn.query(
-            'SELECT u.user_id, u.name\
+            'SELECT u.user_id, u.name, ul.grade\
             FROM user_lecture ul\
             JOIN user u ON ul.user_id = u.user_id\
             WHERE ul.lecture_code = ?',
