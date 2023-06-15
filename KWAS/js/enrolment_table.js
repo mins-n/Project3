@@ -109,6 +109,9 @@ function display(data) {
       enrolButton.type = "button";
       enrolButton.className = "btn btn-primary";
       enrolButton.appendChild(document.createTextNode("수강신청"));
+      enrolButton.addEventListener("click", function () {
+        post_enrolment(row[1], row[5]); // Pass the lecture code to the post_enrolment function
+      });
       enrolButtonCell.appendChild(enrolButton);
       rowElement.appendChild(enrolButtonCell);
 
@@ -184,4 +187,24 @@ function display(data) {
 
   // 초기 테이블 렌더링
   renderTable();
+}
+
+function post_enrolment(lecture_code, seat) {
+  console.log(lecture_code, seat);
+  if (seat > 0) {
+    axios
+      .post("/course_management/enrolment", { lecture_code })
+      .then((res) => {
+        console.log(res);
+        alert("수강신청 성공");
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("수강신청 실패");
+        window.location.reload();
+      });
+  } else {
+    alert("여석이 없습니다.");
+  }
 }
