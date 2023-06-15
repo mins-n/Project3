@@ -11,12 +11,12 @@ var indexRouter = require('./routes/indexRouter');
 var loginRouter = require('./routes/loginRouter');
 var boardRouter = require('./routes/boardRouter');
 var lectureRouter = require('./routes/lectureRouter');
-
+var mainRouter = require('./routes/index');
 const conn = mysql.createConnection({
-    host: '43.202.44.199',
+    host: '3.34.200.80',
     user: 'root',
     password: '1234',
-    port: '54189',
+    port: '51935',
     database: 'ManageSys',
 });
 
@@ -55,7 +55,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use('/', indexRouter);
+app.use('/', mainRouter);
 app.use('/main', indexRouter);
 app.use('/login_form', loginRouter);
 app.use('/boards', boardRouter);

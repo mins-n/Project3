@@ -1,12 +1,11 @@
 const mysql = require('mysql');
 const conn = mysql.createConnection({
-    host: '43.202.44.199',
+    host: '3.34.200.80',
     user: 'root',
     password: '1234',
-    port: '54189',
+    port: '51935',
     database: 'ManageSys',
 });
-
 module.exports.getSemester = (user_id) => {
     return new Promise((resolve, reject) => {
         conn.query(
