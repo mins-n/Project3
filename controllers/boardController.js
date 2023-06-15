@@ -42,6 +42,16 @@ exports.getList = async (req, res, next)=>{
     res.status(200).send(result);
 }
 
+exports.community = (req, res)=>{
+  boardModel.getCommunity()
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch((error) => {
+      res.status(400).send('Invalid credentials');
+    });
+}
+
 exports.getPost = (req, res)=>{
     let post_code = req.params.post_code;
 
@@ -53,6 +63,22 @@ exports.getPost = (req, res)=>{
         res.status(400).send('Invalid credentials');
       });
 }
+
+exports.getPost = async (req, res, next)=>{
+  let post_code = req.params.post_code;
+
+  let post = await boardModel.getPost(post_code);
+  let comment = await boardModel.getComment(post_code);
+  
+  let result = {
+    post: post,
+    comment: comment
+  }
+    console.log(result);
+    res.status(200).send(result);
+}
+
+
 
 exports.setPost = (req, res)=>{
   let user_id = null;
