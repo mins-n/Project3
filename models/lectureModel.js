@@ -1,9 +1,9 @@
 const mysql = require('mysql');
 const conn = mysql.createConnection({
-    host: '3.34.200.80',
+    host: '43.202.44.199',
     user: 'root',
     password: '1234',
-    port: '57751',
+    port: '57021',
     database: 'ManageSys',
 });
 
@@ -37,7 +37,7 @@ module.exports.getPlan = (lecture_code) => {
             'SELECT *\
         FROM plan\
         WHERE lecture_code = ?',
-    lecture_code,
+            lecture_code,
             function (err, rows) {
                 if (err) {
                     reject(err);
@@ -55,7 +55,7 @@ module.exports.getLectureInfo = (lecture_code) => {
             'SELECT *\
         FROM lecture\
         WHERE lecture_code = ?',
-    lecture_code,
+            lecture_code,
             function (err, rows) {
                 if (err) {
                     reject(err);
@@ -66,7 +66,6 @@ module.exports.getLectureInfo = (lecture_code) => {
         );
     });
 };
-
 
 module.exports.getLectureSeat = (department, lecture_name) => {
     return new Promise((resolve, reject) => {
@@ -159,7 +158,7 @@ module.exports.enrolmentList = (user_id) => {
      WHERE ul.user_id = ?\
        AND l.year = 2023\
        AND l.semester = 1',
-              user_id,
+            user_id,
             function (err, rows) {
                 if (err) {
                     reject(err);
@@ -232,4 +231,3 @@ module.exports.evaluate = (user_id, lecture_code, evaluation, evaluation_score) 
         );
     });
 };
-

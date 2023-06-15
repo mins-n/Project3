@@ -73,108 +73,15 @@
                   <canvas id="myLineChart" width="100%" height="30"></canvas>
                 </div>
               </div>
-
-              <script>
-                // 데이터 예시
-                const semesterLabels = [
-                  "1-1학기",
-                  "1-2학기",
-                  "2-1학기",
-                  "2-2학기",
-                  "3-1학기",
-                  "3-2학기",
-                  "4-1학기",
-                  "4-2학기",
-                ];
-                const subjectGrades = [
-                  [4.0, 4.3, 4.0, 3.8, 4.0, 4.1, 4.0, 3.8], // 전체 성적
-                  [, , 4.5, 4.0, 3.8, 4.0, 4.1, 4.0, 4.0], // 전공 성적
-                  [3.0, 3.8, 3.8, 3.5, 4.0, 3.6, 4.0, 4.0], // 교양 성적
-                ];
-
-                // 그래프 생성
-                const ctx = document
-                  .getElementById("myLineChart")
-                  .getContext("2d");
-                const myChart = new Chart(ctx, {
-                  type: "line",
-                  data: {
-                    labels: semesterLabels,
-                    datasets: [
-                      {
-                        label: "전체",
-                        data: subjectGrades[0],
-                        fill: false,
-                        borderColor: "rgba(255, 0, 0, 1)",
-                        borderWidth: 1,
-                      },
-                      {
-                        label: "전공",
-                        data: subjectGrades[1],
-                        fill: false,
-                        borderColor: "rgba(0, 255, 0, 1)",
-                        borderWidth: 1,
-                      },
-                      {
-                        label: "교양",
-                        data: subjectGrades[2],
-                        fill: false,
-                        borderColor: "rgba(0, 0, 255, 1)",
-                        borderWidth: 1,
-                      },
-                    ],
-                  },
-                  options: {
-                    scales: {
-                      y: {
-                        beginAtZero: true,
-                        max: 4.5,
-                        stepSize: 0.5,
-                      },
-                    },
-                  },
-                });
-              </script>
+              <script src="../js/grade_graph.js" defer></script>
               <div class="card-body">
                 <!-- 학정번호 과목명 이수구분 학점 교수명 연락처 -->
-                <div class="container" style="width: 100%; margin: 0 auto">
-                  <table class="table table-hover">
-                    <thead>
-                      <div class="text-center">
-                        <h5>2023년 1학기</h5>
-                      </div>
-                      <tr>
-                        <th style="width: 15%">학정번호</th>
-                        <th style="width: 15%">과목명</th>
-                        <th style="width: 15%">개설학과</th>
-                        <th style="width: 10%">이수구분</th>
-                        <th style="width: 5%">학점</th>
-                        <th style="width: 10%">교수명</th>
-                        <th style="width: 10%">성적</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>H020-4-0846-01</td>
-                        <td>소프트웨어공학</td>
-                        <td>컴퓨터정보공학부</td>
-                        <td>전선</td>
-                        <td>3</td>
-                        <td>이기훈</td>
-                        <td>A</td>
-                      </tr>
-                      <tr>
-                        <td>H020-4-8483-01</td>
-                        <td>머신러닝</td>
-                        <td>컴퓨터정보공학부</td>
-                        <td>전선</td>
-                        <td>3</td>
-                        <td>박철수</td>
-                        <td>A+</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+                <div
+                  class="container"
+                  id="grade_table_container"
+                  style="width: 100%; margin: 0 auto"
+                ></div>
+                <script src="../js/grade_table.js" defer></script>
               </div>
             </div>
           </div>

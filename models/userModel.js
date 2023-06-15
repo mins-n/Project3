@@ -1,9 +1,9 @@
 const mysql = require('mysql');
 const conn = mysql.createConnection({
-    host: '3.34.200.80',
+    host: '43.202.44.199',
     user: 'root',
     password: '1234',
-    port: '57751',
+    port: '57021',
     database: 'ManageSys',
 });
 
@@ -146,7 +146,6 @@ module.exports.getGeScoreAvg = (user_id, year, semester) => {
     });
 };
 
-
 module.exports.getAdviser = (user_id) => {
     return new Promise((resolve, reject) => {
         conn.query(
@@ -248,13 +247,13 @@ module.exports.getStudent = (lecture_code) => {
     });
 };
 
-module.exports.setScore = (user_id,lecture_code,grade) => {
+module.exports.setScore = (user_id, lecture_code, grade) => {
     return new Promise((resolve, reject) => {
         conn.query(
             'UPDATE user_lecture\
             SET grade = ?\
             WHERE user_id = ? AND lecture_code = ?',
-            [grade, user_id,lecture_code],
+            [grade, user_id, lecture_code],
             function (err, rows) {
                 if (err) {
                     reject(err);

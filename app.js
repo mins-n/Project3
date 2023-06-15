@@ -15,10 +15,10 @@ var mainRouter = require('./routes/index');
 var userRouter = require('./routes/userRouter');
 
 const conn = mysql.createConnection({
-    host: '3.34.200.80',
+    host: '43.202.44.199',
     user: 'root',
     password: '1234',
-    port: '57751',
+    port: '57021',
     database: 'ManageSys',
 });
 
