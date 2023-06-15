@@ -123,3 +123,24 @@ module.exports.getUserLecture = (user_id) => {
         );
     });
 };
+
+module.exports.evaluate = (user_id, lecture_code, evaluation, evaluation_score, evaluation_date) => {
+    return new Promise((resolve, reject) => {
+        conn.query(
+            'UPDATE user_lecture\
+            SET evaluation = ?,\
+                evaluation_score = ?,\
+                evaluation_date = ?\
+            WHERE lecture_code = ?\
+            AND user_id = ?',
+            [evaluation, evaluation_score, evaluation_date, lecture_code, user_id],
+            function (err, rows) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            }
+        );
+    });
+};

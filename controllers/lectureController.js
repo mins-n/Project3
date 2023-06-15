@@ -1,5 +1,6 @@
 const express = require('express');
 const lectureModel = require('../models/lectureModel');
+const moment = require('moment');
 
 exports.getLecture = (req, res)=>{
     let year = req.query.year;
@@ -83,6 +84,24 @@ exports.getUserLecture = (req, res)=>{
   let user_id = req.session.user.user_id;
   
   lectureModel.getUserLecture(user_id)
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch((error) => {
+      res.status(400).send('Invalid credentials');
+    });
+}
+
+exports.evaluate = (req, res)=>{
+  let user_id = req.session.user.user_id;
+  let lecture_code = req.query.lecture_code;
+  let evaluation = req.query.evaluation;
+  let evaluation_score = req.query.evaluation_score;
+  let evaluation_date = moment().format("YYYY-MM-DD HH:mm:ss");
+
+  console.log(user_id, lecture_code, evaluation, evaluation_score, evaluation_date)
+
+  lectureModel.evaluate(user_id, lecture_code, evaluation, evaluation_score, evaluation_date)
     .then((result) => {
       res.status(200).send(result);
     })
