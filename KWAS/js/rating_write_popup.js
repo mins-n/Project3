@@ -5,7 +5,11 @@ axios
     var processedData = [];
 
     data.forEach(function (item) {
-      var lectureData = [item.lecture_name, item.name];
+      var lectureData = [
+        item.professor_name,
+        item.lecture_name,
+        item.lecture_code,
+      ];
       processedData.push(lectureData);
     });
     console.log(processedData);
@@ -16,13 +20,9 @@ axios
     console.log(error);
   });
 
-function rating_write_table_popup(data) {
+function rating_write_table_popup(lectureData) {
   var user_lecture = document.getElementById("rating_write_table");
 
-  const lectureData = [
-    ["김교수", "머신러닝", "ABC"],
-    ["김인아", "대학수학1", "DDD"],
-  ];
   const lectureSelect = document.createElement("select");
   lectureSelect.setAttribute("class", "form-select");
   lectureSelect.setAttribute("aria-label", "Default select example");
