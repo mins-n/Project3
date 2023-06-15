@@ -58,3 +58,15 @@ exports.getScore = (req, res)=>{
         res.status(400).send('Invalid credentials');
       });
 }
+
+exports.getAdviser = (req, res)=>{
+    let user_id = req.session.user.user_id;
+    
+    userModel.getAdviser(user_id)
+      .then((result) => {
+        res.status(200).send(result);
+      })
+      .catch((error) => {
+        res.status(400).send('Invalid credentials');
+      });
+}

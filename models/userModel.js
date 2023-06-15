@@ -87,3 +87,22 @@ module.exports.getScore = (user_id) => {
 };
 
 
+module.exports.getAdviser = (user_id) => {
+    return new Promise((resolve, reject) => {
+        conn.query(
+            'SELECT u.name, d.department_name, u.phone_num,\
+             u.email, u.academic_info AS spot, u.profile\
+            FROM adviser a\
+            JOIN user u ON a.professor_id = u.user_id\
+            JOIN department d ON u.department_code = d.department_code\
+            WHERE a.student_id = ?', user_id,
+            function (err, rows) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            }
+        );
+    });
+};
