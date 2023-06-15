@@ -30,7 +30,8 @@ exports.getList = async (req, res, next)=>{
       {
           lecture_code = lectureList[0].lecture_code.toString(); //오름차순으로 가장 높이있는 강의선택 
       }
-      list = await boardModel.getList(user_id, lecture_code, board_name);//해당 페이지에 대한 모든 게시글 가져옴
+      console.log(lecture_code);
+      list = await boardModel.getList(lecture_code, board_name);//해당 페이지에 대한 모든 게시글 가져옴
     }
     let result = {
         semesterList: semesterList,
