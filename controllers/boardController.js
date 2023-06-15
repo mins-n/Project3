@@ -3,7 +3,7 @@ const boardModel = require('../models/boardModel');
 const moment = require('moment');
 
 exports.getList = async (req, res, next)=>{
-    let user_id = null;
+  let user_id = null;
   if (req.session.user) {
     user_id = req.session.user.user_id;
   } else {
@@ -16,7 +16,7 @@ exports.getList = async (req, res, next)=>{
     let lecture_code = req.query.lecture_code;
     let lectureList;
     let list;
-
+    console.log(year, semester, board_name, lecture_code);
     let semesterList = await boardModel.getSemester(user_id); //유저가 듣는 강의에 해당하는 년도, 학기를 내림차순으로 불러옴
     if (typeof semesterList[0] !== "undefined")
     {
