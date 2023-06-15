@@ -1,5 +1,6 @@
 const express = require('express');
 const boardModel = require('../models/boardModel');
+const moment = require('moment');
 
 exports.getList = async (req, res, next)=>{
     let user_id = req.session.user.user_id;
@@ -36,6 +37,7 @@ exports.getList = async (req, res, next)=>{
 
 exports.getPost = (req, res)=>{
     let post_code = req.params.post_code;
+
     boardModel.getPost(post_code)
       .then((result) => {
         res.status(200).send(result);
@@ -46,8 +48,16 @@ exports.getPost = (req, res)=>{
 }
 
 exports.setPost = (req, res)=>{
-  let post_code = req.params.post_code;
-  boardModel.getPost(post_code)
+  let user_id = req.session.user.user_id;
+  let board_code = req.params.board_code;
+  let title = req.params.title;
+  let post_contents = req.params.post_contents;
+  let file = req.params.file;
+  let post_date = moment().format("YYYY-MM-DD HH:mm:ss");
+
+  console.log(user_id, board_code, post_date, title, post_contents, file);
+  
+  boardModel.setPost(user_id, board_code, post_date, title, post_contents, file)
     .then((result) => {
       res.status(200).send(result);
     })
@@ -56,3 +66,20 @@ exports.setPost = (req, res)=>{
     });
 }
 
+exports.updatePost = (req, res)=>{
+  let post_code = req.params.post_code;
+  let title = req.params.title;
+  let post_contents = req.params.post_contents;
+  let file = req.params.file;
+  let post_date = moment().format("YYYY-MM-DD HH:mm:ss");
+
+  console.log(post_code, post_date, title, post_contents, file);
+  
+  boardModel.updatePost(post_code, post_date, title, post_contents, file)
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch((error) => {
+      res.status(400).send('Invalid credentials');
+    });
+}
