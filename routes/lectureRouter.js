@@ -10,6 +10,7 @@ router.get('/list', lectureController.enrolmentList) //수강 신청 현황
 router.get('/evaluation', lectureController.getEvaluatedLecture);   //강의 평가목록 조회
 router.get('/user_evaluation', lectureController.getUserLecture);   //로그인한 유저의 강의 평가목록 조회
 router.post('/evaluation', lectureController.evaluate); //강의 평가
+router.get('/schedule', lectureController.schedule); //시간표
 
 module.exports = router;
 

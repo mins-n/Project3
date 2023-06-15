@@ -149,3 +149,45 @@ module.exports.getLecture = (user_id) => {
         );
     });
 };
+
+module.exports.getLecture = (user_id) => {
+    return new Promise((resolve, reject) => {
+        conn.query(
+            'SELECT s.year, s.semester, s.name AS scholarship_name, \
+            s.price, d.department_name, u.name, u.academic_info, u.grade, u.semester\
+            FROM scholarship s\
+            JOIN user u ON s.user_id = u.user_id\
+            JOIN department d ON u.department_code = d.department_code\
+            WHERE s.user_id = ?',
+            user_id,
+            function (err, rows) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            }
+        );
+    });
+};
+
+module.exports.getStudent = (user_id) => {
+    return new Promise((resolve, reject) => {
+        conn.query(
+            'SELECT s.year, s.semester, s.name AS scholarship_name, \
+            s.price, d.department_name, u.name, u.academic_info, u.grade, u.semester\
+            FROM scholarship s\
+            JOIN user u ON s.user_id = u.user_id\
+            JOIN department d ON u.department_code = d.department_code\
+            WHERE s.user_id = ?',
+            user_id,
+            function (err, rows) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            }
+        );
+    });
+};

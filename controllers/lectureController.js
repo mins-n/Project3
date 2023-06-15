@@ -1,5 +1,6 @@
 const express = require('express');
 const lectureModel = require('../models/lectureModel');
+const boardModel = require('../models/boardModel');
 const moment = require('moment');
 
 exports.getLecture = (req, res)=>{
@@ -132,4 +133,28 @@ exports.evaluate = (req, res)=>{
     .catch((error) => {
       res.status(400).send('Invalid credentials');
     });
+}
+
+
+exports.schedule = async (req, res, next)=>{
+  let user_id = req.session.user.user_id;
+  let year = req.query.year;
+  let semester = req.query.semester;
+
+  let semesterList = await boardModel.getSemester(user_id); //유저가 듣는 강의에 해당하는 년도, 학기를 내림차순으로 불러옴
+  if (typeof semesterList[0] !== "undefined")
+  {
+    if(typeof year === "undefined" || typeof semester === "undefined" || year === "" || semester === "") //학기가 정해져 있지 않은경우
+    {
+        year = semesterList[0].year.toString(); //가장 높은 연도
+        semester = semesterList[0].semester.toString(); //가장 높은 학기
+    }
+    lectureList = await boardModel.getLecture(user_id, year, semester); //해당 년도, 학기에 대한 모든 강의를 가져옴
+  }
+  let result = {
+      semesterList: semesterList,
+      lectureList: lectureList
+    }
+  console.log(result);
+  res.status(200).send(result);
 }
