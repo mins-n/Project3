@@ -34,6 +34,7 @@
       src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"
       defer
     ></script>
+    <script src="../js/rating_table.js" defer></script>
   </head>
 
   <body class="sb-nav-fixed">
@@ -79,54 +80,61 @@
               /></a>
             </div>
             <div class="card mb-4">
-              <div class="card-header">게시글 내용</div>
+              <div class="card-header">강의평가</div>
               <div class="card-body">
-                <form id="searchForm" method="get">
-                  <div align="right">
-                    <input
-                      type="text"
-                      name="keyword"
-                      style="width: 500px; height: 25px"
-                      placeholder="교수명 또는 강의명을 입력하세요."
-                    />
-                    <button id="searchButton" class="btn btn-secondary">
-                      검색
-                    </button>
-                  </div>
-                </form>
-
+                <table align="right">
+                  <tr>
+                    <td>
+                      <select
+                              class="form-select"
+                              aria-label="Default select example"
+                              id="pro_lec"
+                            >
+                              <option value="professor" selected>교수명</option>
+                              <option value="lecture">강의명</option>
+                            </select>
+                          </td>              
+                    <td>
+                      <input
+                          type="text"
+                          name="keyword"
+                          placeholder=""
+                          id = "search_value"
+                          >
+                    </td>
+                    <td>
+                        <button id="searchButton" class="btn btn-primary">
+                          검색
+                        </button>
+                    </td>
+                  </tr>
+                </table>
+                
                 <div class="container" style="width: 100%; margin: 0 auto">
                   <!-- 댓글 노출 & 작성 & 댓글 삭제-->
                   <div style="margin-top: 30px; margin-bottom: 30px">
-                    <table
-                      class="table table-striped"
-                      style="text-align: center"
-                    >
-                      <thead>
-                        <tr>
-                          <th scope="col">과목이름</th>
-                          <th scope="col">점수</th>
-                          <th scope="col">작성날자</th>
-                          <th scope="col">한줄평</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>소프트웨어공학</td>
-                          <td>4.5/5</td>
-                          <td>2023-05-28</td>
-                          <td>의미있고 좋은 수업이였어요</td>
-                          <td>
-                            <a
-                              type="button"
-                              class="btn btn-secondary btn-sm"
-                              href="#"
-                              >삭제</a
-                            >
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                    <div
+                class="container"
+                id="rating_container"
+                style="width: 100%; margin: 0 auto"
+                >
+                  <script>
+                    document
+                      .getElementById("searchButton")
+                      .addEventListener("click", function () {
+                        if (document.getElementById("pro_lec").value == "professor") {
+                          var professorName =
+                            document.getElementById("search_value").value;
+                          var lectureName = "";
+                        } else {
+                          var professorName = "";
+                          var lectureName =
+                            document.getElementById("search_value").value;
+                        }
+                        loadTable(professorName, lectureName);
+                      });
+                  </script>
+                </div>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                       <a
                         href="../service/writie_rating.html"
