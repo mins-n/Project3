@@ -49,10 +49,10 @@ exports.getPost = (req, res)=>{
 
 exports.setPost = (req, res)=>{
   let user_id = req.session.user.user_id;
-  let board_code = req.params.board_code;
-  let title = req.params.title;
-  let post_contents = req.params.post_contents;
-  let file = req.params.file;
+  let board_code = req.body.board_code;
+  let title = req.body.title;
+  let post_contents = req.body.post_contents;
+  let file = req.body.file;
   let post_date = moment().format("YYYY-MM-DD HH:mm:ss");
 
   console.log(user_id, board_code, post_date, title, post_contents, file);
@@ -67,10 +67,10 @@ exports.setPost = (req, res)=>{
 }
 
 exports.updatePost = (req, res)=>{
-  let post_code = req.params.post_code;
-  let title = req.params.title;
-  let post_contents = req.params.post_contents;
-  let file = req.params.file;
+  let post_code = req.body.post_code;
+  let title = req.body.title;
+  let post_contents = req.body.post_contents;
+  let file = req.body.file;
   let post_date = moment().format("YYYY-MM-DD HH:mm:ss");
 
   console.log(post_code, post_date, title, post_contents, file);
@@ -85,7 +85,7 @@ exports.updatePost = (req, res)=>{
 }
 
 exports.deletePost = (req, res)=>{
-  let post_code = req.params.post_code;
+  let post_code = req.body.post_code;
   console.log(post_code);
   
   boardModel.deletePost(post_code)
@@ -99,8 +99,8 @@ exports.deletePost = (req, res)=>{
 
 exports.setComment = (req, res)=>{
   let user_id = req.session.user.user_id;
-  let post_code = req.params.board_code;
-  let comment_contents = req.params.post_contents;
+  let post_code = req.body.board_code;
+  let comment_contents = req.body.post_contents;
   let comment_date = moment().format("YYYY-MM-DD HH:mm:ss");
 
   console.log(user_id, post_code, comment_contents, comment_date);
@@ -115,8 +115,8 @@ exports.setComment = (req, res)=>{
 }
 
 exports.updateComment = (req, res)=>{
-  let comment_code = req.params.comment_code;
-  let comment_contents = req.params.comment_contents;
+  let comment_code = req.body.comment_code;
+  let comment_contents = req.body.comment_contents;
   let comment_date = moment().format("YYYY-MM-DD HH:mm:ss");
 
   console.log(comment_code, comment_contents, comment_date);
@@ -131,7 +131,7 @@ exports.updateComment = (req, res)=>{
 }
 
 exports.deleteComment = (req, res)=>{
-  let comment_code = req.params.comment_code;
+  let comment_code = req.body.comment_code;
   console.log(comment_code);
   
   boardModel.deleteComment(comment_code)

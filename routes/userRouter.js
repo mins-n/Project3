@@ -7,6 +7,10 @@ router.post('/update', userController.updateUser);
 router.get('/professor', userController.getProfessor);
 router.get('/score', userController.getScore);
 router.get('/adviser', userController.getAdviser);
+router.get('/scholarship', userController.getScholarship);
+router.get('/professor/lecture', userController.getLecture);
+router.get('/professor/lecture/:lecture_code', userController.getStudent);
+router.post('/professor/lecture/score', userController.setScore);
 
 module.exports = router;
 

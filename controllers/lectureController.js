@@ -49,7 +49,7 @@ exports.getLecture2 = (req, res)=>{
 
 exports.enrolment = (req, res)=>{
   let user_id = req.session.user.user_id;
-  let lecture_code = req.query.lecture_code;
+  let lecture_code = req.body.lecture_code;
 
   lectureModel.enrolment(user_id, lecture_code)
     .then((result) => {
@@ -94,9 +94,9 @@ exports.getUserLecture = (req, res)=>{
 
 exports.evaluate = (req, res)=>{
   let user_id = req.session.user.user_id;
-  let lecture_code = req.query.lecture_code;
-  let evaluation = req.query.evaluation;
-  let evaluation_score = req.query.evaluation_score;
+  let lecture_code = req.body.lecture_code;
+  let evaluation = req.body.evaluation;
+  let evaluation_score = req.body.evaluation_score;
 
   console.log(user_id, lecture_code, evaluation, evaluation_score)
 

@@ -16,10 +16,10 @@ exports.getUser = (req, res)=>{
 
 exports.updateUser = (req, res)=>{
     let user_id = req.session.user.user_id;
-    let email = req.query.email;
-    let phone_num = req.query.phone_num;
-    let password = req.query.password;
-    let profile = req.query.profile;
+    let email = req.body.email;
+    let phone_num = req.body.phone_num;
+    let password = req.body.password;
+    let profile = req.body.profile;
     
     console.log(user_id, email, phone_num, password, profile);
     userModel.updateUser(user_id, email, phone_num, password, profile)
@@ -63,6 +63,55 @@ exports.getAdviser = (req, res)=>{
     let user_id = req.session.user.user_id;
     
     userModel.getAdviser(user_id)
+      .then((result) => {
+        res.status(200).send(result);
+      })
+      .catch((error) => {
+        res.status(400).send('Invalid credentials');
+      });
+}
+
+
+exports.getScholarship = (req, res)=>{
+    let user_id = req.session.user.user_id;
+    
+    userModel.getScholarship(user_id)
+      .then((result) => {
+        res.status(200).send(result);
+      })
+      .catch((error) => {
+        res.status(400).send('Invalid credentials');
+      });
+}
+
+exports.getLecture = (req, res)=>{
+    let user_id = req.session.user.user_id;
+    
+    userModel.getLecture(user_id)
+      .then((result) => {
+        res.status(200).send(result);
+      })
+      .catch((error) => {
+        res.status(400).send('Invalid credentials');
+      });
+}
+
+exports.getStudent = (req, res)=>{
+    let user_id = req.session.user.user_id;
+    
+    userModel.getStudent(user_id)
+      .then((result) => {
+        res.status(200).send(result);
+      })
+      .catch((error) => {
+        res.status(400).send('Invalid credentials');
+      });
+}
+
+exports.setScore = (req, res)=>{
+    let user_id = req.session.user.user_id;
+    
+    userModel.setScore(user_id)
       .then((result) => {
         res.status(200).send(result);
       })
