@@ -60,6 +60,19 @@ exports.enrolment = (req, res)=>{
     });
 }
 
+exports.deleteEnrolment = (req, res)=>{
+  let user_id = req.session.user.user_id;
+  let lecture_code = req.body.lecture_code;
+
+  lectureModel.deleteEnrolment(user_id, lecture_code)
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch((error) => {
+      res.status(400).send('Invalid credentials');
+    });
+}
+
 exports.getEvaluatedLecture = (req, res)=>{
   let lecture_name = req.query.lecture_name;
   let name = req.query.name;
