@@ -36,7 +36,7 @@ function initializeHeader(studentId, name) {
             <a class="dropdown-item" href="#!" id="editLink" onclick="openEditPopup()">회원정보수정</a>
           </li>
           <li><hr class="dropdown-divider" /></li>
-          <li><a class="dropdown-item" href="#!">로그아웃</a></li>
+          <li><a class="dropdown-item" href="../login_form/login.html">로그아웃</a></li>
         </ul>`;
         }
         // 로그인 버튼 추가

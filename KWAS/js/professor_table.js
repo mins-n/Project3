@@ -1,17 +1,19 @@
 axios
-  .get("/course_management/syllabus_inquiry", {})
+  .get("/user/professor", {})
   .then(function (response) {
     let data = response.data;
     var processedData = [];
 
     data.forEach(function (item) {
       var lectureData = [
-        item.lecture_code,
+        item.department_name,
         item.name,
-        item.lecture_name,
-        item.lecture_class,
-        item.credit.toString(),
+        item.spot,
+        item.lab,
+        item.major,
         item.phone_num,
+        item.email,
+        item.profile,
       ];
       processedData.push(lectureData);
     });
@@ -74,23 +76,17 @@ function display(data) {
     // Create the table header
     var thead = document.createElement("thead");
     var headerRow = document.createElement("tr");
-    var headers = [
-      "학과",
-      "이름",
-      "직위",
-      "연구실",
-      "전공분야",
-      "연락처",
-      "이메일",
-      "홈페이지",
-    ];
 
-    headers.forEach(function (headerText) {
-      var th = document.createElement("th");
-      th.style.width = "10%";
-      th.appendChild(document.createTextNode(headerText));
-      headerRow.appendChild(th);
-    });
+    headerRow.innerHTML = `
+    <th style="width: 28%">학과</th>
+    <th style="width: 7%">이름</th>
+    <th style="width: 10%">직위</th>
+    <th style="width: 10%">연구실</th>
+    <th style="width: 15%">전공분야</th>
+    <th style="width: 10%">연락처</th>
+    <th style="width: 10%">이메일</th>
+    <th style="width: 10%">홈페이지</th>
+  `;
 
     thead.appendChild(headerRow);
     table.appendChild(thead);
@@ -102,7 +98,16 @@ function display(data) {
 
       row.forEach(function (cellData, index) {
         var cell = document.createElement("td");
-        cell.appendChild(document.createTextNode(cellData));
+
+        if (index === row.length - 1) {
+          // Create a link for the last column
+          var link = document.createElement("a");
+          link.href = cellData;
+          link.appendChild(document.createTextNode(cellData));
+          cell.appendChild(link);
+        } else {
+          cell.appendChild(document.createTextNode(cellData));
+        }
 
         // Style the first column as "No."
         if (index === 0) {
@@ -113,6 +118,7 @@ function display(data) {
         tbody.appendChild(rowElement);
       });
     });
+
     table.appendChild(tbody);
 
     // Add the table to the document body or a specific container
