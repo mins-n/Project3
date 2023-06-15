@@ -84,7 +84,8 @@ module.exports.enrolment = (user_id, lecture_code) => {
 module.exports.getEvaluatedLecture = (name, lecture_name) => {
     return new Promise((resolve, reject) => {
         conn.query(
-            'SELECT l.lecture_name, u.name, ul.evaluation_score, ul.evaluation, ul.evaluation_date\
+            'SELECT l.lecture_name, l.year, l.semester, u.name,\
+             ul.evaluation_score, ul.evaluation, ul.evaluation_date\
             FROM user_lecture ul\
             JOIN lecture l ON ul.lecture_code = l.lecture_code\
             JOIN user u ON l.professor_id = u.user_id\
@@ -107,7 +108,7 @@ module.exports.getUserLecture = (user_id) => {
     return new Promise((resolve, reject) => {
         conn.query(
             'SELECT l.lecture_name, u.name AS professor_name,ul.evaluation,\
-             ul.evaluation_score, ul.evaluation_date, l.year, l.semester\
+             ul.evaluation_score, l.year, l.semester\
             FROM user_lecture ul\
             JOIN lecture l ON ul.lecture_code = l.lecture_code\
             JOIN user u ON l.professor_id = u.user_id\
@@ -124,16 +125,15 @@ module.exports.getUserLecture = (user_id) => {
     });
 };
 
-module.exports.evaluate = (user_id, lecture_code, evaluation, evaluation_score, evaluation_date) => {
+module.exports.evaluate = (user_id, lecture_code, evaluation, evaluation_score) => {
     return new Promise((resolve, reject) => {
         conn.query(
             'UPDATE user_lecture\
             SET evaluation = ?,\
-                evaluation_score = ?,\
-                evaluation_date = ?\
+                evaluation_score = ?\
             WHERE lecture_code = ?\
             AND user_id = ?',
-            [evaluation, evaluation_score, evaluation_date, lecture_code, user_id],
+            [evaluation, evaluation_score, lecture_code, user_id],
             function (err, rows) {
                 if (err) {
                     reject(err);

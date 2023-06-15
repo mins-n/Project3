@@ -97,11 +97,10 @@ exports.evaluate = (req, res)=>{
   let lecture_code = req.query.lecture_code;
   let evaluation = req.query.evaluation;
   let evaluation_score = req.query.evaluation_score;
-  let evaluation_date = moment().format("YYYY-MM-DD HH:mm:ss");
 
-  console.log(user_id, lecture_code, evaluation, evaluation_score, evaluation_date)
+  console.log(user_id, lecture_code, evaluation, evaluation_score)
 
-  lectureModel.evaluate(user_id, lecture_code, evaluation, evaluation_score, evaluation_date)
+  lectureModel.evaluate(user_id, lecture_code, evaluation, evaluation_score)
     .then((result) => {
       res.status(200).send(result);
     })
