@@ -24,16 +24,15 @@ module.exports.getUser = (user_id) => {
     });
 };
 
-module.exports.updateUser = (user_id, email, phone_num, password, profile) => {
+module.exports.updateUser = (user_id, email, phone_num, password) => {
     return new Promise((resolve, reject) => {
         conn.query(
             'UPDATE user\
             SET password = ?,\
                 phone_num = ?,\
-                email = ?,\
-                profile = ?\
+                email = ?\
             WHERE user_id = ?',
-            [password, phone_num, email, profile, user_id],
+            [password, phone_num, email, user_id],
             function (err, rows) {
                 if (err) {
                     reject(err);

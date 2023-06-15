@@ -20,10 +20,9 @@ exports.updateUser = (req, res)=>{
     let email = req.body.email;
     let phone_num = req.body.phone_num;
     let password = req.body.password;
-    let profile = req.body.profile;
     
-    console.log(user_id, email, phone_num, password, profile);
-    userModel.updateUser(user_id, email, phone_num, password, profile)
+    console.log(user_id, email, phone_num, password);
+    userModel.updateUser(user_id, email, phone_num, password)
       .then((result) => {
         res.status(200).send(result);
       })
