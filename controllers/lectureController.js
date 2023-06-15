@@ -28,7 +28,35 @@ exports.getLecture = (req, res)=>{
       });
 }
 
-exports.getLecture2 = (req, res)=>{
+exports.getPlan = (req, res)=>{
+  let lecture_code = req.query.lecture_code;
+  lecture_code = 'L01';
+  lectureModel.getPlan(lecture_code)
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch((error) => {
+      res.status(400).send('Invalid credentials');
+    });
+}
+
+exports.getPlan = async (req, res, next)=>{
+  let lecture_code = req.query.lecture_code;
+  lecture_code = 'L01';
+
+  let planList = await lectureModel.getPlan(lecture_code);
+  let lectureInfo = await lectureModel.getLectureInfo(lecture_code);
+  
+  let result = {
+      planList: planList,
+      lectureInfo: lectureInfo
+    }
+  console.log(result);
+  res.status(200).send(result);
+}
+
+
+exports.getLectureSeat = (req, res)=>{
   let lecture_name = req.query.lecture_name;
   let department = req.query.department;
   

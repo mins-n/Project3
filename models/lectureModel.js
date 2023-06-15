@@ -31,7 +31,44 @@ module.exports.getLecture = (year, semester, lecture_name, professor_name) => {
     });
 };
 
-module.exports.getLecture2 = (department, lecture_name) => {
+module.exports.getPlan = (lecture_code) => {
+    return new Promise((resolve, reject) => {
+        conn.query(
+            'SELECT *\
+        FROM plan\
+        WHERE lecture_code = ?',
+    lecture_code,
+            function (err, rows) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            }
+        );
+    });
+};
+
+module.exports.getLectureInfo = (lecture_code) => {
+    return new Promise((resolve, reject) => {
+        conn.query(
+            'SELECT *\
+        FROM lecture\
+        WHERE lecture_code = ?',
+    lecture_code,
+            function (err, rows) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            }
+        );
+    });
+};
+
+
+module.exports.getLectureSeat = (department, lecture_name) => {
     return new Promise((resolve, reject) => {
         conn.query(
             'SELECT l.lecture_code, l.lecture_name, l.credit, u.name, l.seat, l.lecture_week1, l.lecture_time1, l.lecture_week2, l.lecture_time2\
@@ -195,3 +232,4 @@ module.exports.evaluate = (user_id, lecture_code, evaluation, evaluation_score) 
         );
     });
 };
+
