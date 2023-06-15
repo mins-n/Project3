@@ -1,9 +1,9 @@
 const mysql = require('mysql');
 const conn = mysql.createConnection({
-    host: '43.202.44.199',
+    host: '3.34.200.80',
     user: 'root',
     password: '1234',
-    port: '57132',
+    port: '57751',
     database: 'ManageSys',
 });
 
@@ -128,16 +128,13 @@ module.exports.updatePost = (post_code, post_date, title, post_contents, file) =
 
 module.exports.deletePost = (post_code) => {
     return new Promise((resolve, reject) => {
-        conn.query(
-            'DELETE FROM post WHERE post_code = ?',post_code,
-            function (err, rows) {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(rows);
-                }
+        conn.query('DELETE FROM post WHERE post_code = ?', post_code, function (err, rows) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(rows);
             }
-        );
+        });
     });
 };
 
@@ -179,15 +176,12 @@ module.exports.updateComment = (comment_code, comment_contents, comment_date) =>
 
 module.exports.deleteComment = (comment_code) => {
     return new Promise((resolve, reject) => {
-        conn.query(
-            'DELETE FROM comment WHERE comment_code = ?',comment_code,
-            function (err, rows) {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(rows);
-                }
+        conn.query('DELETE FROM comment WHERE comment_code = ?', comment_code, function (err, rows) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(rows);
             }
-        );
+        });
     });
 };
