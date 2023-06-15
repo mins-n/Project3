@@ -1,16 +1,15 @@
 axios
-.get("/course_management/syllabus_inquiry", {})
+.get("/course_management/evaluation", {})
 .then(function (response) {
   let data = response.data;
   var processedData = [];
-
   data.forEach(function (item) {
     var lectureData = [
       item.lecture_name,
       item.name,
-      item.credit.toString(),
-      item.lecture_class,
-      item.phone_num,
+      item.year + "년 " + item.semester + "학기",
+      item.evaluation_score,
+      item.evaluation,
     ];
     processedData.push(lectureData);
   });
@@ -38,8 +37,8 @@ function loadTable(professor_name,lecture_name) {
                     item.lecture_name,
                     item.name,
                     item.credit.toString(),
-                    item.lecture_class,
-                    item.phone_num,
+                    item.evaluation_score,
+                    item.evaluation,
                 ];
                 processedData.push(lectureData);
             });
@@ -78,8 +77,8 @@ function loadTable(professor_name,lecture_name) {
       var headers = [
         "과목이름",
         "교수명",
+        "수강 학기",
         "점수",
-        "작성 날짜",
         "한줄평",
       ];
   
