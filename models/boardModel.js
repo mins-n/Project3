@@ -1,9 +1,9 @@
 const mysql = require('mysql');
 const conn = mysql.createConnection({
-    host: '3.34.200.80',
+    host: '43.202.44.199',
     user: 'root',
     password: '1234',
-    port: '51935',
+    port: '57132',
     database: 'ManageSys',
 });
 
@@ -94,6 +94,27 @@ module.exports.setPost = (user_id, board_code, post_date, title, post_contents, 
             'INSERT INTO post(board_code, post_date, user_id, title, post_contents, file)\
              VALUES (?,?,?,?,?,?)',
             [board_code, post_date, user_id, title, post_contents, file],
+            function (err, rows) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            }
+        );
+    });
+};
+
+module.exports.updatePost = (post_code, post_date, title, post_contents, file) => {
+    return new Promise((resolve, reject) => {
+        conn.query(
+            'UPDATE post\
+            SET post_date = ?,\
+                title = ?,\
+                post_contents = ?,\
+                file = ?\
+            WHERE post_code = ?',
+            [post_date, title, post_contents, file ? file : null, post_code],
             function (err, rows) {
                 if (err) {
                     reject(err);

@@ -13,10 +13,10 @@ var boardRouter = require('./routes/boardRouter');
 var lectureRouter = require('./routes/lectureRouter');
 var mainRouter = require('./routes/index');
 const conn = mysql.createConnection({
-    host: '3.34.200.80',
+    host: '43.202.44.199',
     user: 'root',
     password: '1234',
-    port: '51935',
+    port: '57132',
     database: 'ManageSys',
 });
 
