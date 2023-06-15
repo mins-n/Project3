@@ -34,14 +34,14 @@ module.exports.getLecture = (year, semester, lecture_name, professor_name) => {
 module.exports.getLecture2 = (department, lecture_name) => {
     return new Promise((resolve, reject) => {
         conn.query(
-            'SELECT l.lecture_code, l.lecture_name, l.credit, u.name, l.seat, l.lecture_week1, l.lecture_time1, l.lecture_week2, l.lecture_time2, l.year, l.semester\
-            FROM lecture l\
-            JOIN user u ON l.professor_id = u.user_id\
-            JOIN department d ON l.department_code = d.department_code\
-            WHERE l.lecture_name LIKE ?\
-              AND d.department_name LIKE ?\
-              AND l.year = (SELECT MAX(year) FROM lecture)\
-              AND l.semester = (SELECT MAX(semester) FROM lecture WHERE year = (SELECT MAX(year) FROM lecture))',
+            'SELECT l.lecture_code, l.lecture_name, l.credit, u.name, l.seat, l.lecture_week1, l.lecture_time1, l.lecture_week2, l.lecture_time2\
+    FROM lecture l\
+    JOIN user u ON l.professor_id = u.user_id\
+    JOIN department d ON l.department_code = d.department_code\
+    WHERE l.lecture_name LIKE ?\
+      AND d.department_name LIKE ?\
+      AND l.year = 2023\
+      AND l.semester = 1',
             [lecture_name, department],
             function (err, rows) {
                 if (err) {
@@ -105,6 +105,29 @@ module.exports.deleteEnrolment = (user_id, lecture_code) => {
                             }
                         }
                     );
+                }
+            }
+        );
+    });
+};
+
+module.exports.enrolmentList = (user_id) => {
+    return new Promise((resolve, reject) => {
+        conn.query(
+            'SELECT l.lecture_code, l.lecture_name, l.lecture_class, l.lecture_week1, l.lecture_time1,\
+            l.lecture_week2, l.lecture_time2, u.name AS professor_name, l.credit\
+     FROM user_lecture ul\
+     JOIN lecture l ON ul.lecture_code = l.lecture_code\
+     JOIN user u ON l.professor_id = u.user_id\
+     WHERE ul.user_id = ?\
+       AND l.year = 2023\
+       AND l.semester = 1',
+              user_id,
+            function (err, rows) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
                 }
             }
         );

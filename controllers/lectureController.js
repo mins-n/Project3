@@ -30,11 +30,11 @@ exports.getLecture = (req, res)=>{
 exports.getLecture2 = (req, res)=>{
   let lecture_name = req.query.lecture_name;
   let department = req.query.department;
-
+  
   if(typeof lecture_name === "undefined")
     lecture_name = "";
   if(typeof department === "undefined") 
-  department = "";
+    department = "";
   lecture_name = "%" + lecture_name + "%";
   department = "%" + department + "%";
 
@@ -65,6 +65,18 @@ exports.deleteEnrolment = (req, res)=>{
   let lecture_code = req.body.lecture_code;
 
   lectureModel.deleteEnrolment(user_id, lecture_code)
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch((error) => {
+      res.status(400).send('Invalid credentials');
+    });
+}
+
+exports.enrolmentList = (req, res)=>{
+  let user_id = req.session.user.user_id;
+
+  lectureModel.enrolmentList(user_id)
     .then((result) => {
       res.status(200).send(result);
     })
