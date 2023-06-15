@@ -12,6 +12,8 @@ var loginRouter = require('./routes/loginRouter');
 var boardRouter = require('./routes/boardRouter');
 var lectureRouter = require('./routes/lectureRouter');
 var mainRouter = require('./routes/index');
+//var userRouter = require('./routes/userRouter');
+
 const conn = mysql.createConnection({
     host: '43.202.44.199',
     user: 'root',
@@ -60,6 +62,7 @@ app.use('/main', indexRouter);
 app.use('/login_form', loginRouter);
 app.use('/boards', boardRouter);
 app.use('/course_management', lectureRouter);
+//app.use('/user', userRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

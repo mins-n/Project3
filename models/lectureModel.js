@@ -79,3 +79,47 @@ module.exports.enrolment = (user_id, lecture_code) => {
         );
     });
 };
+
+
+module.exports.getEvaluatedLecture = (name, lecture_name) => {
+    return new Promise((resolve, reject) => {
+        conn.query(
+            'SELECT l.lecture_name, u.name, ul.evaluation_score, ul.evaluation, ul.evaluation_date\
+            FROM user_lecture ul\
+            JOIN lecture l ON ul.lecture_code = l.lecture_code\
+            JOIN user u ON l.professor_id = u.user_id\
+            WHERE l.lecture_name LIKE ?\
+              AND u.name LIKE ?\
+              AND (ul.evaluation IS NOT NULL OR ul.evaluation_score IS NOT NULL);',
+            [lecture_name, name],
+            function (err, rows) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            }
+        );
+    });
+};
+
+module.exports.getUserLecture = (user_id) => {
+    return new Promise((resolve, reject) => {
+        conn.query(
+            'SELECT l.lecture_name, u.name AS professor_name,ul.evaluation,\
+             ul.evaluation_score, ul.evaluation_date, l.year, l.semester\
+            FROM user_lecture ul\
+            JOIN lecture l ON ul.lecture_code = l.lecture_code\
+            JOIN user u ON l.professor_id = u.user_id\
+            WHERE ul.user_id = ?',
+            user_id,
+            function (err, rows) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            }
+        );
+    });
+};

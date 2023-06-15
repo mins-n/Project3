@@ -125,3 +125,69 @@ module.exports.updatePost = (post_code, post_date, title, post_contents, file) =
         );
     });
 };
+
+module.exports.deletePost = (post_code) => {
+    return new Promise((resolve, reject) => {
+        conn.query(
+            'DELETE FROM post WHERE post_code = ?',post_code,
+            function (err, rows) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            }
+        );
+    });
+};
+
+module.exports.setComment = (user_id, post_code, comment_contents, comment_date) => {
+    return new Promise((resolve, reject) => {
+        conn.query(
+            'INSERT INTO comment(post_code, comment_date, user_id, comment_contents)\
+             VALUES (?,?,?,?)',
+            [post_code, comment_date, user_id, comment_contents],
+            function (err, rows) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            }
+        );
+    });
+};
+
+module.exports.updateComment = (comment_code, comment_contents, comment_date) => {
+    return new Promise((resolve, reject) => {
+        conn.query(
+            'UPDATE comment\
+            SET comment_date = ?,\
+                comment_contents = ?\
+            WHERE comment_code = ?',
+            [comment_date, comment_contents, comment_code],
+            function (err, rows) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            }
+        );
+    });
+};
+
+module.exports.deleteComment = (comment_code) => {
+    return new Promise((resolve, reject) => {
+        conn.query(
+            'DELETE FROM comment WHERE comment_code = ?',comment_code,
+            function (err, rows) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            }
+        );
+    });
+};

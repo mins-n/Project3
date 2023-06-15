@@ -83,3 +83,62 @@ exports.updatePost = (req, res)=>{
       res.status(400).send('Invalid credentials');
     });
 }
+
+exports.deletePost = (req, res)=>{
+  let post_code = req.params.post_code;
+  console.log(post_code);
+  
+  boardModel.deletePost(post_code)
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch((error) => {
+      res.status(400).send('Invalid credentials');
+    });
+}
+
+exports.setComment = (req, res)=>{
+  let user_id = req.session.user.user_id;
+  let post_code = req.params.board_code;
+  let comment_contents = req.params.post_contents;
+  let comment_date = moment().format("YYYY-MM-DD HH:mm:ss");
+
+  console.log(user_id, post_code, comment_contents, comment_date);
+  
+  boardModel.setComment(user_id, post_code, comment_contents, comment_date)
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch((error) => {
+      res.status(400).send('Invalid credentials');
+    });
+}
+
+exports.updateComment = (req, res)=>{
+  let comment_code = req.params.comment_code;
+  let comment_contents = req.params.comment_contents;
+  let comment_date = moment().format("YYYY-MM-DD HH:mm:ss");
+
+  console.log(comment_code, comment_contents, comment_date);
+  
+  boardModel.updateComment(comment_code, comment_contents, comment_date)
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch((error) => {
+      res.status(400).send('Invalid credentials');
+    });
+}
+
+exports.deleteComment = (req, res)=>{
+  let comment_code = req.params.comment_code;
+  console.log(comment_code);
+  
+  boardModel.deleteComment(comment_code)
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch((error) => {
+      res.status(400).send('Invalid credentials');
+    });
+}

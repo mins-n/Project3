@@ -59,3 +59,34 @@ exports.enrolment = (req, res)=>{
     });
 }
 
+exports.getEvaluatedLecture = (req, res)=>{
+  let lecture_name = req.query.lecture_name;
+  let name = req.query.name;
+
+  if(typeof lecture_name === "undefined")
+    lecture_name = "";
+  if(typeof name === "undefined") 
+    name = "";
+  lecture_name = "%" + lecture_name + "%";
+  name = "%" + name + "%";
+
+  lectureModel.getEvaluatedLecture(name, lecture_name)
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch((error) => {
+      res.status(400).send('Invalid credentials');
+    });
+}
+
+exports.getUserLecture = (req, res)=>{
+  let user_id = req.session.user.user_id;
+  
+  lectureModel.getUserLecture(user_id)
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch((error) => {
+      res.status(400).send('Invalid credentials');
+    });
+}
