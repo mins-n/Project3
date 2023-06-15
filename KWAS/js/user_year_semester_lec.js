@@ -83,6 +83,7 @@ function user_lec_boards(year, semester, lecture_code) {
     .then(function (response) {
       data = response.data.list;
       board_list = [];
+      post_codes = [];
       i = 1;
       data.forEach(function (item) {
         var boardData = [
@@ -92,6 +93,7 @@ function user_lec_boards(year, semester, lecture_code) {
           item.post_date.substr(0, 10),
           item.view_count,
         ];
+        post_codes.push(item.post_code);
         board_list.push(boardData);
         i++;
       });
@@ -99,13 +101,13 @@ function user_lec_boards(year, semester, lecture_code) {
         alert("해당 과목의 과제가 없습니다.");
         basic_table();
       } else {
-        lec_table(board_list);
+        lec_table(board_list, post_codes);
       }
     })
     .catch(function (error) {});
 }
 
-function lec_table(data) {
+function lec_table(data, post_codes) {
   var itemsPerPage = 10; // 한 페이지에 표시할 항목 수
   var currentPage = 1; // 현재 페이지
   var totalPages = Math.ceil(data.length / itemsPerPage); // 전체 페이지 수
@@ -148,13 +150,18 @@ function lec_table(data) {
 
       row.forEach(function (cellData, index) {
         var cell = document.createElement("td");
-        cell.appendChild(document.createTextNode(cellData));
-
-        // Style the first column as "No."
         if (index === 0) {
           cell.style.width = "5%";
         }
-
+        // /boards/post/:post_code 링크로 연결
+        if (index === 1) {
+          var a = document.createElement("a");
+          a.href = "/boards/post/" + post_codes[index];
+          a.appendChild(document.createTextNode(cellData));
+          cell.appendChild(a);
+        } else {
+          cell.appendChild(document.createTextNode(cellData));
+        }
         rowElement.appendChild(cell);
         tbody.appendChild(rowElement);
       });
