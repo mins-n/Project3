@@ -89,7 +89,7 @@ function user_enrolment_table(data) {
     enrolButton.className = "btn btn-primary";
     enrolButton.appendChild(document.createTextNode("수강취소"));
     enrolButton.addEventListener("click", function () {
-      post_enrolment(row[0]); // Pass the lecture code to the post_enrolment function
+      post_delete_enrolment(row[0]); // Pass the lecture code to the post_enrolment function
     });
     enrolButtonCell.appendChild(enrolButton);
     rowElement.appendChild(enrolButtonCell);
