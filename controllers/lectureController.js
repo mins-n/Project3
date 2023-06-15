@@ -54,7 +54,7 @@ exports.getLectureSeat = (req, res)=>{
   lecture_name = "%" + lecture_name + "%";
   department = "%" + department + "%";
 
-  lectureModel.getLecture2(department, lecture_name)
+  lectureModel.getLectureSeat(department, lecture_name)
     .then((result) => {
       res.status(200).send(result);
     })

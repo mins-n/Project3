@@ -80,15 +80,18 @@ exports.getScore = async (req, res, next)=>{
 exports.getScoreAvg = async (req, res, next)=>{
     let user_id = req.session.user.user_id;
     let result = [];
-    let semesterList = await boardModel.getSemester(user_id); //유저가 듣는 강의에 해당하는 년도, 학기를 내림차순으로 불러옴
+    let semesterList = await boardModel.getSemester(user_id); 
     
     for (let i = 0; i < semesterList.length; i++) {
         let year = semesterList[i].year.toString();
         let semester = semesterList[i].semester.toString();
-        console.log(user_id, year, semester);
-        let averageGrade = await userModel.getGrade(user_id, year, semester);
-        console.log(averageGrade);
-        result.push({ year: year, semester: semester, averageGrade: averageGrade[0].average_grade });
+
+        let allAvg = await userModel.getScoreAvg(user_id, year, semester);
+        let majorAvg = await userModel.getMajorScoreAvg(user_id, year, semester);
+        let geAvg = await userModel.getGeScoreAvg(user_id, year, semester);
+
+        result.push({ year: year, semester: semester, all: allAvg[0].average_grade,
+        major : majorAvg[0].average_grade, ge : geAvg[0].average_grade });
     }
     
     console.log(result);

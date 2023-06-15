@@ -86,7 +86,7 @@ module.exports.getScore = (user_id, year, semester) => {
     });
 };
 
-module.exports.getGrade = (user_id, year, semester) => {
+module.exports.getScoreAvg = (user_id, year, semester) => {
     return new Promise((resolve, reject) => {
         conn.query(
             'SELECT ROUND(AVG(ul.grade), 2) AS average_grade\
@@ -95,6 +95,46 @@ module.exports.getGrade = (user_id, year, semester) => {
             WHERE ul.user_id = ? AND l.year = ? AND l.semester = ?\
             ',
             [user_id, year, semester],
+            function (err, rows) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            }
+        );
+    });
+};
+
+module.exports.getMajorScoreAvg = (user_id, year, semester) => {
+    return new Promise((resolve, reject) => {
+        conn.query(
+            'SELECT ROUND(AVG(ul.grade), 2) AS average_grade\
+            FROM user_lecture ul\
+            JOIN lecture l ON ul.lecture_code = l.lecture_code\
+            WHERE ul.user_id = ? AND l.year = ? AND l.semester = ?\
+            AND l.lecture_class LIKE ?',
+            [user_id, year, semester, '전%'],
+            function (err, rows) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            }
+        );
+    });
+};
+
+module.exports.getGeScoreAvg = (user_id, year, semester) => {
+    return new Promise((resolve, reject) => {
+        conn.query(
+            'SELECT ROUND(AVG(ul.grade), 2) AS average_grade\
+            FROM user_lecture ul\
+            JOIN lecture l ON ul.lecture_code = l.lecture_code\
+            WHERE ul.user_id = ? AND l.year = ? AND l.semester = ?\
+            AND l.lecture_class LIKE ?',
+            [user_id, year, semester, '교%'],
             function (err, rows) {
                 if (err) {
                     reject(err);
