@@ -28,21 +28,8 @@ exports.getLecture = (req, res)=>{
       });
 }
 
-exports.getPlan = (req, res)=>{
-  let lecture_code = req.query.lecture_code;
-  lecture_code = 'L01';
-  lectureModel.getPlan(lecture_code)
-    .then((result) => {
-      res.status(200).send(result);
-    })
-    .catch((error) => {
-      res.status(400).send('Invalid credentials');
-    });
-}
-
 exports.getPlan = async (req, res, next)=>{
   let lecture_code = req.query.lecture_code;
-  lecture_code = 'L01';
 
   let planList = await lectureModel.getPlan(lecture_code);
   let lectureInfo = await lectureModel.getLectureInfo(lecture_code);
