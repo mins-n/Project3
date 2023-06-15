@@ -106,12 +106,13 @@ module.exports.getEvaluatedLecture = (name, lecture_name) => {
 module.exports.getUserLecture = (user_id) => {
     return new Promise((resolve, reject) => {
         conn.query(
-            'SELECT l.lecture_code, l.lecture_name, u.name AS professor_name,ul.evaluation,\
+            'SELECT l.lecture_code,l.lecture_name, u.name AS professor_name,ul.evaluation,\
              ul.evaluation_score, l.year, l.semester\
             FROM user_lecture ul\
             JOIN lecture l ON ul.lecture_code = l.lecture_code\
             JOIN user u ON l.professor_id = u.user_id\
-            WHERE ul.user_id = ?',
+            WHERE ul.user_id = ?\
+            AND (ul.evaluation IS NULL AND ul.evaluation_score IS NULL)',
             user_id,
             function (err, rows) {
                 if (err) {
