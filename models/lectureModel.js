@@ -85,7 +85,7 @@ module.exports.getEvaluatedLecture = (name, lecture_name) => {
     return new Promise((resolve, reject) => {
         conn.query(
             'SELECT l.lecture_name, l.year, l.semester, u.name,\
-             ul.evaluation_score, ul.evaluation, ul.evaluation_date\
+             ul.evaluation_score, ul.evaluation\
             FROM user_lecture ul\
             JOIN lecture l ON ul.lecture_code = l.lecture_code\
             JOIN user u ON l.professor_id = u.user_id\
