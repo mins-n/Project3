@@ -49,6 +49,14 @@
       defer
     ></script>
     <script src="../js/plan.js" defer></script>
+
+    <style>
+      #planTable th:first-child,
+      #planTable td:first-child {
+        width: 1px; /* 원하는 너비로 조정하세요 */
+      }
+    </style>
+    
   </head>
   <body class="sb-nav-fixed">
     <header class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -97,18 +105,26 @@
               <div class="card-header">강의계획서 조회</div>
               <div class="card-body">
                 <h1>Lecture Information</h1>
-                <div id="lectureInfo"></div>
-              
-                <h2>Weekly Plan</h2>
-                <table id="planTable">
-                  <thead>
-                    <tr>
-                      <th>Week</th>
-                      <th>Plan</th>
-                    </tr>
-                  </thead>
-                  <tbody></tbody>
-                </table>
+<table id="lectureInfoTable" class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Attribute</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<h2>Weekly Plan</h2>
+<table id="planTable" class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Week</th>
+      <th>Plan</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
             </div>
             </div>
         </main>
