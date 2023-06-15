@@ -128,12 +128,9 @@ module.exports.getUserLecture = (user_id) => {
 module.exports.evaluate = (user_id, lecture_code, evaluation, evaluation_score) => {
     return new Promise((resolve, reject) => {
         conn.query(
-            'UPDATE user_lecture\
-            SET evaluation = ?,\
-                evaluation_score = ?\
-            WHERE lecture_code = ?\
-            AND user_id = ?',
-            [evaluation, evaluation_score, lecture_code, user_id],
+            'INSERT INTO (user_id, lecture_code, evaluation, evaluation_score)\
+            VALUES (?,?,?,?)',
+            [user_id, lecture_code, evaluation, evaluation_score],
             function (err, rows) {
                 if (err) {
                     reject(err);
