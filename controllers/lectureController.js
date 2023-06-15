@@ -137,7 +137,8 @@ exports.evaluate = (req, res)=>{
 
 
 exports.schedule = async (req, res, next)=>{
-  let user_id = req.session.user.user_id;
+  
+  let user_id = req.session.user ? req.session.user.user_id : null;
   let year = req.query.year;
   let semester = req.query.semester;
 

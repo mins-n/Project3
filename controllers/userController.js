@@ -96,11 +96,12 @@ exports.getLecture = (req, res)=>{
       });
 }
 
-/*
+
 exports.getStudent = (req, res)=>{
     let user_id = req.session.user.user_id;
-    
-    userModel.getStudent(user_id)
+    let lecture_code = req.params.lecture_code;
+
+    userModel.getStudent(user_id, lecture_code)
       .then((result) => {
         res.status(200).send(result);
       })
@@ -120,4 +121,3 @@ exports.setScore = (req, res)=>{
         res.status(400).send('Invalid credentials');
       });
 }
-*/
