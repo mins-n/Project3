@@ -41,11 +41,13 @@ exports.login = (req, res) => {
   };
 
 exports.findId = (req, res)=>{
-    const name = req.body.inputName;
-    const phone_num = req.body.inputPhone;
+    const name = req.query.name;
+    const phone_num = req.query.telephone;
+    console.log(name, phone_num)
     loginModel.findId(name, phone_num)
       .then((result) => {
-        res.status(200).send('Find successful');
+        console.log(result);
+        res.status(200).send(result);
       })
       .catch((error) => {
         // Authentication failed
@@ -53,12 +55,12 @@ exports.findId = (req, res)=>{
       });
 }
 exports.findPw = (req, res)=>{
-  const user_id = req.body.inputName;
-    const name = req.body.inputName;
-    const phone_num = req.body.inputPhone;
+    const user_id = req.query.school_number;
+    const name = req.query.name;
+    const phone_num = req.query.telephone;
     loginModel.findPw(user_id, name, phone_num)
       .then((result) => {
-        res.status(200).send('Find successful');
+        res.status(200).send(result);
       })
       .catch((error) => {
         // Authentication failed
