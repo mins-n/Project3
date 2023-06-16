@@ -1,43 +1,13 @@
-axios
-  .get("/boards/boardList", {
-    params: {
-      board_name: "자유게시판 ",
-    },
-  })
-  .then(function (response) {
-    data = response.data.list;
-    board_list = [];
-    post_codes = [];
-    i = 1;
-    data.forEach(function (item) {
-      var boardData = [
-        i,
-        item.title,
-        item.post_date.substr(0, 10),
-        item.view_count,
-      ];
-      post_codes.push(item.post_code);
-      board_list.push(boardData);
-      i++;
-    });
-    if (board_list.length == 0) {
-      alert("게시글이 없습니다.");
-      basic_table();
-    } else {
-      lec_table(board_list, post_codes);
-    }
-  })
-  .catch(function (error) {});
+show_free_boards();
 
-function free_boards() {
+function show_free_boards() {
   axios
-    .get("/boards/boardList", {
-      params: {
-        board_name: "자유게시판 ",
-      },
+    .get("/boards/community", {
+      params: {},
     })
     .then(function (response) {
-      data = response.data.list;
+      data = response.data;
+      console.log(data);
       board_list = [];
       post_codes = [];
       i = 1;
@@ -45,7 +15,6 @@ function free_boards() {
         var boardData = [
           i,
           item.title,
-          "",
           item.post_date.substr(0, 10),
           item.view_count,
         ];
@@ -54,7 +23,7 @@ function free_boards() {
         i++;
       });
       if (board_list.length == 0) {
-        alert("해당 과목의 공지가 없습니다.");
+        alert("해당 게시판에 게시글이 없습니다.");
         basic_table();
       } else {
         lec_table(board_list, post_codes);
@@ -126,7 +95,12 @@ function lec_table(data, post_codes) {
 
     // Add the table to the document body or a specific container
     var lec_table_container = document.getElementById("lec_table_container");
-    lec_table_container.innerHTML = ""; // 기존 내용을 초기화
+    if (!lec_table_container) {
+      lec_table_container = document.createElement("div");
+      lec_table_container.id = "lec_table_container";
+      document.body.appendChild(lec_table_container);
+    }
+    lec_table_container.innerHTML = ""; // Clear the container's contents
     lec_table_container.appendChild(table);
 
     // 페이지 네이션 버튼 생성
@@ -226,6 +200,109 @@ function basic_table() {
 
   // Add the table to the document body or a specific container
   var lec_table_container = document.getElementById("lec_table_container");
-  lec_table_container.innerHTML = ""; // 기존 내용을 초기화
+  if (!lec_table_container) {
+    lec_table_container = document.createElement("div");
+    lec_table_container.id = "lec_table_container";
+    document.body.appendChild(lec_table_container);
+  }
+  lec_table_container.innerHTML = ""; // Clear the container's contents
   lec_table_container.appendChild(table);
 }
+
+function openWritePopup() {
+  document.getElementById("writePopup").style.display = "block";
+}
+
+function closeWritePopup() {
+  var writePopup = document.getElementById("writePopup");
+  writePopup.style.display = "none";
+}
+
+window.addEventListener("DOMContentLoaded", function () {
+  var queryString = window.location.search;
+  var urlParams = new URLSearchParams(queryString);
+  var year = urlParams.get("year");
+  var semester = urlParams.get("semester");
+  var lec_name = urlParams.get("lec_name");
+  var lec_code = urlParams.get("lec_code");
+
+  var ratingWriteTable = document.getElementById("rating_write_table");
+
+  // 게시글 작성 폼 생성
+  var form = document.createElement("form");
+  form.classList.add("p-4", "bg-light");
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    // 작성된 게시글 내용을 처리하는 함수 호출
+    handlePostFormSubmit();
+  });
+
+  // 제목 입력 필드
+  var titleInput = document.createElement("input");
+  titleInput.type = "text";
+  titleInput.placeholder = "제목";
+  titleInput.classList.add("form-control", "mb-3");
+  form.appendChild(titleInput);
+
+  // 내용 입력 필드
+  var contentTextarea = document.createElement("textarea");
+  contentTextarea.placeholder = "내용";
+  contentTextarea.classList.add("form-control", "mb-3");
+  form.appendChild(contentTextarea);
+
+  // 파일 입력 필드
+  var fileInput = document.createElement("input");
+  fileInput.type = "file";
+  fileInput.classList.add("form-control", "mb-3");
+  form.appendChild(fileInput);
+
+  // 작성 버튼
+  var submitButton = document.createElement("button");
+  submitButton.type = "submit";
+  submitButton.textContent = "작성";
+  submitButton.classList.add("btn", "btn-primary");
+  form.appendChild(submitButton);
+
+  ratingWriteTable.appendChild(form);
+
+  function handlePostFormSubmit() {
+    var title = titleInput.value;
+    var content = contentTextarea.value;
+    var file = fileInput.files[0];
+
+    console.log("제목:", title);
+    console.log("내용:", content);
+    console.log("파일:", file);
+
+    var formData = new FormData();
+    formData.append("board_name", "과제게시판");
+    formData.append("lecture_code", lec_code);
+    formData.append("title", title);
+    formData.append("post_contents", content);
+    formData.append("file", file);
+
+    axios
+      .post("/boards/community", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    // 게시글 작성 후 팝업안에 값 초기화
+    titleInput.value = "";
+    contentTextarea.value = "";
+    fileInput.value = "";
+
+    closeWritePopup();
+
+    show_free_boards();
+  }
+});
