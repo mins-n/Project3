@@ -277,14 +277,12 @@ window.addEventListener("DOMContentLoaded", function () {
     console.log("파일:", file);
 
     var formData = new FormData();
-    formData.append("board_name", "과제게시판");
-    formData.append("lecture_code", lec_code);
     formData.append("title", title);
     formData.append("post_contents", content);
     formData.append("file", file);
 
     axios
-      .post("/boards/community", formData, {
+      .post("/boards/community/write", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
