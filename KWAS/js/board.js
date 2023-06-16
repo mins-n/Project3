@@ -246,7 +246,7 @@ window.addEventListener("DOMContentLoaded", function () {
     console.log("파일:", file);
 
     axios
-      .post("/boards/post/write", {
+      .post("/boards/post/update", {
         post_code: post_value,
         title: title,
         post_contents: content,
