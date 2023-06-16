@@ -1,5 +1,3 @@
-const { post } = require("../../routes");
-
 var queryString = window.location.search;
 var urlParams = new URLSearchParams(queryString);
 var year = urlParams.get("year");
@@ -21,7 +19,7 @@ function user_lec_boards(year, semester, lecture_code) {
       params: {
         year: year,
         semester: semester,
-        board_name: "공지게시판",
+        board_name: "공지사항",
         lecture_code: lecture_code,
       },
     })
@@ -291,7 +289,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
     axios
       .post("/boards/post/write", {
-        board_name: "과제게시판",
+        board_name: "공지사항",
         lecture_code: lec_code,
         title: title,
         post_contents: content,
