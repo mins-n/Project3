@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>학사정보관리시스템</title>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <link href="../css/styles.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body class="sb-nav-fixed">
+    <header class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <!-- First Section -->
+        <div class="navbar-brand">
+            <a class="navbar-brand ps-3" href="../main/index.html">KWAS</a>
+        </div>
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Second Section (to be loaded with a script) -->
+        <div id="dynamicHeader" class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0"></div>
+    </header>
+    <script src="../js/component/header.js" defer></script>
+
+
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <script src="../js/component/nav.js" defer></script>
+            </nav>
+        </div>
+
+        <!-- index contents ::: 여기에 템플릿 넣으세요 -->
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4" style="width: 100%; margin: 0 auto;">
+                    <div class="align-items-center justify-content-center text-center">
+                        <a class="navbar-brand" href="../main/index.html"><img src="../img/kwas_logo.png"
+                                alt="kwas_logo" width="15%" height="20%" /></a>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            공지게시판
+                        </div>
+                        <div class="card-body">
+                            <div class="container" style="width: 100%; margin: 0 auto;">
+                                <table id="dataTable" width="100%" cellspacing="0">
+                                    <tbody>
+                                        <tr class="text-center">
+                                            <h4 class="text-center" id = "lec_txt" ></h4>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="card-body">
+                                <div class="container" style="width: 100%; margin: 0 auto;" id = "lec_table_container">
+                                </div>
+                                <!-- 게시글 작성 버튼 클릭시 이동-->
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" style="float: right; width: 10%;"
+                                    data-bs-target="#exampleModal" onclick="openWritePopup()">
+                                    글쓰기
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <div id="writePopup" class="popup">
+        <div class="popup-content">
+          <div class="popup-header">
+            <span class="close" onclick="closeWritePopup()">&times;</span>
+          </div>
+          <div class="popup-body">
+            <div
+              id="rating_write_table"
+              class="container text-center justify-content-center"
+              style="width: 100%; height: 100%; margin: 0 auto"
+            ></div>
+            <script src="../js/pro_announcement.js" defer></script>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="py-4 bg-light mt-auto">
+       
+        <script>
+            const footer = document.querySelector('footer');
+
+            fetch('../component/footer.html')
+                .then(res => res.text())
+                .then(data => footer.innerHTML = data);
+        </script>
+    </footer>
+    </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+    <script src="../js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="../assets/demo/chart-area-demo.js"></script>
+    <script src="../assets/demo/chart-bar-demo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+        crossorigin="anonymous"></script>
+    <script src="../js/datatables-simple-demo.js"></script>
+</body>
+
+</html>
