@@ -1,0 +1,196 @@
+@@ -0,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>학사정보관리시스템</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
+      rel="stylesheet"
+    />
+    <link href="../css/styles.css" rel="stylesheet" />
+    <script
+      src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <style>
+      .scholar_table {
+        border-collapse: collapse;
+      }
+
+      .scholar_table th,
+      .scholar_table td {
+        border: 1px solid black;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      th,
+      td {
+        text-align: left;
+        padding: 8px;
+        border: 1px solid #ddd;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+    </style>
+    <script
+      src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"
+      defer
+    ></script>
+  </head>
+
+  <body class="sb-nav-fixed">
+    <header class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+      <!-- First Section -->
+      <div class="navbar-brand">
+        <a class="navbar-brand ps-3" href="../main/index.html">KWAS</a>
+      </div>
+      <button
+        class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
+        id="sidebarToggle"
+        href="#!"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Second Section (to be loaded with a script) -->
+      <div
+        id="dynamicHeader"
+        class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0"
+      ></div>
+    </header>
+    <script src="../js/component/header.js" defer></script>
+
+    <div id="layoutSidenav">
+      <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+          <script src="../js/component/nav.js" defer></script>
+        </nav>
+      </div>
+
+      <!-- index contents ::: 여기에 템플릿 넣으세요 -->
+      <div id="layoutSidenav_content">
+        <main>
+          <div class="container-fluid px -4">
+            <div class="align-items-center justify-content-center text-center">
+              <a class="navbar-brand" href="../main/index.html"
+                ><img
+                  src="../img/kwas_logo.png"
+                  alt="kwas_logo"
+                  width="15%"
+                  height="20%"
+              /></a>
+            </div>
+
+            <div class="card mb-4">
+              <div class="card-header">강의 목록</div>
+                <div class="container">
+                    <table>
+                        <tr>
+                          <th>학정 코드</th>
+                          <th>강의명</th>
+                          <th>강의 분류</th>
+                          <th>강의 시간</th>
+                          <th>학기</th>
+                        </tr>
+                        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+      <script>
+        axios.get("/user/professor/lecture")
+  .then(function (response) {
+    var lectures = response.data;
+
+    var table = document.querySelector("table");
+
+    lectures.forEach(function (lecture) {
+      var row = table.insertRow();
+
+      var codeCell = row.insertCell();
+      var codeLink = document.createElement("a");
+      codeLink.href = "/study/listening_student.html?lecture_code=" + lecture.lecture_code;
+      codeLink.textContent = lecture.lecture_code;
+      codeCell.appendChild(codeLink);
+
+      var nameCell = row.insertCell();
+      nameCell.innerHTML = lecture.lecture_name;
+
+      var classCell = row.insertCell();
+      classCell.innerHTML = lecture.lecture_class;
+
+      var timeCell = row.insertCell();
+      var lectureTime = "";
+
+      if (lecture.lecture_week1 && lecture.lecture_time1) {
+        lectureTime += weekdays[lecture.lecture_week1 - 1] + lecture.lecture_time1;
+      }
+
+      if (lecture.lecture_week2 && lecture.lecture_time2) {
+        lectureTime += " / " + weekdays[lecture.lecture_week2 - 1] + lecture.lecture_time2;
+      }
+
+      if (lectureTime === "") {
+        lectureTime = "일정 미정";
+      }
+
+      timeCell.innerHTML = lectureTime;
+
+      var semesterCell = row.insertCell();
+      var semester = lecture.year + "년 " + lecture.semester + "학기";
+      semesterCell.innerHTML = semester;
+    });
+  })
+  .catch(function (error) {
+    console.error(error);
+  });
+
+
+        const weekdays = ["월", "화", "수", "목", "금", "토", "일"];
+
+      </script>
+                      </table>
+              </div>
+            </div>
+          </div>
+        </main>
+        <footer class="py-4 bg-light mt-auto">
+          <script>
+            const footer = document.querySelector("footer");
+
+            fetch("../component/footer.html")
+              .then((res) => res.text())
+              .then((data) => (footer.innerHTML = data));
+          </script>
+        </footer>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../js/scripts.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="assets/demo/chart-area-demo.js"></script>
+    <script src="assets/demo/chart-bar-demo.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../js/datatables-simple-demo.js"></script>
+  </body>
+</html>
