@@ -8,7 +8,7 @@ var lec_code = urlParams.get("lec_code");
 const lec_txt = document.getElementById("lec_txt");
 
 lec_txt.innerHTML =
-  year + "년 " + semester + "학기 " + lec_name + " 과제게시판";
+  year + "년 " + semester + "학기 " + lec_name + " 공지게시판";
 
 user_lec_boards(year, semester, lec_code);
 
@@ -19,7 +19,7 @@ function user_lec_boards(year, semester, lecture_code) {
       params: {
         year: year,
         semester: semester,
-        board_name: "과제게시판",
+        board_name: "공지게시판",
         lecture_code: lecture_code,
       },
     })
@@ -287,7 +287,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
     axios
       .post("post/write", {
-        board_name: "과제게시판",
+        board_name: "공지게시판",
         lecture_code: lec_code,
         title: title,
         post_contents: content,
