@@ -22,7 +22,7 @@ axios
 
 function loadTable(professor_name,lecture_name) {
     axios
-        .get("/course_management/syllabus_inquiry", {
+        .get("/course_management/evaluation", {
             params: {
                 professor_name: professor_name,
                 lecture_name: lecture_name,
@@ -34,11 +34,11 @@ function loadTable(professor_name,lecture_name) {
 
             data.forEach(function (item) {
                 var lectureData = [
-                    item.lecture_name,
-                    item.name,
-                    item.credit.toString(),
-                    item.evaluation_score,
-                    item.evaluation,
+                  item.lecture_name,
+                  item.name,
+                  item.year + "년 " + item.semester + "학기",
+                  item.evaluation_score,
+                  item.evaluation,
                 ];
                 processedData.push(lectureData);
             });

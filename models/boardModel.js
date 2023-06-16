@@ -158,12 +158,15 @@ module.exports.getComment = (post_code) => {
 };
 
 
-module.exports.setPost = (user_id, board_code, post_date, title, post_contents, file) => {
+module.exports.setPost = (user_id, board_name, lecture_code, post_date, title, post_contents, file) => {
     return new Promise((resolve, reject) => {
         conn.query(
             'INSERT INTO post(board_code, post_date, user_id, title, post_contents, file)\
-             VALUES (?,?,?,?,?,?)',
-            [board_code, post_date, user_id, title, post_contents, file ? file : null],
+            SELECT b.board_code, ?, ?, ?, ?, ?\
+            FROM board AS b\
+            WHERE b.board_name = ?\
+              AND b.lecture_code = ?'
+            [post_date, user_id, title, post_contents,file ? file : null, board_name, lecture_code],
             function (err, rows) {
                 if (err) {
                     reject(err);

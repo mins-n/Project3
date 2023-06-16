@@ -129,7 +129,7 @@ exports.getEvaluatedLecture = (req, res)=>{
     name = "";
   lecture_name = "%" + lecture_name + "%";
   name = "%" + name + "%";
-  
+  console.log(name, lecture_name);
   lectureModel.getEvaluatedLecture(name, lecture_name)
     .then((result) => {
       res.status(200).send(result);

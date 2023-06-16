@@ -130,15 +130,16 @@ exports.setPost = (req, res)=>{
     res.status(400).send("세션이 없습니다.");
     return;
   }
-  let board_code = req.body.board_code;
+  let board_name = req.body.board_name;
+  let lecture_code = req.body.lecture_code;
   let title = req.body.title;
   let post_contents = req.body.post_contents;
   let file = req.body.file;
   let post_date = moment().format("YYYY-MM-DD HH:mm:ss");
 
-  console.log(user_id, board_code, post_date, title, post_contents, file);
+  console.log(user_id, board_name, lecture_code, post_date, title, post_contents, file);
   
-  boardModel.setPost(user_id, board_code, post_date, title, post_contents, file)
+  boardModel.setPost(user_id, board_name, lecture_code, post_date, title, post_contents, file)
     .then((result) => {
       res.status(200).send(result);
     })
