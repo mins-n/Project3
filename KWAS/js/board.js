@@ -1,7 +1,21 @@
+var queryString = window.location.search;
+var urlParams = new URLSearchParams(queryString);
+var postValue = urlParams.get('post_value');
+console.log(postValue);
+url = "/boards/post/" + postValue;
+axios
+  .get(url, {})
+  .then(function (response) {
+    let post_data = response.data.post;
+    let comment_data = response.data.comment;
+    showPost(post_data);
+    
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 
-showPost();
-function showPost() {
-var data = [{"board_code":3,"post_code":15,"post_date":"2023-06-15T15:00:00.000Z","user_id":"prof1414","title":"임시 제목","post_contents":"임시 제목","view_count":42,"file":null}];
+function showPost(data) {
 var postContainer = document.getElementById("post");
 postContainer.innerHTML = "";
 
@@ -37,19 +51,33 @@ postContainer.innerHTML += post;
 }
 }
 
-function addComment() {
-    var comment = document.getElementById("comment").value;
-    var commentsContainer = document.getElementById("comments");
+function addComment(data) {
+    data =[{"post_code":2,"comment_code":1,"comment_date":"2023-06-14T15:00:00.000Z","user_id":"2018202091","comment_contents":"넵"},{"post_code":2,"comment_code":2,"comment_date":"2023-06-05T15:00:00.000Z","user_id":"shine8917","comment_contents":"항상 감사합니다"},{"post_code":2,"comment_code":3,"comment_date":"2023-06-05T15:00:00.000Z","user_id":"akashine","comment_contents":"F는 좀;;;"},{"post_code":2,"comment_code":4,"comment_date":"2023-06-06T15:00:00.000Z","user_id":"shine8917","comment_contents":"아 ㅋㅋ"}]
+    var commentsContainer = document.getElementById("comments_container");
+    commentsContainer.innerHTML = "";
 
-    var newComment = "<div class='card'>" +
-                     "<div class='card-body'>" +
-                     "<p class='card-text'>" + comment + "</p>" +
-                     "</div>" +
-                     "</div>";
-    commentsContainer.innerHTML += newComment;
+    for (var i = 0; i < data.length; i++) {
+        var author = data[i].user_id;
+        var date = formatDate(data[i].comment_date);
+        var time = formatTime(data[i].comment_date);
+        var content = data[i].comment_contents;
 
-    // Clear the input field after adding a comment
-    document.getElementById("comment").value = "";
+        var comment = `
+        <div class="comment">
+            <div class="comment-info">
+                <p class="author-date">
+                    <span class="author">${author}</span>
+                    <span class="date">${date}</span>
+                    <span class="time">${time}</span>
+                </p>
+            </div>
+            <div class="comment-content">
+                <p>${content}</p>
+            </div>
+        </div>
+        `;
+        commentsContainer.innerHTML += comment;
+    }
 }
 
 function formatDate(dateStr) {
