@@ -30,14 +30,14 @@ function user_proffesor(lectureData) {
   var headerRow = document.createElement("tr");
 
   headerRow.innerHTML = `
-                        <th style="width: 13%">학과</th>
-                        <th style="width: 7%">이름</th>
-                        <th style="width: 7%">직위</th>
-                        <th style="width: 10%">연구실</th>
-                        <th style="width: 10%">전공분야</th>
-                        <th style="width: 10%">연락처</th>
-                        <th style="width: 10%">이메일</th>
-                        <th style="width: 10%">홈페이지</th>
+  <th style="width: 15%">학과</th>
+  <th style="width: 7%">이름</th>
+  <th style="width: 7%">직위</th>
+  <th style="width: 15%">연구실</th>
+  <th style="width: 15%">전공분야</th>
+  <th style="width: 10%">연락처</th>
+  <th style="width: 15%">이메일</th>
+  <th style="width: 15%">홈페이지</th>
                       `;
 
   thead.appendChild(headerRow);
@@ -55,7 +55,7 @@ function user_proffesor(lectureData) {
       // Create a link for the last column
       var link = document.createElement("a");
       link.href = cellData;
-      link.appendChild(document.createTextNode(cellData));
+      link.textContent = shortenURL(cellData); 
       cell.appendChild(link);
     } else {
       cell.appendChild(document.createTextNode(cellData));
@@ -76,4 +76,15 @@ function user_proffesor(lectureData) {
   var professor_container = document.getElementById("professor_container");
   professor_container.innerHTML = ""; // 기존 내용을 초기화
   professor_container.appendChild(table);
+}
+
+function shortenURL(url) {
+  var maxLength = 20; // Maximum length of the shortened URL text
+
+  if (url.length <= maxLength) {
+    return url; // Return the original URL if it's already within the limit
+  } else {
+    var shortenedText = url.slice(0, maxLength - 3) + "..."; // Append "..." to indicate it's shortened
+    return shortenedText;
+  }
 }

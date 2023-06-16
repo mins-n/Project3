@@ -156,7 +156,7 @@ function lec_table(data, post_codes) {
         // /boards/post/:post_code 링크로 연결
         if (index === 1) {
           var a = document.createElement("a");
-          a.href = "/boards/post/" + post_codes[index];
+          a.href = "/boards/board.html?" + post_codes[index];
           a.appendChild(document.createTextNode(cellData));
           cell.appendChild(a);
         } else {

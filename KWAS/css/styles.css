@@ -5509,6 +5509,10 @@ fieldset:disabled .btn {
 .toast-container > :not(:last-child) {
   margin-bottom: var(--bs-toast-spacing);
 }
+.content-container {
+  height: 200px; /* Set the desired height */
+  overflow: auto;
+}
 
 .toast-header {
   display: flex;
@@ -11763,4 +11767,31 @@ body {
 
 .pagination .next-button {
   margin-left: 10px;
+}
+
+.author-date {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.author-start {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.author {
+  margin-right: 10px;
+}
+
+.date {
+  margin-right: 5px;
+}
+
+.time {
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.view-count {
+  margin-top: 5px;
 }
