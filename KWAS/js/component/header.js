@@ -8,8 +8,8 @@ axios
   })
   .catch(function (error) {
     studentId = null;
-    name = null;
-    initializeHeader(studentId, name);
+    user_name = null;
+    initializeHeader(studentId, user_name);
   });
 
 function initializeHeader(studentId, name) {

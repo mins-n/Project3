@@ -3,14 +3,44 @@ const nav = document.querySelector("nav");
 fetch("../component/nav.html")
   .then((res) => res.text())
   .then((data) => {
-    // ¹öÆ°À» ·ÎµåÇÏ±â Àü¿¡ ³»ºñ°ÔÀÌ¼Ç »çÀÌµå¹Ù¸¦ ·Îµå
     nav.innerHTML = data;
 
-    // ³»ºñ°ÔÀÌ¼Ç »çÀÌµå¹Ù¸¦ ·ÎµåÇÑ ÈÄ¿¡ ¹öÆ°¿¡ ´ëÇÑ ÀÌº¥Æ® ¸®½º³Ê¸¦ ¿¬°á
     const sidebarToggle = document.getElementById("sidebarToggle");
     const layoutSidenav = document.getElementById("layoutSidenav");
 
     sidebarToggle.addEventListener("click", () => {
-      layoutSidenav.classList.toggle("sb-sidenav-toggled");
+    layoutSidenav.classList.toggle("sb-sidenav-toggled");
     });
+
+    study_nav();
   });
+
+
+  function study_nav(){
+    axios
+    .get("/user/get", {
+    params: {},
+    })
+    .then(function (response) {
+    let data = response.data;
+    console.log(data);
+    user_class = data[0].user_class;
+    console.log(user_class);
+    study_nav = document.getElementById("study_nav");
+    study_nav.innerHTML = "";
+    if (user_class == 2) {
+      study_nav.innerHTML += `
+      <a class="nav-link" href="../study/grade.html">ì„±ì ì¡°íšŒ</a>
+      <a class="nav-link" href="#.html">í•™ì‚¬ì¼ì •</a>
+      `;
+    }else if(user_class == 1){
+      study_nav.innerHTML += `
+      <a class="nav-link" href="../study/listening_student.html">ì„±ì ì…ë ¥</a>
+      <a class="nav-link" href="#.html">í•™ì‚¬ì¼ì •</a>
+      `;
+    }
+    })
+    .catch(function (error) {
+    console.log(error);
+    });
+  }
