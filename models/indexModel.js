@@ -1,12 +1,11 @@
 const mysql = require('mysql');
 const conn = mysql.createConnection({
-    host: '3.34.200.80',
+    host: '43.202.44.199',
     user: 'root',
     password: '1234',
-    port: '55035',
+    port: '54610',
     database: 'ManageSys',
 });
-
 
 // Fetch the timetable data for a specific user
 // exports.getTimetable = (req) => {

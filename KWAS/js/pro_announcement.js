@@ -285,13 +285,18 @@ window.addEventListener("DOMContentLoaded", function () {
     console.log("내용:", content);
     console.log("파일:", file);
 
+    var formData = new FormData();
+    formData.append("board_name", "과제게시판");
+    formData.append("lecture_code", lec_code);
+    formData.append("title", title);
+    formData.append("post_contents", content);
+    formData.append("file", file);
+
     axios
-      .post("/boards/post/write", {
-        board_name: "공지게시판",
-        lecture_code: lec_code,
-        title: title,
-        post_contents: content,
-        file: file,
+      .post("/boards/post/write", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       })
       .then(function (response) {
         console.log(response);
