@@ -1,3 +1,5 @@
+const { post } = require("../../routes");
+
 var queryString = window.location.search;
 var urlParams = new URLSearchParams(queryString);
 var year = urlParams.get("year");
@@ -27,7 +29,6 @@ function user_lec_boards(year, semester, lecture_code) {
       data = response.data.list;
       console.log(data);
       board_list = [];
-      post_codes = [];
       i = 1;
       data.forEach(function (item) {
         var boardData = [
@@ -36,8 +37,8 @@ function user_lec_boards(year, semester, lecture_code) {
           item.name,
           item.post_date.substr(0, 10),
           item.view_count,
+          item.post_code,
         ];
-        post_codes.push(item.post_code);
         board_list.push(boardData);
         i++;
       });
@@ -45,13 +46,13 @@ function user_lec_boards(year, semester, lecture_code) {
         alert("해당 과목의 공지가 없습니다.");
         basic_table();
       } else {
-        lec_table(board_list, post_codes);
+        lec_table(board_list);
       }
     })
     .catch(function (error) {});
 }
 
-function lec_table(data, post_codes) {
+function lec_table(data) {
   var itemsPerPage = 10; // 한 페이지에 표시할 항목 수
   var currentPage = 1; // 현재 페이지
   var totalPages = Math.ceil(data.length / itemsPerPage); // 전체 페이지 수
@@ -92,24 +93,25 @@ function lec_table(data, post_codes) {
     currentPageData.forEach(function (row) {
       var rowElement = document.createElement("tr");
 
-      i = 0;
       row.forEach(function (cellData, index) {
-        var cell = document.createElement("td");
-        if (index === 0) {
-          cell.style.width = "5%";
-        }
-        // /boards/post/:post_code 링크로 연결
-        if (index === 1) {
-          var a = document.createElement("a");
-          a.href = "/boards/board.html?post_value=" + post_codes[i];
-          a.appendChild(document.createTextNode(cellData));
-          cell.appendChild(a);
+        if (i == 5) {
         } else {
-          cell.appendChild(document.createTextNode(cellData));
+          var cell = document.createElement("td");
+          if (index === 0) {
+            cell.style.width = "5%";
+          }
+          // /boards/post/:post_code 링크로 연결
+          if (index === 1) {
+            var a = document.createElement("a");
+            a.href = "/boards/board.html?post_value=" + row[5];
+            a.appendChild(document.createTextNode(cellData));
+            cell.appendChild(a);
+          } else {
+            cell.appendChild(document.createTextNode(cellData));
+          }
+          rowElement.appendChild(cell);
+          tbody.appendChild(rowElement);
         }
-        rowElement.appendChild(cell);
-        tbody.appendChild(rowElement);
-        i++;
       });
     });
     table.appendChild(tbody);
