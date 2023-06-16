@@ -163,7 +163,7 @@ module.exports.setPost = (user_id, board_code, post_date, title, post_contents, 
         conn.query(
             'INSERT INTO post(board_code, post_date, user_id, title, post_contents, file)\
              VALUES (?,?,?,?,?,?)',
-            [board_code, post_date, user_id, title, post_contents, file],
+            [board_code, post_date, user_id, title, post_contents, file ? file : null],
             function (err, rows) {
                 if (err) {
                     reject(err);
