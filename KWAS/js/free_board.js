@@ -282,7 +282,7 @@ window.addEventListener("DOMContentLoaded", function () {
     formData.append("file", file);
 
     axios
-      .post("/boards/community", formData, {
+      .post("/boards/community/write", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
