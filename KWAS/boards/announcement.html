@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>학사정보관리시스템</title>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <link href="../css/styles.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body class="sb-nav-fixed">
+    <header class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <!-- First Section -->
+        <div class="navbar-brand">
+            <a class="navbar-brand ps-3" href="../main/index.html">KWAS</a>
+        </div>
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Second Section (to be loaded with a script) -->
+        <div id="dynamicHeader" class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0"></div>
+    </header>
+    <script src="../js/component/header.js" defer></script>
+
+
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <script src="../js/component/nav.js" defer></script>
+            </nav>
+        </div>
+
+        <!-- index contents ::: 여기에 템플릿 넣으세요 -->
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4" style="width: 100%; margin: 0 auto;">
+                    <div class="align-items-center justify-content-center text-center">
+                        <a class="navbar-brand" href="../main/index.html"><img src="../img/kwas_logo.png"
+                                alt="kwas_logo" width="15%" height="20%" /></a>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            공지사항
+                        </div>
+                        <div class="card-body">
+                            <div class="container" style="width: 100%; margin: 0 auto;">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 10%; text-align:center;">년도/학기</td>
+                                            <td style="width: 20%;">
+                                                <select class="form-select" aria-label="Default select example" id="user_year_semester">
+                                                    <!-- JavaScript로 동적으로 옵션을 생성합니다 -->
+                                                    <script src="../js/announcement.js" defer></script>
+                                                    </script>
+                                                  </select>
+                                            </td>
+                                            <td style="width: 10%; text-align:center;">과목명</td>
+                                            <td style=" width: 20%;">
+                                                <select class="form-select" aria-label="Default select example" id="lectureSelect">
+                                                    <script>
+                                                        const user_select = document.getElementById("user_year_semester");
+                                                        // 사용자가 학기를 선택하면 실행
+                                                        user_select.addEventListener("change", () => {
+                                                            console.log(user_select.value);
+                                                            selected_list = JSON.parse(user_select.value);
+                                                            const year = selected_list[0];
+                                                            const semester = selected_list[1];
+                                                            user_lec(year, semester) 
+                                                        });
+                                                    </script>
+                                                </select>
+                                            </td>
+                                            <td rowspan="4" style="width: 5%; text-align:center;">
+                                                <button type="button" class="btn btn-primary" id ="lec_post_btn"name="searchbtn">조회</button>
+                                            </td>
+                                            <script>
+                                                const lec_post_btn = document.getElementById("lec_post_btn");
+                                                const y_s = document.getElementById("user_year_semester");
+                                                const lectureSelect = document.getElementById("lectureSelect");
+                                                lec_post_btn.addEventListener("click", function() {
+                                                    selected_list = JSON.parse(y_s.value);
+                                                    const year = selected_list[0];
+                                                    const semester = selected_list[1];
+                                                    const lecture_code = lectureSelect.value;
+                                                    console.log(year, semester, lecture_code);
+                                                    user_lec_boards(year, semester, lecture_code);
+                                                });
+                                            </script>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="card-body">
+                                <div class="container" style="width: 100%; margin: 0 auto;"id = "lec_table_container">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    </main>
+    <footer class="py-4 bg-light mt-auto">
+        <script>
+            // 버튼 클릭 이벤트 핸들러
+            button.addEventListener('click', () => {
+                // 선택한 값 가져오기
+                const yearSelect = document.querySelector('#yearSelect');
+                const semesterSelect = document.querySelector('#semesterSelect');
+                const lectureSelect = document.querySelector('#lectureSelect');
+
+                const user_id = '2018202091';
+                const year = yearSelect.value;
+                const semester = semesterSelect.value;
+                const board_code = '1';
+                const lecture_code = lectureSelect.value;
+
+                // GET 요청 보내기
+                axios.get("/boards/boardList", {
+                    params: {
+                        user_id: user_id,
+                        year: year,
+                        semester: semester,
+                        board_code: board_code,
+                        lecture_code: lecture_code
+                    }
+                })
+                    .then(response => {
+                        // 응답 데이터를 사용하여 테이블 업데이트
+                        const tableBody = document.querySelector('#tableBody');
+                        tableBody.innerHTML = ''; // 테이블 내용 초기화
+
+                        response.data.forEach(item => {
+                            const tr = document.createElement('tr');
+
+                            const td1 = document.createElement('td');
+                            td1.textContent = item.number;
+
+                            const td2 = document.createElement('td');
+                            const link = document.createElement('a');
+                            link.href = '../boards/contentForm.html';
+                            link.textContent = item.title;
+                            td2.appendChild(link);
+
+                            const td3 = document.createElement('td');
+                            td3.textContent = item.author;
+
+                            const td4 = document.createElement('td');
+                            td4.textContent = item.date;
+
+                            const td5 = document.createElement('td');
+                            td5.textContent = item.views;
+
+                            tr.appendChild(td1);
+                            tr.appendChild(td2);
+                            tr.appendChild(td3);
+                            tr.appendChild(td4);
+                            tr.appendChild(td5);
+
+                            tableBody.appendChild(tr);
+                        });
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            });
+        </script>
+        <script>
+            const footer = document.querySelector('footer');
+
+            fetch('../component/footer.html')
+                .then(res => res.text())
+                .then(data => footer.innerHTML = data);
+        </script>
+    </footer>
+    </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+    <script src="../js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="../assets/demo/chart-area-demo.js"></script>
+    <script src="../assets/demo/chart-bar-demo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+        crossorigin="anonymous"></script>
+    <script src="../js/datatables-simple-demo.js"></script>
+</body>
+
+</html>
