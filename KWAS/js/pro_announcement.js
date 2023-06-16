@@ -286,7 +286,7 @@ window.addEventListener("DOMContentLoaded", function () {
     console.log("파일:", file);
 
     axios
-      .post("post/write", {
+      .post("/boards/post/write", {
         board_name: "공지게시판",
         lecture_code: lec_code,
         title: title,
