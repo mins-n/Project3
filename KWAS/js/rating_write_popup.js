@@ -141,9 +141,12 @@ function post_rating() {
     })
     .then(function (response) {
       alert("평가가 완료되었습니다.");
+      window.close();
       window.location.reload();
     })
     .catch(function (error) {
       console.log(error);
+      window.close();
+      window.location.reload();
     });
 }
