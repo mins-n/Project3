@@ -26,6 +26,12 @@ axios
       var time = formatTime(data[i].post_date);
       var content = data[i].post_contents;
       var viewCount = data[i].view_count;
+      var file_url = data[i].file;
+      var file_name = "";
+  
+      if (file_url != null) {
+        file_name = file_url.split("/").pop();
+      }
   
       var post = document.createElement("div");
       post.className = "post";
@@ -72,7 +78,28 @@ axios
   
       contentContainer.appendChild(postContent);
   
+      if (file_url != null) {
+        var fileContainer = document.createElement("div");
+        fileContainer.className = "file-container";
+        fileContainer.className = "author-date";
+        var fileIcon = document.createElement("i");
+        fileIcon.className = "fas fa-file-download";
+  
+        var fileLink = document.createElement("a");
+        fileLink.className = "file-link";
+        fileLink.href = file_url;
+        fileLink.download = file_name;
+        fileLink.textContent = file_name;
+  
+        fileContainer.appendChild(fileIcon);
+        fileContainer.appendChild(fileLink);
+  
+      }
+  
       postInfo.appendChild(authorDate);
+      if (file_url != null){
+        postInfo.appendChild(fileContainer);
+      }
       postInfo.appendChild(viewCountInfo);
   
       post.appendChild(postTitle);
@@ -82,6 +109,9 @@ axios
       postContainer.appendChild(post);
     }
   }
+  
+  
+  
   
   
   function addComment(data) {
