@@ -7,7 +7,6 @@ const conn = mysql.createConnection({
     database: 'ManageSys',
 });
 
-
 module.exports.getLecture = (year, semester, lecture_name, professor_name) => {
     return new Promise((resolve, reject) => {
         console.log(year, semester, lecture_name, professor_name);

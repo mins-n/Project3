@@ -39,7 +39,7 @@ fetch("../component/nav.html")
       `;
     }else if(user_class == 1){
       study_nav.innerHTML += `
-      <a class="nav-link" href="../study/listening_student.html">성적입력</a>
+      <a class="nav-link" href="../study/professor_lecture.html">성적입력</a>
       <a class="nav-link" href="#.html">학사일정</a>
       `;
     }
