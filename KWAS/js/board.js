@@ -9,76 +9,136 @@ axios
     let post_data = response.data.post;
     let comment_data = response.data.comment;
     showPost(post_data);
-    
+    addComment(comment_data);
   })
   .catch(function (error) {
     console.log(error);
   });
 
-function showPost(data) {
-var postContainer = document.getElementById("post");
-postContainer.innerHTML = "";
-
-for (var i = 0; i < data.length; i++) {
-var title = data[i].title;
-var author = data[i].user_id;
-var date = formatDate(data[i].post_date);
-var time = formatTime(data[i].post_date);
-var content = data[i].post_contents;
-var viewCount = data[i].view_count;
-
-var post = `
-<div class="card">
-  <div class="card-body">
-      <h2 class="card-title">${title}</h2>
-      <div class="card-text">
-          <div class="post-info">
-              <p class="author-date">     
-                <span class="author">${author}</span>                           
-                <span class="date">${date}</span>
-                <span class="time">${time}</span>
-              </p>
-              <p class="view-count author-date">조회수: ${viewCount}</p>
-          </div>
-          <div class="content-container">
-              <p class="card-text">${content}</p>
-          </div>
-      </div>
-  </div>
-</div>
-`;
-postContainer.innerHTML += post;
-}
-}
-
-function addComment(data) {
-    data =[{"post_code":2,"comment_code":1,"comment_date":"2023-06-14T15:00:00.000Z","user_id":"2018202091","comment_contents":"넵"},{"post_code":2,"comment_code":2,"comment_date":"2023-06-05T15:00:00.000Z","user_id":"shine8917","comment_contents":"항상 감사합니다"},{"post_code":2,"comment_code":3,"comment_date":"2023-06-05T15:00:00.000Z","user_id":"akashine","comment_contents":"F는 좀;;;"},{"post_code":2,"comment_code":4,"comment_date":"2023-06-06T15:00:00.000Z","user_id":"shine8917","comment_contents":"아 ㅋㅋ"}]
+  function showPost(data) {
+    var postContainer = document.getElementById("post");
+    postContainer.innerHTML = "";
+  
+    for (var i = 0; i < data.length; i++) {
+      var title = data[i].title;
+      var author = data[i].user_id;
+      var date = formatDate(data[i].post_date);
+      var time = formatTime(data[i].post_date);
+      var content = data[i].post_contents;
+      var viewCount = data[i].view_count;
+  
+      var post = document.createElement("div");
+      post.className = "post";
+      post.style.border = "1px solid #ccc";
+      post.style.padding = "10px";
+      post.style.marginBottom = "20px";
+  
+      var postTitle = document.createElement("h2");
+      postTitle.className = "post-title";
+      postTitle.textContent = title;
+  
+      var postInfo = document.createElement("div");
+      postInfo.className = "post-info";
+  
+      var authorDate = document.createElement("p");
+      authorDate.className = "author-date";
+  
+      var authorSpan = document.createElement("span");
+      authorSpan.className = "author";
+      authorSpan.innerHTML = "<i class='fas fa-user'></i> " + author;
+  
+      var dateSpan = document.createElement("span");
+      dateSpan.className = "date";
+      dateSpan.innerHTML = "<i class='fas fa-calendar-alt'></i> " + date;
+  
+      var timeSpan = document.createElement("span");
+      timeSpan.className = "time";
+      timeSpan.innerHTML = "<i class='fas fa-clock'></i> " + time;
+  
+      authorDate.appendChild(authorSpan);
+      authorDate.appendChild(dateSpan);
+      authorDate.appendChild(timeSpan);
+  
+      var viewCountInfo = document.createElement("p");
+      viewCountInfo.className = "view-count author-date";
+      viewCountInfo.innerHTML = "<i class='fas fa-eye'></i> 조회수: " + viewCount;
+  
+      var contentContainer = document.createElement("div");
+      contentContainer.className = "content-container";
+  
+      var postContent = document.createElement("p");
+      postContent.className = "card-text";
+      postContent.textContent = content;
+  
+      contentContainer.appendChild(postContent);
+  
+      postInfo.appendChild(authorDate);
+      postInfo.appendChild(viewCountInfo);
+  
+      post.appendChild(postTitle);
+      post.appendChild(postInfo);
+      post.appendChild(contentContainer);
+  
+      postContainer.appendChild(post);
+    }
+  }
+  
+  
+  function addComment(data) {
     var commentsContainer = document.getElementById("comments_container");
     commentsContainer.innerHTML = "";
-
+  
     for (var i = 0; i < data.length; i++) {
-        var author = data[i].user_id;
-        var date = formatDate(data[i].comment_date);
-        var time = formatTime(data[i].comment_date);
-        var content = data[i].comment_contents;
-
-        var comment = `
-        <div class="comment">
-            <div class="comment-info">
-                <p class="author-date">
-                    <span class="author">${author}</span>
-                    <span class="date">${date}</span>
-                    <span class="time">${time}</span>
-                </p>
-            </div>
-            <div class="comment-content">
-                <p>${content}</p>
-            </div>
-        </div>
-        `;
-        commentsContainer.innerHTML += comment;
+      var author = data[i].user_id;
+      var date = formatDate(data[i].comment_date);
+      var time = formatTime(data[i].comment_date);
+      var content = data[i].comment_contents;
+  
+      var commentContainer = document.createElement("div");
+      commentContainer.className = "comment";
+      commentContainer.style.border = "1px solid #ccc";
+      commentContainer.style.padding = "10px";
+      commentContainer.style.marginBottom = "10px";
+  
+      var commentInfo = document.createElement("div");
+      commentInfo.className = "comment-info";
+  
+      var authorDate = document.createElement("p");
+      authorDate.className = "author-date";
+  
+      var authorSpan = document.createElement("span");
+      authorSpan.className = "author";
+      authorSpan.innerHTML = "<i class='fas fa-user'></i> " + author;
+  
+      var dateSpan = document.createElement("span");
+      dateSpan.className = "date";
+      dateSpan.innerHTML = "<i class='fas fa-calendar-alt'></i> " + date;
+  
+      var timeSpan = document.createElement("span");
+      timeSpan.className = "time";
+      timeSpan.innerHTML = "<i class='fas fa-clock'></i> " + time;
+  
+      authorDate.appendChild(authorSpan);
+      authorDate.appendChild(dateSpan);
+      authorDate.appendChild(timeSpan);
+  
+      var commentContent = document.createElement("div");
+      commentContent.className = "comment-content";
+  
+      var commentText = document.createElement("p");
+      commentText.textContent = content;
+  
+      commentContent.appendChild(commentText);
+  
+      commentInfo.appendChild(authorDate);
+      commentContainer.appendChild(commentInfo);
+      commentContainer.appendChild(commentContent);
+  
+      commentsContainer.appendChild(commentContainer);
     }
-}
+  }
+  
+  
 
 function formatDate(dateStr) {
     var date = new Date(dateStr);
