@@ -33,7 +33,7 @@ function user_lec_boards(year, semester, lecture_code) {
         var boardData = [
           i,
           item.title,
-          "",
+          item.name,
           item.post_date.substr(0, 10),
           item.view_count,
         ];
@@ -286,7 +286,7 @@ window.addEventListener("DOMContentLoaded", function () {
     console.log("파일:", file);
 
     axios
-      .post("post/write", {
+      .post("/boards/post/write", {
         board_name: "과제게시판",
         lecture_code: lec_code,
         title: title,
@@ -300,7 +300,11 @@ window.addEventListener("DOMContentLoaded", function () {
         console.log(error);
       });
 
-    // 게시글 작성 후 팝업 닫기
+    // 게시글 작성 후 팝업안에 값 초기화
+    titleInput.value = "";
+    contentTextarea.value = "";
+    fileInput.value = "";
+
     closeWritePopup();
 
     user_lec_boards(year, semester, lec_code);

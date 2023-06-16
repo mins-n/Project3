@@ -89,7 +89,7 @@ function user_lec_boards(year, semester, lecture_code) {
         var boardData = [
           i,
           item.title,
-          "",
+          item.name,
           item.post_date.substr(0, 10),
           item.view_count,
         ];
