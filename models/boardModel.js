@@ -158,15 +158,12 @@ module.exports.getComment = (post_code) => {
 };
 
 
-module.exports.setPost = (user_id, board_name, lecture_code, post_date, title, post_contents, file) => {
+module.exports.setPost = (user_id, board_code, post_date, title, post_contents, file) => {
     return new Promise((resolve, reject) => {
         conn.query(
-            'INSERT INTO post(board_code, post_date, user_id, title, post_contents, file)\
-            SELECT b.board_code, ?, ?, ?, ?, ?\
-            FROM board AS b\
-            WHERE b.board_name = ?\
-              AND b.lecture_code = ?'
-            [post_date, user_id, title, post_contents,file ? file : null, board_name, lecture_code],
+            'INSERT INTO post (user_id, board_code, post_date, title, post_contents, file)\
+            VALUES (?, ?, ?, ?, ?, ?)',
+            [user_id, board_code, post_date, title, post_contents, file],
             function (err, rows) {
                 if (err) {
                     reject(err);
@@ -256,5 +253,39 @@ module.exports.deleteComment = (comment_code) => {
                 resolve(rows);
             }
         });
+    });
+};
+
+module.exports.getBoard = (lecture_code, board_name) => {
+    return new Promise((resolve, reject) => {
+        conn.query(
+            'SELECT board_code FROM board WHERE lecture_code = ? AND board_name = ?',
+            [lecture_code, board_name],
+            function (err, rows) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            }
+        );
+    });
+};
+
+module.exports.setBoard = (lecture_code, board_name) => {
+    return new Promise((resolve, reject) => {
+        conn.query(
+            'INSERT INTO board (lecture_code, board_name)\
+            VALUES (?, ?);\
+            ',
+            [lecture_code, board_name],
+            function (err, rows) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            }
+        );
     });
 };

@@ -122,7 +122,7 @@ exports.getPost = async (req, res, next)=>{
 
 
 
-exports.setPost = (req, res)=>{
+exports.setPost = async (req, res)=>{
   let user_id = null;
   if (req.session.user) {
     user_id = req.session.user.user_id;
@@ -135,11 +135,23 @@ exports.setPost = (req, res)=>{
   let title = req.body.title;
   let post_contents = req.body.post_contents;
   let file = req.body.file;
+  if (typeof file === "undefined" )
+  {
+    file = null;
+  }
   let post_date = moment().format("YYYY-MM-DD HH:mm:ss");
 
+
   console.log(user_id, board_name, lecture_code, post_date, title, post_contents, file);
-  
-  boardModel.setPost(user_id, board_name, lecture_code, post_date, title, post_contents, file)
+
+  let board_code = await boardModel.getBoard(lecture_code, board_name);
+  if(!board_code[0])
+  {
+    await boardModel.setBoard(lecture_code, board_name);
+    board_code = await boardModel.getBoard(lecture_code, board_name);
+  }
+  console.log(user_id, board_code[0].board_code, post_date, title, post_contents, file)
+  boardModel.setPost(user_id, board_code[0].board_code, post_date, title, post_contents, file)
     .then((result) => {
       res.status(200).send(result);
     })
