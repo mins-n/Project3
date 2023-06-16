@@ -288,3 +288,20 @@ module.exports.setBoard = (lecture_code, board_name) => {
         );
     });
 };
+
+module.exports.setCommunity = (user_id, post_date, title, post_contents, file) => {
+    return new Promise((resolve, reject) => {
+        conn.query(
+            'INSERT INTO post (user_id, board_code, post_date, title, post_contents, file)\
+            VALUES (?, ?, ?, ?, ?, ?)',
+            [user_id, '4', post_date, title, post_contents, file],
+            function (err, rows) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            }
+        );
+    });
+};
