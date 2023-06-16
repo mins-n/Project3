@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>학사정보관리시스템</title>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <link href="../css/styles.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',    // 로드 될 때 표시되는 달
+                navLinks: true, // 날짜를 선택하면 Day 캘린더나 Week 캘린더로 링크
+                editable: true, // 수정 가능?
+                selectable: true, // 달력 일자 드래그 설정가능
+                nowIndicator: true, // 현재 시간 마크
+                dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
+                locale: 'ko', // 한국어 설정
+                eventAdd: function (obj) { // 이벤트가 추가되면 발생하는 이벤트
+                    console.log(obj);
+                },
+                eventChange: function (obj) { // 이벤트가 수정되면 발생하는 이벤트
+                    console.log(obj);
+                },
+                eventRemove: function (obj) { // 이벤트가 삭제되면 발생하는 이벤트
+                    console.log(obj);
+                },
+                select: function (arg) { // 캘린더에서 드래그로 이벤트를 생성할 수 있다.
+                    var title = prompt('Event Title:');
+                    if (title) {
+                        calendar.addEvent({
+                            title: title,
+                            start: arg.start,
+                            end: arg.end,
+                            allDay: arg.allDay
+                        })
+                    }
+                    calendar.unselect()
+                }
+
+                // 하드코딩으로 일정 추가
+                , events: [
+                    {
+                        title: '개교기념일시작',
+                        start: '2023-05-20',
+                    },
+                    {
+                        title: '춘계 체육대회시작',
+                        start: '2023-05-26',
+                    },
+                    {
+                        title: '춘계 체육대회종료',
+                        start: '2023-05-31',
+                    },
+                    {
+                        title: '장학금 신청',
+                        start: '2023-06-01',
+                    },
+                    {
+                        title: '1학기 기말고사 주간',
+                        start: '2023-06-08',
+                    },
+                    {
+                        title: '1학기 기말고사 종료',
+                        start: '2023-06-14',
+                    },
+                    {
+                        title: '1학기 종강 교수회의',
+                        start: '2023-06-15',
+                    },
+                    {
+                        title: '1학기 보강기간 시작',
+                        start: '2023-06-15',
+                    },
+                    {
+                        title: '3차 프로젝트 종료',
+                        start: '2023-06-16',
+                    },
+                    {
+                        title: '1학기 보강기간 종료',
+                        start: '2023-06-21',
+                    },
+                    {
+                        title: '하계 계절수업시작',
+                        start: '2023-06-22',
+                    },
+                    {
+                        title: '하계 계절수업종료',
+                        start: '2023-07-14'
+                    }
+                ]
+
+            });
+            calendar.render();
+        });
+
+    </script>
+</head>
+
+<body class="sb-nav-fixed">
+    <header class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <!-- First Section -->
+        <div class="navbar-brand">
+            <a class="navbar-brand ps-3" href="/KWAS/main/index.html">KWAS</a>
+        </div>
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Second Section (to be loaded with a script) -->
+        <div id="dynamicHeader" class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0"></div>
+    </header>
+    <script src="../js/component/header.js" defer></script>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <script src="../js/component/nav.js" defer></script>
+            </nav>
+        </div>
+        <!-- index contents ::: 여기에 템플릿 넣으세요 -->
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px -4">
+                    <div class="align-items-center justify-content-center text-center">
+                        <a class="navbar-brand" href="/KWAS/main/index.html"><img src="../img/kwas_logo.png" alt="kwas_logo"
+                                width="15%" height="20%" /></a>
+                    </div>
+
+                    <!-- Fullcalender import-->
+                    <div id='calendar'></div>
+                </div>
+            </main>
+            <footer class="py-4 bg-light mt-auto">
+                <script>
+                    const footer = document.querySelector("footer");
+
+                    fetch("../component/footer.html")
+                        .then((res) => res.text())
+                        .then((data) => (footer.innerHTML = data));
+                </script>
+            </footer>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+    <script src="../js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="assets/demo/chart-area-demo.js"></script>
+    <script src="assets/demo/chart-bar-demo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+        crossorigin="anonymous"></script>
+    <script src="../js/datatables-simple-demo.js"></script>
+</body>
+
+</html>
