@@ -6,10 +6,15 @@ axios
     let data = response.data;
     console.log(data);
     user_class = data[0].user_class;
+    if (user_class == 2){
     display_adviser(user_class)
     display_year_semester_container(user_class)
+    display_year_semester(user_class)
+    }
+    else if (user_class == 1){
+        display_main_container(user_class)
+    }
     display_card_header_container(user_class)
-    display_main_container(user_class)
     })
     .catch(function (error) {
     console.log(error);
@@ -38,6 +43,46 @@ function display_year_semester_container(user_class){
         <select class="form-select" aria-label="Default select example" id="user_year_semester">
         </select>
             `
+    }
+}
+function display_year_semester(user_class){
+    if (user_class == 2){
+        axios
+        .get("/course_management/schedule", {
+            params: {},
+        })
+        .then(function (response) {
+            let data = response.data.semesterList;
+            var processedData = [];
+            data.forEach(function (item) {
+            var lectureData = [item.year, item.semester];
+            processedData.push(lectureData);
+            });
+            console.log(processedData);
+            user_year_semester(processedData);
+            init_table(processedData);
+        })
+        .catch(function (error) {});
+
+        function user_year_semester(data) {
+        const user_select = document.getElementById("user_year_semester");
+        user_select.innerHTML = "";
+        for (var i = 0; i < data.length; i++) {
+            var option = document.createElement("option");
+            option.value = JSON.stringify(data[i]);
+            option.text = data[i][0] + "년 " + data[i][1] + "학기";
+            if (i == 0) {
+            option.setAttribute("selected", "selected");
+            }
+            user_select.appendChild(option);
+        }
+        }
+
+        function init_table(data) {
+        const year = data[0][0];
+        const semester = data[0][1];
+        user_Timetable(year, semester);
+        }
     }
 }
 
