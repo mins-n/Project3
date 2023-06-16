@@ -98,6 +98,18 @@ module.exports.getCommunity = () => {
     });
 };
 
+module.exports.getCommunity = () => {
+    return new Promise((resolve, reject) => {
+        conn.query('SELECT * FROM post WHERE board_code = 4', function (err, rows) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(rows);
+            }
+        });
+    });
+};
+
 module.exports.getList = (lecture_code, board_name) => {
     return new Promise((resolve, reject) => {
         conn.query(
