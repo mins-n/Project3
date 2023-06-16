@@ -17,7 +17,7 @@ var upload = multer({ storage: storage});
 router.get('/boardList', boardController.getList);  //게시판의 게시글 목록 조회
 router.get('/boardList/professor', boardController.getProfessorList);  //게시판의 게시글 목록 조회
 router.get('/community',boardController.community); //커뮤니티 게시판
-router.get('/community/write',boardController.setCommunity);
+router.post('/community/write',boardController.setCommunity);
 router.get('/post/:post_code', boardController.getPost);    //게시글과 댓글 내용 조회
 router.post('/post/write', upload.single('file'), boardController.setPost);    //게시글 작성
 router.post('/post/update', upload.single('file'), boardController.updatePost);    //게시글 수정

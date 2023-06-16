@@ -153,8 +153,7 @@ exports.setPost = async (req, res) => {
     let post_contents = req.body.post_contents;
     let file = null;
     console.log(req);
-    console.log(req.body.file);
-    console.log(req.file);
+    
     if(req.file){
       file = '/files/' + req.file.filename;
     }
