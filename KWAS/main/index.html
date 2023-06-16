@@ -65,22 +65,16 @@
             </div>
             <div class="row">
               <div class="card mb-4">
-                <div class="card-header">
-                  <i class="fas fa-table me-1"></i>
-                  시간표
+                <div class="card-header" id = card_header_container>
                 </div>
                 <div class="container" style="width: 100%;">
                   <!-- Select Semester -->
                   <!-- 오른쪽 정렬 -->
-                  <div class="d-flex justify-content-end">
-                    <div class="input-group mb-3" style="width: 13%;">
-                      <select class="form-select" aria-label="Default select example" id="user_year_semester">
-                        <!-- JavaScript로 동적으로 옵션을 생성합니다 -->
-                        <script src="../js/get_year_semester.js" defer></script>
-                        </script>
-                      </select>
+                  <div class="d-flex justify-content-end" id ="year_semester_container">
+                    <div class="input-group mb-3" style="width: 13%;">                      
                     </div>
                   </div>
+                  <script src="../js/get_year_semester.js" defer></script>
                   <div class="row" id="timetable-container">
                     <!-- 서버로부터 시간표 정보 가져옴 -->
                     <script defer>
