@@ -28,6 +28,25 @@ module.exports.getSemester = (user_id) => {
     });
 };
 
+module.exports.getSemester2 = (user_id) => {
+    return new Promise((resolve, reject) => {
+        conn.query(
+            'SELECT DISTINCT l.year, l.semester\
+            FROM lecture l\
+            WHERE l.professor_id = ?\
+            ORDER BY l.year DESC, l.semester DESC;\
+            ',user_id,
+                        function (err, rows) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            }
+        );
+    });
+};
+
 module.exports.getLecture = (user_id, year, semester) => {
     return new Promise((resolve, reject) => {
         conn.query(
@@ -35,6 +54,25 @@ module.exports.getLecture = (user_id, year, semester) => {
       FROM user_lecture u\
       INNER JOIN lecture l ON u.lecture_code = l.lecture_code\
       WHERE u.user_id = ? AND l.year = ? AND l.semester = ?\
+      ORDER BY l.lecture_name ASC',
+            [user_id, year, semester],
+            function (err, rows) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            }
+        );
+    });
+};
+
+module.exports.getLecture2 = (user_id, year, semester) => {
+    return new Promise((resolve, reject) => {
+        conn.query(
+            'SELECT l.lecture_code, l.lecture_name, l.lecture_week1, l.lecture_week2, l.lecture_time1, l.lecture_time2\
+      FROM lecture l\
+      WHERE l.professor_id = ? AND l.year = ? AND l.semester = ?\
       ORDER BY l.lecture_name ASC',
             [user_id, year, semester],
             function (err, rows) {
