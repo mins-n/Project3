@@ -108,7 +108,10 @@ function display_main_container(user_class){
         const weekdays = ["월", "화", "수", "목", "금", "토", "일"];
 
         axios
-        .get("/user/professor/lecture")
+        .get("/user/professor/lecture", {params: {
+            year: 2023,
+            semester: 1,
+        }})
         .then(function (response) {
         var lectures = response.data;
 
@@ -134,10 +137,11 @@ function display_main_container(user_class){
 
             var codeCell = row.insertCell();
             var codeLink = document.createElement("a");
-            codeLink.href =
-                "/course_management/listening_student.html?lecture_code=" +
-                lecture.lecture_code;
-            codeLink.textContent = lecture.lecture_code;
+            var link = "../boards/pro_task_board.html?lec_code=" + lecture.lecture_code + "&year=2023" + "&semester=1" + "&lec_name=" + lecture.lecture_name;
+
+            codeLink.href = link;
+            codeLink.innerHTML = lecture.lecture_code;
+
             codeCell.appendChild(codeLink);
 
             var nameCell = row.insertCell();
@@ -174,4 +178,42 @@ function display_main_container(user_class){
             console.error(error);
         });
     }
+}
+
+function get_lec_link(year, semester, lecture_code){
+    console.log(year, semester, lecture_code);
+    axios
+        .get("/boards/boardList", {
+        params: {
+            year: year,
+            semester: semester,
+            board_name: "과제게시판",
+            lecture_code: lecture_code,
+        },
+        })
+        .then(function (response) {
+        data = response.data.list;
+        board_list = [];
+        post_codes = [];
+        i = 1;
+        data.forEach(function (item) {
+            var boardData = [
+            i,
+            item.title,
+            "",
+            item.post_date.substr(0, 10),
+            item.view_count,
+            ];
+            post_codes.push(item.post_code);
+            board_list.push(boardData);
+            i++;
+        });
+        if (board_list.length == 0) {
+            alert("해당 과목의 과제가 없습니다.");
+            basic_table();
+        } else {
+            lec_table(board_list, post_codes);
+        }
+        })
+        .catch(function (error) {});
 }
