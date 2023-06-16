@@ -78,7 +78,8 @@ exports.getProfessorList = async (req, res, next) => {
 };
 
 exports.community = (req, res) => {
-    boardModel.getCommunity()
+    boardModel
+        .getCommunity()
         .then((result) => {
             res.status(200).send(result);
         })
@@ -87,9 +88,8 @@ exports.community = (req, res) => {
         });
 };
 
-exports.setCommunity = (req, res) => 
-{
-  let user_id = null;
+exports.setCommunity = (req, res) => {
+    let user_id = null;
     if (req.session.user) {
         user_id = req.session.user.user_id;
     } else {
@@ -99,17 +99,19 @@ exports.setCommunity = (req, res) =>
     let title = req.body.title;
     let post_contents = req.body.post_contents;
     let file = null;
-    if(req.file){
-      file = '/files/' + req.file.filename;
+    if (req.file) {
+        file = '/files/' + req.file.filename;
     }
+    console.log(title, post_contents, file);
     let post_date = moment().format('YYYY-MM-DD HH:mm:ss');
-  boardModel.setCommunity(user_id, post_date, title, post_contents, file)
-      .then((result) => {
-          res.status(200).send(result);
-      })
-      .catch((error) => {
-          res.status(400).send('Invalid credentials');
-      });
+    boardModel
+        .setCommunity(user_id, post_date, title, post_contents, file)
+        .then((result) => {
+            res.status(200).send(result);
+        })
+        .catch((error) => {
+            res.status(400).send('Invalid credentials');
+        });
 };
 
 exports.getPost = (req, res) => {
@@ -155,8 +157,8 @@ exports.setPost = async (req, res) => {
     console.log(req);
     console.log(req.body.file);
     console.log(req.file);
-    if(req.file){
-      file = '/files/' + req.file.filename;
+    if (req.file) {
+        file = '/files/' + req.file.filename;
     }
     let post_date = moment().format('YYYY-MM-DD HH:mm:ss');
 
@@ -185,8 +187,8 @@ exports.updatePost = (req, res) => {
     let file = req.body.file;
     let post_date = moment().format('YYYY-MM-DD HH:mm:ss');
 
-    if(req.file){
-      file = '/files/' + req.file.filename;
+    if (req.file) {
+        file = '/files/' + req.file.filename;
     }
 
     console.log(post_code, post_date, title, post_contents, file);
