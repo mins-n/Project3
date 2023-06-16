@@ -148,6 +148,7 @@ function lec_table(data, post_codes) {
     currentPageData.forEach(function (row) {
       var rowElement = document.createElement("tr");
 
+      i = 0;
       row.forEach(function (cellData, index) {
         var cell = document.createElement("td");
         if (index === 0) {
@@ -156,7 +157,7 @@ function lec_table(data, post_codes) {
         // /boards/post/:post_code 링크로 연결
         if (index === 1) {
           var a = document.createElement("a");
-          a.href = "/boards/board.html?post_value=" + post_codes[index];
+          a.href = "/boards/board.html?post_value=" + post_codes[i];
           a.appendChild(document.createTextNode(cellData));
           cell.appendChild(a);
         } else {
@@ -164,6 +165,7 @@ function lec_table(data, post_codes) {
         }
         rowElement.appendChild(cell);
         tbody.appendChild(rowElement);
+        i++;
       });
     });
     table.appendChild(tbody);
