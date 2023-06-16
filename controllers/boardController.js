@@ -89,6 +89,7 @@ exports.community = (req, res) => {
 };
 
 exports.setCommunity = (req, res) => {
+    console.log(req);
     let user_id = null;
     if (req.session.user) {
         user_id = req.session.user.user_id;
@@ -142,6 +143,7 @@ exports.getPost = async (req, res, next) => {
 };
 
 exports.setPost = async (req, res) => {
+
     let user_id = null;
     if (req.session.user) {
         user_id = req.session.user.user_id;
@@ -181,9 +183,9 @@ exports.updatePost = (req, res) => {
     let post_code = req.body.post_code;
     let title = req.body.title;
     let post_contents = req.body.post_contents;
-    let file = req.body.file;
+    let file = null;
     let post_date = moment().format('YYYY-MM-DD HH:mm:ss');
-
+  
     if (req.file) {
         file = '/files/' + req.file.filename;
     }
