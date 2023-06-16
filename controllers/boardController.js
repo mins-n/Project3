@@ -53,7 +53,6 @@ exports.getProfessorList = async (req, res, next) => {
     let semester = req.query.semester;
     let board_name = req.query.board_name;
     let lecture_code = req.query.lecture_code;
-    board_name = '공지사항';
     let lectureList;
     let list;
     console.log(year, semester, board_name, lecture_code);

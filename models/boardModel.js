@@ -101,12 +101,14 @@ module.exports.getCommunity = () => {
 module.exports.getList = (lecture_code, board_name) => {
     return new Promise((resolve, reject) => {
         conn.query(
-            'SELECT p.*\
+            'SELECT p.*, u.name\
             FROM post AS p\
             JOIN board AS b ON p.board_code = b.board_code\
+            JOIN user AS u ON p.user_id = u.user_id\
             WHERE b.board_name = ?\
               AND b.lecture_code = ?\
-              ORDER BY p.post_code DESC',
+            ORDER BY p.post_code DESC;\
+            ',
             [board_name, lecture_code],
             function (err, rows) {
                 if (err) {
