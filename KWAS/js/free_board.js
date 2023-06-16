@@ -1,35 +1,33 @@
 axios
-.get("/boards/boardList", {
-  params: {
-    board_name: "자유게시판 ",
-  },
-})
-.then(function (response) {
-  data = response.data.list;
-  board_list = [];
-  post_codes = [];
-  i = 1;
-  data.forEach(function (item) {
-    var boardData = [
-      i,
-      item.title,
-      "",
-      item.post_date.substr(0, 10),
-      item.view_count,
-    ];
-    post_codes.push(item.post_code);
-    board_list.push(boardData);
-    i++;
-  });
-  if (board_list.length == 0) {
-    alert("게시글이 없습니다.");
-    basic_table();
-  } else {
-    lec_table(board_list, post_codes);
-  }
-})
-.catch(function (error) {});
-
+  .get("/boards/boardList", {
+    params: {
+      board_name: "자유게시판 ",
+    },
+  })
+  .then(function (response) {
+    data = response.data.list;
+    board_list = [];
+    post_codes = [];
+    i = 1;
+    data.forEach(function (item) {
+      var boardData = [
+        i,
+        item.title,
+        item.post_date.substr(0, 10),
+        item.view_count,
+      ];
+      post_codes.push(item.post_code);
+      board_list.push(boardData);
+      i++;
+    });
+    if (board_list.length == 0) {
+      alert("게시글이 없습니다.");
+      basic_table();
+    } else {
+      lec_table(board_list, post_codes);
+    }
+  })
+  .catch(function (error) {});
 
 function free_boards() {
   axios
