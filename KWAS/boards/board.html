@@ -47,7 +47,28 @@
                 <div class="row" id="board-container">
                   <div id="post" class="text-center"></div>
                 </div>
-        
+                <div id="post" class="text-center">
+                  <!-- Existing post content -->
+                  <div class="d-flex justify-content-end mt-3">
+                    <button class="btn btn-primary me-2" onclick="editPost()">수정</button>
+                    <button class="btn btn-danger" onclick="deletePost()">삭제</button>
+                    <script defer>
+                    function deletePost() {
+                      axios
+                        .post("/boards/post/delete", { post_code: postValue })
+                        .then(function (response) {
+                          // Handle successful deletion
+                          console.log("Post deleted successfully");
+                          window.location.href = "free_board.html";
+                        })
+                        .catch(function (error) {
+                          // Handle error
+                          console.log(error);
+                        });
+                    }
+                  </script>
+                  </div>
+                </div>
                 <div class="row">
                     <div class="text-center">
                         <h2>댓글</h2>
