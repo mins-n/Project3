@@ -81,14 +81,23 @@ exports.getProfessorList = async (req, res, next) => {
 };
 
 exports.community = (req, res) => {
-    boardModel
-        .getCommunity()
+    boardModel.getCommunity()
         .then((result) => {
             res.status(200).send(result);
         })
         .catch((error) => {
             res.status(400).send('Invalid credentials');
         });
+};
+
+exports.setCommunity = (req, res) => {
+  boardModel.setCommunity()
+      .then((result) => {
+          res.status(200).send(result);
+      })
+      .catch((error) => {
+          res.status(400).send('Invalid credentials');
+      });
 };
 
 exports.getPost = (req, res) => {
@@ -136,7 +145,9 @@ exports.setPost = async (req, res) => {
         file = null;
     }
     else{
-      file = '/files/'+req.file.filename;
+      if (req.file) {
+        file = '/files/' + req.file.filename;
+      }
     }
     let post_date = moment().format('YYYY-MM-DD HH:mm:ss');
 
