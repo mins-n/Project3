@@ -278,16 +278,11 @@ window.addEventListener("DOMContentLoaded", function () {
     console.log("내용:", content);
     console.log("파일:", file);
 
-    var formData = new FormData();
-    formData.append("title", title);
-    formData.append("post_contents", content);
-    formData.append("file", file);
-
     axios
-      .post("/boards/community/write", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+      .post("/boards/community/write", {
+        title: title,
+        post_contents: content,
+        file: file,
       })
       .then(function (response) {
         console.log(response);
