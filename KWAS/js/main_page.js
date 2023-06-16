@@ -165,7 +165,7 @@ function display_main_container(user_class) {
             lecture.lecture_name;
 
           var lec_cell = row.insertCell();
-          lec_cell.innerHTML = `<a href="${lec_link}}">과제 게시판</a>`;
+          lec_cell.innerHTML = `<a href="${lec_link}">과제 게시판</a>`;
 
           var codeCell = row.insertCell();
           codeCell.innerHTML = lecture.lecture_code;
