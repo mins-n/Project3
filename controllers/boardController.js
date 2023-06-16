@@ -135,6 +135,9 @@ exports.setPost = async (req, res) => {
     if (typeof file === 'undefined') {
         file = null;
     }
+    else{
+      file = '/files/'+req.file.filename;
+    }
     let post_date = moment().format('YYYY-MM-DD HH:mm:ss');
 
     console.log(user_id, board_name, lecture_code, post_date, title, post_contents, file);
@@ -161,6 +164,13 @@ exports.updatePost = (req, res) => {
     let post_contents = req.body.post_contents;
     let file = req.body.file;
     let post_date = moment().format('YYYY-MM-DD HH:mm:ss');
+
+    if (typeof file === 'undefined') {
+      file = null;
+  }
+  else{
+    file = '/files/'+req.file.filename;
+  }
 
     console.log(post_code, post_date, title, post_contents, file);
 
