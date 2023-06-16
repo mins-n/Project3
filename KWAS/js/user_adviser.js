@@ -1,26 +1,28 @@
-axios
-  .get("/user/adviser", {
-    params: {},
-  })
-  .then(function (response) {
-    let data = response.data;
-    data = data[0];
-    var lectureData = [
-      data.department_name,
-      data.name,
-      data.spot,
-      data.lab,
-      data.major,
-      data.phone_num,
-      data.email,
-      data.profile,
-    ];
-    user_proffesor(lectureData);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-function user_proffesor(lectureData) {
+function user_proffesor(){
+  axios
+    .get("/user/adviser", {
+      params: {},
+    })
+    .then(function (response) {
+      let data = response.data;
+      data = data[0];
+      var lectureData = [
+        data.department_name,
+        data.name,
+        data.spot,
+        data.lab,
+        data.major,
+        data.phone_num,
+        data.email,
+        data.profile,
+      ];
+      user_proffesor(lectureData);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
+function show_user_proffesor(lectureData) {
   console.log(lectureData);
   var table = document.createElement("table");
   table.className = "table table-hover";
