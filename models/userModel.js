@@ -229,6 +229,25 @@ module.exports.getLecture = (user_id) => {
     });
 };
 
+module.exports.getLecture2 = (user_id, year, semester) => {
+    return new Promise((resolve, reject) => {
+        conn.query(
+            'SELECT lecture_code, lecture_name, lecture_class, lecture_week1, \
+            lecture_time1, lecture_week2, lecture_time2, professor_id, year, semester\
+            FROM lecture\
+            WHERE professor_id = ? AND year = ? AND semester = ?',
+            [user_id, year, semester],
+            function (err, rows) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            }
+        );
+    });
+};
+
 module.exports.getStudent = (lecture_code) => {
     return new Promise((resolve, reject) => {
         conn.query(

@@ -174,14 +174,28 @@ exports.getLecture = (req, res)=>{
     res.status(400).send("세션이 없습니다.");
     return;
   }
-    
+  let year = req.query.year;
+  let semester = req.query.semester;
+  console.log(year, semester)
+  if(typeof year === "undefined" || typeof semester === "undefined")
+  {
     userModel.getLecture(user_id)
       .then((result) => {
-        res.status(200).send(result);
-      })
+      res.status(200).send(result);
+    })
       .catch((error) => {
-        res.status(400).send('Invalid credentials');
-      });
+      res.status(400).send('Invalid credentials');
+    });
+  } 
+  else{
+    userModel.getLecture2(user_id, year, semester)
+      .then((result) => {
+      res.status(200).send(result);
+    })
+      .catch((error) => {
+      res.status(400).send('Invalid credentials');
+    });
+  }
 }
 
 
