@@ -16,7 +16,6 @@ exports.getList = async (req, res, next) => {
     let lecture_code = req.query.lecture_code;
     let lectureList;
     let list;
-    console.log(year, semester, board_name, lecture_code);
     let semesterList = await boardModel.getSemester(user_id); //유저가 듣는 강의에 해당하는 년도, 학기를 내림차순으로 불러옴
     if (typeof semesterList[0] !== 'undefined') {
         if (typeof year === 'undefined' || typeof semester === 'undefined' || year === '' || semester === '') {
@@ -29,7 +28,6 @@ exports.getList = async (req, res, next) => {
             //강의가 정해져 있지 않은경우
             lecture_code = lectureList[0].lecture_code.toString(); //오름차순으로 가장 높이있는 강의선택
         }
-        console.log(lecture_code);
         list = await boardModel.getList(lecture_code, board_name); //해당 페이지에 대한 모든 게시글 가져옴
     }
     let result = {
@@ -37,7 +35,6 @@ exports.getList = async (req, res, next) => {
         lectureList: lectureList,
         list: list,
     };
-    console.log(result);
     res.status(200).send(result);
 };
 
@@ -90,7 +87,9 @@ exports.community = (req, res) => {
         });
 };
 
-exports.setCommunity = (req, res) => {
+exports.setCommunity = (req, res) => 
+{
+
   boardModel.setCommunity()
       .then((result) => {
           res.status(200).send(result);
@@ -139,15 +138,12 @@ exports.setPost = async (req, res) => {
     let lecture_code = req.body.lecture_code;
     let title = req.body.title;
     let post_contents = req.body.post_contents;
-    let file = req.body.file;
-
-    if (typeof file === 'undefined') {
-        file = null;
-    }
-    else{
-      if (req.file) {
-        file = '/files/' + req.file.filename;
-      }
+    let file = null;
+    console.log(req);
+    console.log(req.body.file);
+    console.log(req.file);
+    if(req.file){
+      file = '/files/' + req.file.filename;
     }
     let post_date = moment().format('YYYY-MM-DD HH:mm:ss');
 
@@ -176,12 +172,9 @@ exports.updatePost = (req, res) => {
     let file = req.body.file;
     let post_date = moment().format('YYYY-MM-DD HH:mm:ss');
 
-    if (typeof file === 'undefined') {
-      file = null;
-  }
-  else{
-    file = '/files/'+req.file.filename;
-  }
+    if(req.file){
+      file = '/files/' + req.file.filename;
+    }
 
     console.log(post_code, post_date, title, post_contents, file);
 

@@ -1,9 +1,9 @@
 const mysql = require('mysql');
 const conn = mysql.createConnection({
-    host: '3.34.200.80',
+    host: '43.202.44.199',
     user: 'root',
     password: '1234',
-    port: '55035',
+    port: '54610',
     database: 'ManageSys',
 });
 
@@ -83,6 +83,18 @@ module.exports.getLecture2 = (user_id, year, semester) => {
                 }
             }
         );
+    });
+};
+
+module.exports.getCommunity = () => {
+    return new Promise((resolve, reject) => {
+        conn.query('SELECT * FROM post WHERE board_code = 4', function (err, rows) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(rows);
+            }
+        });
     });
 };
 
