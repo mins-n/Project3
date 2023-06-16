@@ -42,7 +42,7 @@ function user_lec_boards(year, semester, lecture_code) {
         i++;
       });
       if (board_list.length == 0) {
-        alert("해당 과목의 과제가 없습니다.");
+        alert("해당 과목의 공지가 없습니다.");
         basic_table();
       } else {
         lec_table(board_list, post_codes);
