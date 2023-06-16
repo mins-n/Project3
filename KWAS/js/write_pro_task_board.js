@@ -9,6 +9,13 @@ function closeWritePopup() {
 }
   
 window.addEventListener('DOMContentLoaded', function() {
+    var queryString = window.location.search;
+    var urlParams = new URLSearchParams(queryString);
+    var year = urlParams.get('year');
+    var semester = urlParams.get('semester');
+    var lec_name = urlParams.get('lec_name');
+    var lec_code = urlParams.get('lec_code');
+
     var ratingWriteTable = document.getElementById('rating_write_table');
 
     // 게시글 작성 폼 생성
@@ -54,14 +61,23 @@ window.addEventListener('DOMContentLoaded', function() {
       var title = titleInput.value;
       var content = contentTextarea.value;
       var file = fileInput.files[0];
+      
 
-      // 게시글 작성 후 처리할 로직을 추가하세요.
-      // 예: 게시글을 서버에 전송하거나, 클라이언트 측에서 게시글을 처리하는 등의 작업
-
-      // 예시: 게시글 정보를 콘솔에 출력
       console.log('제목:', title);
       console.log('내용:', content);
       console.log('파일:', file);
+    
+      axios.post('/post/write', {
+        board_code : lec_code,
+        title: title,
+        post_contents: content,
+        file: file,
+      }).then(function(response) {
+        console.log(response);
+        }).catch(function(error) {
+        console.log(error);
+        });
+        
 
       // 게시글 작성 후 팝업 닫기
       closeWritePopup();

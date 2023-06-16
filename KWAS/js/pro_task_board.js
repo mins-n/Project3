@@ -8,12 +8,13 @@ var lec_code = urlParams.get('lec_code');
 const lec_txt = document.getElementById('lec_txt');
 
 lec_txt.innerHTML = year + "년 " + semester + "학기 " + lec_name + " 과제게시판";
+
 user_lec_boards(year, semester, lec_code);
 
 function user_lec_boards(year, semester, lecture_code) {
     console.log(year, semester, lecture_code);
     axios
-      .get("/boards/boardList", {
+      .get("/boards/boardList/professor", {
         params: {
           year: year,
           semester: semester,
@@ -23,6 +24,7 @@ function user_lec_boards(year, semester, lecture_code) {
       })
       .then(function (response) {
         data = response.data.list;
+        console.log(data);
         board_list = [];
         post_codes = [];
         i = 1;
