@@ -7,7 +7,6 @@ const conn = mysql.createConnection({
     database: 'ManageSys',
 });
 
-
 module.exports.getSemester = (user_id) => {
     return new Promise((resolve, reject) => {
         conn.query(
@@ -35,8 +34,9 @@ module.exports.getSemester2 = (user_id) => {
             FROM lecture l\
             WHERE l.professor_id = ?\
             ORDER BY l.year DESC, l.semester DESC;\
-            ',user_id,
-                        function (err, rows) {
+            ',
+            user_id,
+            function (err, rows) {
                 if (err) {
                     reject(err);
                 } else {
@@ -86,22 +86,17 @@ module.exports.getLecture2 = (user_id, year, semester) => {
     });
 };
 
-
 module.exports.getCommunity = () => {
     return new Promise((resolve, reject) => {
-        conn.query(
-            'SELECT * FROM post WHERE board_code = 4',
-            function (err, rows) {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(rows);
-                }
+        conn.query('SELECT * FROM post WHERE board_code = 4', function (err, rows) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(rows);
             }
-        );
+        });
     });
 };
-
 
 module.exports.getList = (lecture_code, board_name) => {
     return new Promise((resolve, reject) => {
@@ -112,7 +107,7 @@ module.exports.getList = (lecture_code, board_name) => {
             WHERE b.board_name = ?\
               AND b.lecture_code = ?\
               ORDER BY p.post_code DESC',
-            [lecture_code, board_name],
+            [board_name, lecture_code],
             function (err, rows) {
                 if (err) {
                     reject(err);
@@ -126,36 +121,27 @@ module.exports.getList = (lecture_code, board_name) => {
 
 module.exports.getPost = (post_code) => {
     return new Promise((resolve, reject) => {
-        conn.query(
-            'SELECT * FROM post WHERE post_code = ? ',
-            post_code,
-            function (err, rows) {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(rows);
-                }
+        conn.query('SELECT * FROM post WHERE post_code = ? ', post_code, function (err, rows) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(rows);
             }
-        );
+        });
     });
 };
 
 module.exports.getComment = (post_code) => {
     return new Promise((resolve, reject) => {
-        conn.query(
-            'SELECT * FROM comment WHERE post_code = ? ',
-            post_code,
-            function (err, rows) {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(rows);
-                }
+        conn.query('SELECT * FROM comment WHERE post_code = ? ', post_code, function (err, rows) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(rows);
             }
-        );
+        });
     });
 };
-
 
 module.exports.setPost = (user_id, board_code, post_date, title, post_contents, file) => {
     return new Promise((resolve, reject) => {
